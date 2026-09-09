@@ -5,12 +5,13 @@ const pool = require("./db");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const corsOrigin = (process.env.CORS_ORIGIN || "http://localhost:5173").replace(/\/$/, "");
 
 // =============================================
 // MIDDLEWARE
 // =============================================
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+  origin: corsOrigin,
   methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"],
   credentials: true,
 }));
@@ -57,7 +58,7 @@ async function initDB() {
 // =============================================
 app.listen(PORT, async () => {
   console.log(`\n🚀 Backend đang chạy tại: http://localhost:${PORT}`);
-  console.log(`📡 CORS cho phép: ${process.env.CORS_ORIGIN || "http://localhost:5173"}`);
+  console.log(`📡 CORS cho phép: ${corsOrigin}`);
   console.log(`🔗 API Endpoints:`);
   console.log(`   GET  /api/rsvp    — Lấy danh sách lời chúc`);
   console.log(`   POST /api/rsvp    — Gửi lời chúc mới`);
