@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Pinyon+Script&family=Montserrat:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #b8965a;
+  --color-gold-light: #d4b483;
+  --color-gold-dim: rgba(184,150,90,0.15);
+  --color-gold-dark: #8a6535;
+  --color-cream: #faf7f2;
+  --color-cream-dark: #f2ede4;
+  --color-dark: #1a1208;
+  --color-text-admin: #2d2416;
+  --color-muted: #7a6d5e;
+  --color-border-admin: rgba(184,150,90,0.18);
+  --color-border-solid: #e8e0d4;
+  --color-white: #ffffff;
+  --color-red: #c0392b;
+  --color-red-light: #fff5f5;
+
+  --font-sans: "Outfit", sans-serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-pinyon: "Pinyon Script", cursive;
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+/* Reset cụ thể cho các thẻ được sử dụng bên trong thư (không dùng dấu sao *) */
+:where(.nhi-wrapper div, .nhi-wrapper p, .nhi-wrapper span, .nhi-wrapper a, .nhi-wrapper img, .nhi-wrapper button, .nhi-wrapper input, .nhi-wrapper textarea, .nhi-wrapper form, .nhi-wrapper table, .nhi-wrapper thead, .nhi-wrapper tbody, .nhi-wrapper tr, .nhi-wrapper th, .nhi-wrapper td, .nhi-wrapper canvas, .nhi-wrapper audio, .nhi-wrapper iframe) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html:has(.nhi-wrapper) ::-webkit-scrollbar { display: none; }
+html:has(.nhi-wrapper) {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+body:has(.nhi-wrapper), html:has(.nhi-wrapper) {
+  width: 100%;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body:has(.nhi-wrapper) {
+  background: #111;
+  display: flex;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root:has(.nhi-wrapper) {
+  width: 100%;
+}
