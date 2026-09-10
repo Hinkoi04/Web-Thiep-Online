@@ -1,19 +1,28 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { InvitationPage } from './Nhi';
-import { AdminLogin, AdminDashboard, AdminTrash } from './Nhi/admin';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/trash" element={<AdminTrash />} />
-        <Route path="/:slug" element={<InvitationPage />} />
-        {/* Route mặc định chuyển hướng đến một slug nào đó (ví dụ: nhi) */}
-        <Route path="/" element={<InvitationPage />} />
-      </Routes>
-    </BrowserRouter>
+    <div style={{ padding: '50px', fontFamily: 'sans-serif', textAlign: 'center' }}>
+      <h1>Hệ Thống Thiệp Mời</h1>
+      <p>Chọn một thiệp để xem:</p>
+      
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '30px' }}>
+        <a href="/Nhi/" style={cardStyle}>
+          <h2>Thiệp của Nhi</h2>
+          <p>Xem thư mời tốt nghiệp</p>
+        </a>
+      </div>
+    </div>
   );
 }
+
+const cardStyle = {
+  display: 'block',
+  padding: '20px',
+  border: '1px solid #ccc',
+  borderRadius: '8px',
+  textDecoration: 'none',
+  color: '#333',
+  width: '200px',
+  boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+};
