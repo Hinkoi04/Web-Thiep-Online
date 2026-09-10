@@ -8,7 +8,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/*" element={<InvitationPage slug="nhi" />} />
+        <Route path="/*" element={<InvitationPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

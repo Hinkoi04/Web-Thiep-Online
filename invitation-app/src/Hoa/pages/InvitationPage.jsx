@@ -99,7 +99,7 @@ export default function InvitationPage({ info: _info, timeline: _timeline, rsvp:
 
   // Fetch RSVP messages from backend
   useEffect(() => {
-    fetch(`${API_URL}/rsvp?slug=nhi`)
+    fetch(`${API_URL}/rsvp?slug=hoa`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {
@@ -197,7 +197,7 @@ export default function InvitationPage({ info: _info, timeline: _timeline, rsvp:
       const res = await fetch(`${API_URL}/rsvp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ guest_name: rsvpName.trim(), message: rsvpMsg.trim(), slug: "nhi" }),
+        body: JSON.stringify({ guest_name: rsvpName.trim(), message: rsvpMsg.trim(), slug: "hoa" }),
       });
       const data = await res.json();
       if (data.success) {
@@ -211,7 +211,7 @@ export default function InvitationPage({ info: _info, timeline: _timeline, rsvp:
       }
     } catch {
       // Fallback client-side nếu API không khả dụng
-      const newMsg = { id: Date.now(), guest_name: rsvpName.trim(), message: rsvpMsg.trim(), slug: "nhi" };
+      const newMsg = { id: Date.now(), guest_name: rsvpName.trim(), message: rsvpMsg.trim(), slug: "hoa" };
       setRsvpList((prev) => [newMsg, ...prev]);
       showToast(`✨ Cảm ơn ${rsvpName.trim()} đã gửi lời chúc! 🎓`);
       setRsvpName(guestName || "");
