@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import IntroOverlay from "../components/IntroOverlay";
 import Reveal from "../components/Reveal";
 import Divider from "../components/Divider";
@@ -9,61 +10,28 @@ import BokehEffect from "../components/BokehEffect";
 import Lightbox from "../components/Lightbox";
 import { pad, useCountdown, buildCalendar } from "../utils";
 import "../NhiStyles.css";
-
-/* ====== IMAGE IMPORTS ====== */
-import imgAnhbia from "../uploads/anhbia.jpg";
-import imgAnh1 from "../uploads/anh1.JPG";
-import imgAnh7 from "../uploads/anh7.JPG";
-import imgAnh8 from "../uploads/anh8.JPG";
-import imgAnh4 from "../uploads/anh4.JPG";
-import imgAnh5 from "../uploads/anh5.JPG";
-import imgAnh6 from "../uploads/anh6.jpg";
-import imgAnh3 from "../uploads/anh3.JPG";
-import imgIntro from "../uploads/IMG_5187.JPG";
-import imgTassel from "../uploads/daay.png";
-
-/* ====================================================
-   HARDCODED DATA — Trần Thị Tố Nhi Graduation
-   ==================================================== */
-const NHI_INFO = {
-  grad_name: "Trần Thị Tố Nhi",
-  event_date: "2026-06-21",
-  event_time: "07:30",
-  location_name: "Trường Đại học Nguyễn Tất Thành",
-  address: "331A - 331B Đỗ Mười, An Phú Đông, TP HCM",
-  lat: 10.859858712011244,
-  lng: 106.69462064035187,
-  hero_image: imgAnhbia,
-  quote: "Đây là ngày mình muốn lưu lại những khoảng khắc đẹp đẽ của thời sinh viên. Hy vọng những khoảnh khắc lưu lại cột mốc thời sinh viên này sẽ có sự tham gia của bạn.",
-  photo_1: imgAnh1,
-  photo_2: imgAnh7,
-  photo_3: imgAnh8,
-  intro_text: "Sau 3 năm nỗ lực không ngừng nghỉ, Tố Nhi đã sẵn sàng để chạm tay vào chiếc mũ cử nhân. Buổi lễ tốt nghiệp này sẽ kém phần trọn vẹn nếu thiếu đi sự hiện diện của những người đã luôn bên cạnh động viên và ủng hộ Nhi. Thân mời bạn/ anh/ chị/ gia đình đến tham dự buổi lễ để cùng Nhi lưu giữ những khung hình đẹp nhất của dấu mốc quan trọng này. 🎓✨",
-  album_1: imgAnh4,
-  album_2: imgAnh5,
-  album_3: imgAnh6,
-  album_4: imgAnh3,
-  rsvp_text: "Sự hiện diện của bạn/ anh/ chị/ gia đình là niềm vinh hạnh cho buổi lễ tốt nghiệp của Tố Nhi. Dẫu khoảng cách địa lý hay công việc có ngăn chúng ta gặp gỡ, nhưng niềm vui ngày tốt nghiệp sẽ thêm trọn vẹn hơn nếu như mình nhận thêm chúc từ bạn.❤️",
-  contact_1_name: "Nhi",
-  contact_1_phone: "0334259765",
-  contact_2_name: "Mi",
-  contact_2_phone: "0397177038",
-  intro_image: imgIntro,
-  tassel_image: imgTassel,
-  music: "music/nhac.mp3",
-};
-
-const NHI_TIMELINE = [
-  { id: 1, order_num: 1, time_str: "07:30", description: "Bắt đầu Lễ Trao Bằng Tốt Nghiệp" },
-  { id: 2, order_num: 2, time_str: "09:45 - 12:00", description: "Đón khách, Chụp ảnh lưu niệm & Chung vui" },
-];
+import { invitationsData } from "../../data/invitations";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
-export default function InvitationPage({ info: _info, timeline: _timeline, rsvp: initialRsvp, onAddRsvp, onBack }) {
-  // Use hardcoded data
-  const info = NHI_INFO;
-  const timeline = NHI_TIMELINE;
+export default function InvitationPage({ slug: propSlug, rsvp: initialRsvp, onAddRsvp, onBack }) {
+  // Lấy slug từ Prop (chế độ MPA) hoặc từ URL (chế độ SPA cũ)
+  let { slug: urlSlug } = useParams();
+  let slug = propSlug || urlSlug || "nhi"; // Mặc định nếu không có
+
+  const invitation = invitationsData[slug];
+
+  if (!invitation) {
+    return (
+      <div className="nhi-wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#fcfaf5' }}>
+        <h2 style={{ fontFamily: 'var(--script)', fontSize: '3rem', color: 'var(--gold-dark)' }}>
+          Thiệp không tồn tại
+        </h2>
+      </div>
+    );
+  }
+
+  const { info, timeline } = invitation;
 
   const [introVisible, setIntroVisible] = useState(true);
   const [mainVisible, setMainVisible] = useState(false);
@@ -99,7 +67,7 @@ export default function InvitationPage({ info: _info, timeline: _timeline, rsvp:
 
   // Fetch RSVP messages from backend
   useEffect(() => {
-    fetch(`${API_URL}/rsvp`)
+    fetch(`${API_URL}/rsvp?slug=${slug}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {
@@ -107,7 +75,7 @@ export default function InvitationPage({ info: _info, timeline: _timeline, rsvp:
         }
       })
       .catch(() => { }); // Fallback: giữ list rỗng nếu API chưa chạy
-  }, []);
+  }, [slug]);
 
   const cd = useCountdown(info.event_date, info.event_time);
   const cal = buildCalendar(info.event_date);
@@ -197,7 +165,7 @@ export default function InvitationPage({ info: _info, timeline: _timeline, rsvp:
       const res = await fetch(`${API_URL}/rsvp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ guest_name: rsvpName.trim(), message: rsvpMsg.trim() }),
+        body: JSON.stringify({ guest_name: rsvpName.trim(), message: rsvpMsg.trim(), slug: slug }),
       });
       const data = await res.json();
       if (data.success) {
@@ -211,7 +179,7 @@ export default function InvitationPage({ info: _info, timeline: _timeline, rsvp:
       }
     } catch {
       // Fallback client-side nếu API không khả dụng
-      const newMsg = { id: Date.now(), guest_name: rsvpName.trim(), message: rsvpMsg.trim() };
+      const newMsg = { id: Date.now(), guest_name: rsvpName.trim(), message: rsvpMsg.trim(), slug: slug };
       setRsvpList((prev) => [newMsg, ...prev]);
       showToast(`✨ Cảm ơn ${rsvpName.trim()} đã gửi lời chúc! 🎓`);
       setRsvpName(guestName || "");

@@ -10,7 +10,9 @@ export default function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/trash" element={<AdminTrash />} />
-        <Route path="/*" element={<InvitationPage />} />
+        <Route path="/:slug" element={<InvitationPage />} />
+        {/* Route mặc định chuyển hướng đến một slug nào đó (ví dụ: nhi) */}
+        <Route path="/" element={<InvitationPage />} />
       </Routes>
     </BrowserRouter>
   );
