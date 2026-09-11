@@ -50,7 +50,7 @@ const NHI_INFO = {
   contact_2_phone: "0397177038",
   intro_image: imgIntro,
   tassel_image: imgTassel,
-  music: "music/nhac.mp3",
+  music: "./../../../dist/assets/nhac.mp3",
 };
 
 const NHI_TIMELINE = [

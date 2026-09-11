@@ -55,3 +55,32 @@ body:has(.nhi-wrapper) {
 #root:has(.nhi-wrapper) {
   width: 100%;
 }
+
+/* Keyframe fadeUp cho các trang Admin */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Đảm bảo layout Admin không bị đè Sidebar */
+@media (min-width: 901px) {
+  .admin-main {
+    margin-left: 240px !important;
+  }
+}
+@media (max-width: 900px) and (min-width: 641px) {
+  .admin-main {
+    margin-left: 200px !important;
+  }
+}
+@media (max-width: 640px) {
+  .admin-main {
+    margin-left: 0 !important;
+  }
+}

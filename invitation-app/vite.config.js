@@ -2,22 +2,41 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'path'
+import fs from 'fs'
 
-// Cấu hình Vite middleware để dev server nhận diện đúng thư mục con
+// Danh sách các thư mục thiệp (MPA entry points)
+const MPA_FOLDERS = ['Nhi', 'Hoa', 'HoangYen'];
+
+// Plugin MPA: serve đúng index.html cho từng thiệp
 const mpaFallbackPlugin = () => ({
   name: 'mpa-fallback',
+  enforce: 'pre',
   configureServer(server) {
     server.middlewares.use((req, res, next) => {
-      if (req.method === 'GET' && req.headers.accept?.includes('text/html')) {
-        // Danh sách các thư mục thiệp
-        const folders = ['Nhi', 'Hoa'];
-        for (const folder of folders) {
-          if (req.url.startsWith(`/${folder}`)) {
-            req.url = `/${folder}/index.html`;
-            break;
+      if (req.method !== 'GET') return next();
+      const accept = req.headers.accept || '';
+      if (!accept.includes('text/html')) return next();
+
+      const url = req.url.split('?')[0]; // bỏ query string
+
+      for (const folder of MPA_FOLDERS) {
+        if (url === `/${folder}` || url.startsWith(`/${folder}/`)) {
+          const htmlPath = resolve(__dirname, folder, 'index.html');
+          if (fs.existsSync(htmlPath)) {
+            // Đọc HTML, cho Vite transform (inject HMR client, etc.)
+            server.transformIndexHtml(url, fs.readFileSync(htmlPath, 'utf-8'))
+              .then((html) => {
+                res.setHeader('Content-Type', 'text/html; charset=utf-8');
+                res.statusCode = 200;
+                res.end(html);
+              })
+              .catch(next);
+            return; // dừng, không gọi next()
           }
+          break;
         }
       }
+
       next();
     });
   }
@@ -35,7 +54,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        nhi: resolve(__dirname, 'Nhi/index.html')
+        nhi: resolve(__dirname, 'Nhi/index.html'),
+        hoangyen: resolve(__dirname, 'HoangYen/index.html')
       }
     }
   }

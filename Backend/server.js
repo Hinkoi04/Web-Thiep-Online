@@ -22,9 +22,11 @@ app.use(express.urlencoded({ extended: true }));
 // ROUTES
 // =============================================
 const rsvpRoutes = require("./routes/rsvp");
+const hoangYenRoutes = require("./routes/hoangYen");
 const adminRoutes = require("./routes/admin");
 
 app.use("/api/rsvp", rsvpRoutes);
+app.use("/api/hoang-yen", hoangYenRoutes);
 app.use("/api/admin", adminRoutes);
 
 // Health check
@@ -37,17 +39,33 @@ app.get("/api/health", (req, res) => {
 // =============================================
 async function initDB() {
   try {
+    // Bảng lời chúc Nhi
     await pool.query(`
       CREATE TABLE IF NOT EXISTS rsvp_messages (
         id int(11) NOT NULL AUTO_INCREMENT,
         guest_name varchar(100) DEFAULT NULL,
         message mediumtext DEFAULT NULL,
         attendance_status varchar(50) DEFAULT NULL,
+        is_deleted tinyint(1) DEFAULT 0,
         created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (id)
       ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
     console.log("✅ Bảng rsvp_messages đã sẵn sàng");
+
+    // Bảng lời chúc Hoàng Yến
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS hoang_yen (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        guest_name varchar(100) DEFAULT NULL,
+        message mediumtext DEFAULT NULL,
+        attendance_status varchar(50) DEFAULT NULL,
+        is_deleted tinyint(1) DEFAULT 0,
+        created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+      ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `);
+    console.log("✅ Bảng hoang_yen đã sẵn sàng");
   } catch (err) {
     console.error("❌ Lỗi tạo bảng:", err.message);
   }
@@ -60,8 +78,10 @@ app.listen(PORT, async () => {
   console.log(`\n🚀 Backend đang chạy tại: http://localhost:${PORT}`);
   console.log(`📡 CORS cho phép: ${corsOrigin}`);
   console.log(`🔗 API Endpoints:`);
-  console.log(`   GET  /api/rsvp    — Lấy danh sách lời chúc`);
-  console.log(`   POST /api/rsvp    — Gửi lời chúc mới`);
-  console.log(`   GET  /api/health  — Health check\n`);
+  console.log(`   GET  /api/rsvp       — Lấy danh sách lời chúc (Nhi)`);
+  console.log(`   POST /api/rsvp       — Gửi lời chúc mới (Nhi)`);
+  console.log(`   GET  /api/hoang-yen  — Lấy danh sách lời chúc (Hoàng Yến)`);
+  console.log(`   POST /api/hoang-yen  — Gửi lời chúc mới (Hoàng Yến)`);
+  console.log(`   GET  /api/health     — Health check\n`);
   await initDB();
 });
