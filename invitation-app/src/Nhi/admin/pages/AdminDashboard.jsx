@@ -4,6 +4,7 @@ import AdminSidebar from "../components/AdminSidebar";
 import AdminTopbar from "../components/AdminTopbar";
 import StatCard from "../components/StatCard";
 import RsvpTable from "../components/RsvpTable";
+import InviteLinkGenerator from "../components/InviteLinkGenerator";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
@@ -97,6 +98,9 @@ export default function AdminDashboard() {
         <div className="flex-1 py-8 px-9 max-[900px]:py-6 max-[900px]:px-5">
           {successMsg && <div className="flex items-center gap-3 py-3.5 px-5 rounded bg-[#f0fff4] border border-[#c6f6d5] text-[#276749] text-sm mb-7 animate-[fadeUp_0.3s_ease_both]">{successMsg}</div>}
           {errorMsg && <div className="flex items-center gap-3 py-3.5 px-5 rounded bg-red-light border border-[#fed7d7] text-red text-sm mb-7 animate-[fadeUp_0.3s_ease_both]">{errorMsg}</div>}
+
+          {/* Chức năng tạo link thiệp mời cá nhân hóa */}
+          <InviteLinkGenerator basePath="/Nhi/" gradName="Tố Nhi" />
 
           <div className="grid grid-cols-3 max-[900px]:grid-cols-2 max-[640px]:grid-cols-1 gap-5 mb-8">
             <StatCard icon="💌" label="Tổng Lời Chúc" value={total} />
