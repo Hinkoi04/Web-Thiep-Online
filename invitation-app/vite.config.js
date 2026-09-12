@@ -5,7 +5,7 @@ import { resolve } from 'path'
 import fs from 'fs'
 
 // Danh sách các thư mục thiệp (MPA entry points)
-const MPA_FOLDERS = ['Nhi', 'Hoa', 'HoangYen'];
+const MPA_FOLDERS = ['Nhi', 'HoangYen'];
 
 // Plugin MPA: serve đúng index.html cho từng thiệp
 const mpaFallbackPlugin = () => ({
@@ -21,7 +21,7 @@ const mpaFallbackPlugin = () => ({
 
       for (const folder of MPA_FOLDERS) {
         if (url === `/${folder}` || url.startsWith(`/${folder}/`)) {
-          const htmlPath = resolve(__dirname, folder, 'index.html');
+          const htmlPath = resolve(__dirname, 'LinkPreview', folder, 'index.html');
           if (fs.existsSync(htmlPath)) {
             // Đọc HTML, cho Vite transform (inject HMR client, etc.)
             server.transformIndexHtml(url, fs.readFileSync(htmlPath, 'utf-8'))
@@ -54,8 +54,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        nhi: resolve(__dirname, 'Nhi/index.html'),
-        hoangyen: resolve(__dirname, 'HoangYen/index.html')
+        nhi: resolve(__dirname, 'LinkPreview/Nhi/index.html'),
+        hoangyen: resolve(__dirname, 'LinkPreview/HoangYen/index.html')
       }
     }
   }
