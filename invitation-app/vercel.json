@@ -1,6 +1,9 @@
 {
   "rewrites": [
-    { "source": "/Nhi/(.*)", "destination": "/Nhi/index.html" },
+    { "source": "/Nhi", "destination": "/LinkPreview/Nhi/index.html" },
+    { "source": "/Nhi/(.*)", "destination": "/LinkPreview/Nhi/index.html" },
+    { "source": "/HoangYen", "destination": "/LinkPreview/HoangYen/index.html" },
+    { "source": "/HoangYen/(.*)", "destination": "/LinkPreview/HoangYen/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
