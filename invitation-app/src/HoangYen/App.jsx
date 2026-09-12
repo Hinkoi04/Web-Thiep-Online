@@ -59,8 +59,8 @@ function Calendar() {
         {rows.map((row, i) => (
           <tr key={i}>
             {row.map((cell, j) => (
-              <td key={j} className={cell === null ? "dim" : cell === 19 ? "active" : ""}>
-                {cell ?? "—"}
+              <td key={j} className={cell === null ? "dim" : ""}>
+                {cell === 19 ? <span className="active">{cell}</span> : (cell ?? "—")}
               </td>
             ))}
           </tr>
@@ -179,7 +179,7 @@ function CardContent({ guestName }) {
           );
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const handleSubmit = async (e) => {
@@ -258,12 +258,12 @@ function CardContent({ guestName }) {
         <Reveal>
           <div className="section-label">Tân Cử Nhân</div>
           <div className="section-title">Hoàng Yến</div>
-          <p className="body-text">
+          {/* <p className="body-text">
             Sau những năm nỗ lực không ngừng nghỉ, Hoàng Yến đã sẵn sàng để chạm tay vào chiếc mũ cử nhân.
             Buổi lễ tốt nghiệp này sẽ kém phần trọn vẹn nếu thiếu đi sự hiện diện của những người đã luôn bên cạnh
             động viên và ủng hộ. Thân mời bạn / anh / chị / gia đình đến tham dự để cùng lưu giữ những
             khung hình đẹp nhất của dấu mốc quan trọng này. 🎓✨
-          </p>
+          </p> */}
         </Reveal>
       </div>
 
@@ -358,7 +358,7 @@ function CardContent({ guestName }) {
         </Reveal>
         {[
           { time: "15:00", desc: "Bắt đầu Lễ Trao Bằng Tốt Nghiệp" },
-          { time: "15:00 – 16:30", desc: "Đón khách, Chụp ảnh lưu niệm & Chung vui" },
+          { time: "15:30 – 16:30", desc: "Đón khách, Chụp ảnh lưu niệm & Chung vui" },
         ].map((item, i) => (
           <Reveal key={i} delay={i * 100}>
             <div className="timeline-item">
