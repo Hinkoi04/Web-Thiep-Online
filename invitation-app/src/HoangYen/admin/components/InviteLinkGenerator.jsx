@@ -68,12 +68,12 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
   };
 
   return (
-    <div className="bg-white border border-border-solid rounded-xl p-6 mb-8 shadow-sm transition-all hover:shadow-md">
-      <div className="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-border-solid">
+    <div className="bg-white border border-border-solid rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-xs transition-all hover:shadow-sm animate-[fadeUp_0.4s_ease_both]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4 pb-3 border-b border-border-solid">
         <div className="flex items-center gap-2.5">
-          <span className="text-2xl">🔗</span>
+          <span className="text-xl sm:text-2xl">🔗</span>
           <div>
-            <h2 className="font-cormorant text-xl font-bold text-dark leading-tight">
+            <h2 className="font-cormorant text-lg sm:text-xl font-bold text-dark leading-tight">
               Tạo Link Thiệp Mời Cá Nhân Hóa
             </h2>
             <p className="text-xs text-muted">
@@ -82,15 +82,15 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
           </div>
         </div>
         {guestName.trim() && (
-          <span className="text-xs px-2.5 py-1 rounded-full bg-[#f0fff4] text-[#276749] border border-[#c6f6d5] font-medium hidden sm:inline-block">
+          <span className="text-xs px-2.5 py-1 rounded-full bg-[#f0fff4] text-[#276749] border border-[#c6f6d5] font-medium self-start sm:self-auto">
             ✓ Đã tạo link cho "{guestName.trim()}"
           </span>
         )}
       </div>
 
       {/* Input tên khách */}
-      <div className="mb-4">
-        <label className="block text-xs font-semibold text-text-admin uppercase tracking-wider mb-1.5">
+      <div className="mb-3.5">
+        <label className="block text-[0.7rem] font-semibold text-text-admin uppercase tracking-wider mb-1.5">
           Tên người nhận (Khách mời)
         </label>
         <div className="relative">
@@ -99,7 +99,7 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
             value={guestName}
             onChange={(e) => setGuestName(e.target.value)}
             placeholder="Ví dụ: Bạn Lan, Anh Tuấn & Gia Đình, Cô Thảo..."
-            className="w-full px-4 py-2.5 bg-cream border border-border-admin rounded-lg text-sm text-dark placeholder-muted/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
+            className="w-full px-3.5 py-2.5 bg-cream border border-border-admin rounded-lg text-sm text-dark placeholder-muted/60 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
           />
           {guestName && (
             <button
@@ -115,11 +115,11 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
 
       {/* Ô hiển thị Link */}
       <div className="mb-4">
-        <label className="block text-xs font-semibold text-text-admin uppercase tracking-wider mb-1.5">
+        <label className="block text-[0.7rem] font-semibold text-text-admin uppercase tracking-wider mb-1.5">
           Đường dẫn thiệp mời
         </label>
-        <div className="flex items-center gap-2 bg-[#fdfbf7] border border-border-admin/70 rounded-lg p-2.5">
-          <span className="text-base select-none pl-1">🌐</span>
+        <div className="flex items-center gap-2 bg-[#fdfbf7] border border-border-admin/70 rounded-lg p-2 sm:p-2.5">
+          <span className="text-sm sm:text-base select-none pl-1">🌐</span>
           <div className="flex-1 font-mono text-xs text-dark select-all overflow-x-auto whitespace-nowrap scrollbar-none py-0.5">
             {inviteUrl}
           </div>
@@ -127,14 +127,14 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
       </div>
 
       {/* Các nút hành động */}
-      <div className="flex flex-wrap items-center gap-2.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap items-center gap-2">
         <button
           type="button"
           onClick={handleCopyLink}
-          className={`cursor-pointer flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+          className={`cursor-pointer flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
             copied
-              ? "bg-[#276749] text-white shadow-sm"
-              : "bg-gold hover:bg-gold-dark text-white shadow-sm hover:shadow"
+              ? "bg-[#276749] text-white shadow-xs"
+              : "bg-gold hover:bg-gold-dark text-white shadow-xs"
           }`}
         >
           {copied ? "✓ Đã sao chép link" : "📋 Sao chép link"}
@@ -144,7 +144,7 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
           href={inviteUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="cursor-pointer flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-cream hover:bg-cream-dark border border-border-admin text-text-admin transition-all"
+          className="cursor-pointer flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-semibold bg-cream hover:bg-cream-dark border border-border-admin text-text-admin transition-all"
         >
           👁️ Xem trước thiệp
         </a>
@@ -152,7 +152,7 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
         <button
           type="button"
           onClick={handleShare}
-          className="cursor-pointer flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold bg-cream hover:bg-cream-dark border border-border-admin text-text-admin transition-all"
+          className="cursor-pointer flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-semibold bg-cream hover:bg-cream-dark border border-border-admin text-text-admin transition-all"
         >
           📤 Chia sẻ
         </button>
@@ -161,13 +161,13 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
           type="button"
           onClick={handleCopyMessage}
           title="Sao chép lời mời soạn sẵn kèm link để gửi qua Zalo/Messenger"
-          className={`cursor-pointer flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium border transition-all ${
+          className={`cursor-pointer flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-medium border transition-all ${
             copiedMsg
               ? "bg-[#276749] text-white border-[#276749]"
               : "bg-transparent hover:bg-cream border-dashed border-border-admin text-muted hover:text-dark"
           }`}
         >
-          {copiedMsg ? "✓ Đã chép tin nhắn mẫu" : "💬 Chép tin nhắn gửi Zalo"}
+          {copiedMsg ? "✓ Đã chép tin nhắn mẫu" : "💬 Chép tin nhắn Zalo"}
         </button>
       </div>
     </div>

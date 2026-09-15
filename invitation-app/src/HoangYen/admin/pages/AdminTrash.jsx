@@ -11,6 +11,7 @@ export default function AdminTrash() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,7 +100,7 @@ export default function AdminTrash() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cream font-sans text-muted">
+      <div className="min-h-screen flex items-center justify-center bg-cream font-sans text-muted p-4 text-center text-sm sm:text-base">
         Đang tải thùng rác hoang_yen...
       </div>
     );
@@ -107,27 +108,35 @@ export default function AdminTrash() {
 
   return (
     <div className="bg-cream text-text-admin min-h-screen flex w-full font-sans">
-      <AdminSidebar />
-      <main className="admin-main ml-[240px] max-[900px]:ml-[200px] max-[640px]:ml-0 flex-1 flex flex-col min-h-screen">
-        <AdminTopbar title="Thùng Rác · Hoàng Yến (hoang_yen)" />
+      <AdminSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
+      <main className="admin-main flex-1 flex flex-col min-h-screen w-full min-w-0">
+        <AdminTopbar
+          title="Thùng Rác · Hoàng Yến"
+          onOpenSidebar={() => setIsSidebarOpen(true)}
+        />
 
-        <div className="flex-1 py-8 px-9 max-[900px]:py-6 max-[900px]:px-5">
+        <div className="flex-1 py-5 px-4 sm:py-6 sm:px-6 md:py-8 md:px-9 max-w-7xl w-full mx-auto">
           {successMsg && (
-            <div className="flex items-center gap-3 py-3.5 px-5 rounded bg-[#f0fff4] border border-[#c6f6d5] text-[#276749] text-sm mb-7 animate-[fadeUp_0.3s_ease_both]">
+            <div className="flex items-center gap-3 py-3 px-4 sm:py-3.5 sm:px-5 rounded-lg bg-[#f0fff4] border border-[#c6f6d5] text-[#276749] text-xs sm:text-sm mb-5 sm:mb-7 animate-[fadeUp_0.3s_ease_both]">
               {successMsg}
             </div>
           )}
           {errorMsg && (
-            <div className="flex items-center gap-3 py-3.5 px-5 rounded bg-red-light border border-[#fed7d7] text-red text-sm mb-7 animate-[fadeUp_0.3s_ease_both]">
+            <div className="flex items-center gap-3 py-3 px-4 sm:py-3.5 sm:px-5 rounded-lg bg-red-light border border-[#fed7d7] text-red text-xs sm:text-sm mb-5 sm:mb-7 animate-[fadeUp_0.3s_ease_both]">
               {errorMsg}
             </div>
           )}
 
-          <div className="mb-6 flex items-center justify-between">
-            <h1 className="text-2xl font-cormorant font-semibold text-dark">Thùng Rác Lời Chúc</h1>
+          <div className="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <h1 className="text-xl sm:text-2xl font-cormorant font-semibold text-dark">
+              Thùng Rác Lời Chúc
+            </h1>
             <button
               onClick={() => navigate("/admin")}
-              className="text-sm border border-border-solid rounded px-4 py-2 hover:bg-white transition-colors cursor-pointer"
+              className="text-xs sm:text-sm border border-border-solid rounded-lg px-3.5 py-2 hover:bg-white transition-colors cursor-pointer self-start sm:self-auto flex items-center gap-1.5"
             >
               ← Quay lại danh sách
             </button>

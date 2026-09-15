@@ -13,6 +13,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cream font-sans text-muted">
+      <div className="min-h-screen flex items-center justify-center bg-cream font-sans text-muted p-4 text-center text-sm sm:text-base">
         Đang tải dữ liệu bảng hoang_yen...
       </div>
     );
@@ -101,18 +102,24 @@ export default function AdminDashboard() {
 
   return (
     <div className="bg-cream text-text-admin min-h-screen flex w-full font-sans">
-      <AdminSidebar />
-      <main className="admin-main ml-[240px] max-[900px]:ml-[200px] max-[640px]:ml-0 flex-1 flex flex-col min-h-screen">
-        <AdminTopbar title="Quản Lý Lời Chúc · Hoàng Yến (hoang_yen)" />
+      <AdminSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
+      <main className="admin-main flex-1 flex flex-col min-h-screen w-full min-w-0">
+        <AdminTopbar
+          title="Quản Lý Lời Chúc · Hoàng Yến"
+          onOpenSidebar={() => setIsSidebarOpen(true)}
+        />
 
-        <div className="flex-1 py-8 px-9 max-[900px]:py-6 max-[900px]:px-5">
+        <div className="flex-1 py-5 px-4 sm:py-6 sm:px-6 md:py-8 md:px-9 max-w-7xl w-full mx-auto">
           {successMsg && (
-            <div className="flex items-center gap-3 py-3.5 px-5 rounded bg-[#f0fff4] border border-[#c6f6d5] text-[#276749] text-sm mb-7 animate-[fadeUp_0.3s_ease_both]">
+            <div className="flex items-center gap-3 py-3 px-4 sm:py-3.5 sm:px-5 rounded-lg bg-[#f0fff4] border border-[#c6f6d5] text-[#276749] text-xs sm:text-sm mb-5 sm:mb-7 animate-[fadeUp_0.3s_ease_both]">
               {successMsg}
             </div>
           )}
           {errorMsg && (
-            <div className="flex items-center gap-3 py-3.5 px-5 rounded bg-red-light border border-[#fed7d7] text-red text-sm mb-7 animate-[fadeUp_0.3s_ease_both]">
+            <div className="flex items-center gap-3 py-3 px-4 sm:py-3.5 sm:px-5 rounded-lg bg-red-light border border-[#fed7d7] text-red text-xs sm:text-sm mb-5 sm:mb-7 animate-[fadeUp_0.3s_ease_both]">
               {errorMsg}
             </div>
           )}
@@ -120,12 +127,14 @@ export default function AdminDashboard() {
           {/* Chức năng tạo link thiệp mời cá nhân hóa */}
           <InviteLinkGenerator basePath="/HoangYen/" gradName="Hoàng Yến" />
 
-          <div className="grid grid-cols-3 max-[900px]:grid-cols-2 max-[640px]:grid-cols-1 gap-5 mb-8">
+          {/* Thống kê nhanh */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5 mb-6 sm:mb-8">
             <StatCard icon="💌" label="Tổng Lời Chúc (hoang_yen)" value={total} />
             <StatCard icon="📅" label="Hôm Nay" value={todayCount} />
             <StatCard icon="🕐" label="Mới Nhất" value={latestDate} isDate />
           </div>
 
+          {/* Bảng danh sách lời chúc */}
           <RsvpTable messages={messages} onDelete={handleDelete} />
         </div>
       </main>
