@@ -109,7 +109,7 @@ function EnvelopeCover({ onOpen, onStartOpen, guestName }) {
 
   // Đổi link ảnh bìa tại đây
   const coverImage =
-    "https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?w=600&h=750&fit=crop&auto=format";
+    "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489456/DSCF0231_midqti.jpg?w=600&h=750&fit=crop&auto=format";
 
   return (
     <div className={`envelope-scene${opening ? " opening" : ""}`} onClick={handleTap}>
@@ -271,9 +271,9 @@ function CardContent({ guestName }) {
       <Reveal>
         <div className="photo-strip">
           {[
-            "https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?w=280&h=360&fit=crop&auto=format",
-            "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=280&h=360&fit=crop&auto=format",
-            "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=280&h=360&fit=crop&auto=format",
+            "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489458/DSCF9792_jf2qh6.jpg?w=280&h=360&fit=crop&auto=format",
+            "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489453/DSCF0296_upz0tk.jpg?w=280&h=360&fit=crop&auto=format",
+            "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489459/DSCF9928_epwyhu.jpg?w=280&h=360&fit=crop&auto=format",
           ].map((src, i) => (
             <div className="photo-strip-item" key={i}>
               <img src={src} alt={`Ảnh tốt nghiệp ${i + 1}`} />
@@ -381,10 +381,10 @@ function CardContent({ guestName }) {
       <Reveal>
         <div className="album-grid">
           {[
-            "https://images.unsplash.com/photo-1546961342-ea5f62d5a27b?w=400&h=530&fit=crop&auto=format",
-            "https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?w=400&h=530&fit=crop&auto=format",
-            "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=530&fit=crop&auto=format",
-            "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=530&fit=crop&auto=format",
+            "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489453/DSCF0114_gqpvrk.jpg?w=400&h=530&fit=crop&auto=format",
+            "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489459/DSCF9868_ju9fbo.jpg?w=400&h=530&fit=crop&auto=format",
+            "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489458/DSCF9695_xpzeh1.jpg?w=400&h=530&fit=crop&auto=format",
+            "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489456/DSCF9766_rcydj9.jpg?w=400&h=530&fit=crop&auto=format",
           ].map((src, i) => (
             <div className="album-item" key={i}>
               <img src={src} alt={`Album ${i + 1}`} />

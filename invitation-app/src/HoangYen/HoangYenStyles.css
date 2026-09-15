@@ -196,10 +196,13 @@
 }
 
 @keyframes tapPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
     transform: translateY(0);
   }
+
   50% {
     opacity: 1;
     transform: translateY(-4px);
@@ -779,6 +782,7 @@
   0% {
     transform: translateX(calc(min(440px, 100vw) / 2 - 58px)) rotate(0deg);
   }
+
   100% {
     transform: translateX(calc(min(440px, 100vw) / 2 - 58px)) rotate(360deg);
   }
