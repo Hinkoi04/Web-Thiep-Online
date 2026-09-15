@@ -342,7 +342,7 @@ function CardContent({ guestName }) {
           <div style={{ textAlign: "center", marginTop: 24 }}>
             <div className="section-label" style={{ marginBottom: 8 }}>Liên Hệ</div>
             <div style={{ fontFamily: "var(--font-display)", fontSize: 20, fontStyle: "italic", color: "var(--mauve)", lineHeight: 1.8 }}>
-              Nhi: 0334 259 765<br />Mi: 0397 177 038
+              Yến: 0899 512 526<br /> Nhi: 0334 259 765
             </div>
           </div>
         </Reveal>
