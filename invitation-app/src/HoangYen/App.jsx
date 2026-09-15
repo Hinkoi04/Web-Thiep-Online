@@ -218,16 +218,24 @@ function CardContent({ guestName }) {
 
   const pad = (n) => String(n).padStart(2, "0");
 
+  // Link ảnh chụp nửa trên bên trong thiệp
+  const insideHeroImage =
+    "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489456/DSCF0231_midqti.jpg?w=600&h=750&fit=crop&auto=format";
+
   return (
     <div className="main-card">
-      {/* Hero */}
+      {/* Hero with top photo */}
       <div className="card-hero">
+        <div className="card-hero-photo-wrap">
+          <img src={insideHeroImage} alt="Hoàng Yến - Lễ Tốt Nghiệp" className="card-hero-photo" />
+          <div className="card-hero-overlay" />
+        </div>
         <Petals />
-        <div style={{ position: "relative", zIndex: 1 }}>
+        <div className="card-hero-content">
           <div className="hero-label">Lễ Tốt Nghiệp · 2026</div>
           <div className="hero-name">Hoàng Yến</div>
           <div className="hero-sub">Tân Cử Nhân</div>
-          <div className="env-ornament" style={{ color: "rgba(246,201,216,0.4)", margin: "16px 0" }}>✦</div>
+          <div className="env-ornament" style={{ color: "#c89fb3", margin: "14px 0" }}>✦</div>
           <div className="hero-date-badge">
             <span>19 · 09 · 2026</span>
             <span style={{ opacity: 0.4 }}>·</span>
