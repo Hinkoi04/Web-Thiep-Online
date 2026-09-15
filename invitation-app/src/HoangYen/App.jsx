@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HYMusicButton from "./components/HYMusicButton";
+import HYLightbox from "./components/HYLightbox";
 import { AdminLogin, AdminDashboard, AdminTrash } from "./admin";
 import "./HoangYenStyles.css";
 
@@ -155,6 +156,7 @@ function CardContent({ guestName }) {
   const [name, setName] = useState(guestName || "");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [lightboxSrc, setLightboxSrc] = useState(null);
   const countdown = useCountdown(new Date("2026-09-19T15:00:00"));
 
   // Tự động điền tên khách nếu có trên URL (?to=...)
@@ -275,7 +277,7 @@ function CardContent({ guestName }) {
             "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489453/DSCF0296_upz0tk.jpg?w=280&h=360&fit=crop&auto=format",
             "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489459/DSCF9928_epwyhu.jpg?w=280&h=360&fit=crop&auto=format",
           ].map((src, i) => (
-            <div className="photo-strip-item" key={i}>
+            <div className="photo-strip-item" key={i} onClick={() => setLightboxSrc(src)}>
               <img src={src} alt={`Ảnh tốt nghiệp ${i + 1}`} />
             </div>
           ))}
@@ -386,7 +388,7 @@ function CardContent({ guestName }) {
             "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489458/DSCF9695_xpzeh1.jpg?w=400&h=530&fit=crop&auto=format",
             "https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789489456/DSCF9766_rcydj9.jpg?w=400&h=530&fit=crop&auto=format",
           ].map((src, i) => (
-            <div className="album-item" key={i}>
+            <div className="album-item" key={i} onClick={() => setLightboxSrc(src)}>
               <img src={src} alt={`Album ${i + 1}`} />
             </div>
           ))}
@@ -474,6 +476,9 @@ function CardContent({ guestName }) {
           <div className="footer-date">19 · 09 · 2026</div>
         </Reveal>
       </div>
+
+      {/* Lightbox phóng to ảnh */}
+      <HYLightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
     </div>
   );
 }
