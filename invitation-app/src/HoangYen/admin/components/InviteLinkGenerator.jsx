@@ -131,11 +131,10 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
         <button
           type="button"
           onClick={handleCopyLink}
-          className={`cursor-pointer flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
-            copied
+          className={`cursor-pointer flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${copied
               ? "bg-[#276749] text-white shadow-xs"
               : "bg-gold hover:bg-gold-dark text-white shadow-xs"
-          }`}
+            }`}
         >
           {copied ? "✓ Đã sao chép link" : "📋 Sao chép link"}
         </button>
@@ -157,7 +156,7 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
           📤 Chia sẻ
         </button>
 
-        <button
+        {/* <button
           type="button"
           onClick={handleCopyMessage}
           title="Sao chép lời mời soạn sẵn kèm link để gửi qua Zalo/Messenger"
@@ -168,7 +167,7 @@ export default function InviteLinkGenerator({ basePath = "/HoangYen/", gradName 
           }`}
         >
           {copiedMsg ? "✓ Đã chép tin nhắn mẫu" : "💬 Chép tin nhắn Zalo"}
-        </button>
+        </button> */}
       </div>
     </div>
   );
