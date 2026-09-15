@@ -497,6 +497,13 @@ function HoangYenInvitation() {
     return params.get("to") || "";
   });
 
+  // Cập nhật tiêu đề tab theo tên khách mời
+  useEffect(() => {
+    document.title = guestName
+      ? `Thư mời tốt nghiệp Hoàng Yến · Kính gửi ${guestName}`
+      : "Thư mời tốt nghiệp của Hoàng Yến";
+  }, [guestName]);
+
   /* ---- AUTO SCROLL (giống Nhi) ---- */
   const stopAutoScroll = useCallback(() => {
     if (autoScrollRef.current) {
