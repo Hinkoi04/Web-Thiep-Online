@@ -427,7 +427,7 @@ function CardContent({ guestName }) {
           </form>
         </Reveal>
 
-        {messages.length > 0 && (
+        {/* {messages.length > 0 && (
           <div style={{ marginTop: 28 }}>
             {messages.map((m, i) => (
               <Reveal key={i} delay={i * 60}>
@@ -438,7 +438,7 @@ function CardContent({ guestName }) {
               </Reveal>
             ))}
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Countdown */}
