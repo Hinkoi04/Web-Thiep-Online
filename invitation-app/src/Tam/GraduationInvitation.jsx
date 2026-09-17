@@ -281,7 +281,7 @@ const GraduationInvitation = () => {
                   {/* Chỗ dành riêng cho khách mời (Personalized Guest Badge) */}
                   <div className="mt-3 inline-block bg-[#fdf2f5] border border-pink-200 px-4 py-1.5 rounded-full shadow-sm">
                     <p className="text-[12.5px] font-sans text-pink-700 font-semibold tracking-wide">
-                      💌 {guestName ? `Kính mời: ${guestName}` : 'Trân trọng kính mời Bạn & Gia đình'}
+                      💌 {guestName ? `Thân mời: ${guestName}` : 'Trân trọng thân mời Bạn & Gia đình'}
                     </p>
                   </div>
                 </div>
