@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap');
 
 /* Typography Utilities */
 .font-great-vibes {
@@ -7,6 +7,14 @@
 
 .font-script {
   font-family: 'Great Vibes', 'Alex Brush', cursive;
+}
+
+.font-pinyon {
+  font-family: 'Pinyon Script', cursive;
+}
+
+.font-respondent {
+  font-family: 'Respondent', 'Alex Brush', cursive;
 }
 
 .font-serif-elegant {
@@ -497,6 +505,44 @@
   color: #fff;
 }
 
+/* Contact Block Under Map (Phong cách Hoàng Yến) */
+.tam-contact-block {
+  margin-top: 22px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.tam-contact-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  color: #854159;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.tam-contact-text {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #6e2f45;
+  line-height: 1.8;
+}
+
+.tam-phone-link {
+  color: #6e2f45;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.tam-phone-link:hover {
+  color: #b05d7a;
+  text-decoration: underline;
+}
+
 /* =========================================
    RSVP / WISHES SECTION
    ========================================= */
@@ -521,6 +567,7 @@
 
 .tam-form-control {
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   padding: 12px 16px;
   margin-bottom: 12px;
@@ -532,6 +579,7 @@
   color: #4a343f;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
+  display: block;
 }
 
 .tam-form-control:focus {
@@ -540,8 +588,13 @@
 }
 
 textarea.tam-form-control {
-  min-height: 90px;
+  min-height: 95px;
   resize: vertical;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  line-height: 1.5;
 }
 
 .tam-btn-submit {
@@ -598,6 +651,140 @@ textarea.tam-form-control {
   color: #9c7b8c;
   margin-top: 4px;
   font-style: italic;
+}
+
+/* =========================================
+   COUNTDOWN TIMER STYLES
+   ========================================= */
+.tam-countdown-card {
+  background: radial-gradient(circle at 50% 50%, #fff8fa 0%, #fdf0f4 100%);
+  border: 1px dashed #eab3c3;
+  border-radius: 14px;
+  padding: 16px 10px;
+  margin-top: 20px;
+  box-shadow: 0 4px 16px rgba(180, 90, 120, 0.06);
+}
+
+.tam-cd-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.tam-cd-box {
+  background: #ffffff;
+  border: 1px solid rgba(223, 115, 149, 0.25);
+  border-radius: 10px;
+  min-width: 54px;
+  padding: 8px 4px 6px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(160, 70, 100, 0.08);
+}
+
+.tam-cd-num {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #5c3547;
+  line-height: 1;
+}
+
+.tam-cd-label {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #a25e77;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.tam-cd-colon {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #b05d7a;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+/* =========================================
+   INNER RSVP / GUESTBOOK STYLES
+   ========================================= */
+.tam-inner-rsvp {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fffafa;
+  border-radius: 12px;
+  border: 1px solid rgba(234, 179, 195, 0.4);
+  padding: 18px 14px;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* =========================================
+   THANK YOU PHOTO & MESSAGE SECTION
+   ========================================= */
+.tam-thank-section {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.tam-thank-photo-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(100, 40, 60, 0.16);
+  border: 2px solid #ffffff;
+  aspect-ratio: 4 / 3;
+}
+
+.tam-thank-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.tam-thank-photo-wrap:hover .tam-thank-img {
+  transform: scale(1.03);
+}
+
+.tam-thank-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(60, 20, 35, 0.45) 60%, rgba(40, 10, 25, 0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 18px 12px;
+  pointer-events: none;
+}
+
+.tam-thank-title-script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.6rem;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 180, 200, 0.6);
+  line-height: 1;
+}
+
+.tam-thank-title-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #ffd6e2;
+  text-transform: uppercase;
+  margin-top: 2px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Toast */

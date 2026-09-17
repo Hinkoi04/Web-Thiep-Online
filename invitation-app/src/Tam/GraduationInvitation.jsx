@@ -3,6 +3,7 @@ import './TamStyles.css';
 import bgImage from './images/background.jpg';
 import buttonImg from './images/buttom.png';
 import timeLogoImg from './images/time-logo.png';
+import { useCountdown, pad } from './utils';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
@@ -14,12 +15,19 @@ const EVENT_INFO = {
   address: 'Cơ sở Q.12 — 331A-331B Đỗ Mười, An Phú Đông 10, Q.12, TP.HCM',
   lat: 10.859858712011244,
   lng: 106.69462064035187,
+  contact_1_name: 'Tâm',
+  contact_1_phone: '0393 455 450',
+  contact_2_name: 'Nhi',
+  contact_2_phone: '0334 259 765',
 };
 
 const GraduationInvitation = () => {
   const [isOpening, setIsOpening] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
+
+  // Đếm ngược thời gian tới sự kiện
+  const countdown = useCountdown(EVENT_INFO.event_date, EVENT_INFO.event_time);
 
   // Lấy tên khách mời nếu có trên URL (?to=...)
   const [guestName, setGuestName] = useState('');
@@ -140,8 +148,8 @@ const GraduationInvitation = () => {
                 </h1>
               </div>
               <p
-                className="text-[17px] sm:text-[19px] md:text-[21px] tracking-[0.42em] uppercase font-bold mt-1.5 font-cormorant text-[#b2878c]"
-                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", letterSpacing: '0.42em', color: '#b2878c' }}
+                className="text-[17px] sm:text-[19px] md:text-[21px] tracking-[0.42em] uppercase font-bold mt-1.5 font-cormorant text-[#5c3746]"
+                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", letterSpacing: '0.42em', color: '#5c3746' }}
               >
                 INVITATIONS
               </p>
@@ -162,20 +170,23 @@ const GraduationInvitation = () => {
 
                   {/* 2. Lá thư bên trong (Bước 1: Trượt từ từ lên | Bước 2: Phóng to full màn hình) */}
                   <div className="envelope-inner-letter">
-                    <div className="text-[11px] sm:text-[12px] uppercase tracking-wider text-[#b2878c] font-sans font-semibold mb-0.5">
-                      {guestName ? `Kính gửi: ${guestName}` : 'Thư Mời Tốt Nghiệp'}
-                    </div>
                     <div
-                      className="text-2xl sm:text-3xl text-[#b2878c] font-bold leading-tight font-script mb-0.5"
-                      style={{ fontFamily: "'Great Vibes', cursive", color: '#b2878c' }}
+                      className="text-2xl sm:text-3xl text-[#b05d7a] font-normal leading-tight drop-shadow-sm font-respondent"
+                      style={{ fontFamily: "'Respondent', 'Alex Brush', cursive", color: '#b05d7a' }}
+                    >
+                      Thân mời
+                    </div>
+                    <div className="text-[15px] sm:text-[16px] uppercase tracking-wider text-[#5c3746] font-sans font-bold my-0.5">
+                      {guestName ? guestName : 'Bạn & Gia đình'}
+                    </div>
+                    <p className="text-[12px] sm:text-[13px] text-[#7a4e61] font-sans leading-snug my-0.5 italic">
+                      tới dự lễ tốt nghiệp của
+                    </p>
+                    <div
+                      className="text-3xl sm:text-4xl text-[#b05d7a] font-normal leading-tight drop-shadow-sm mt-0.5 font-pinyon"
+                      style={{ fontFamily: "'Pinyon Script', cursive", color: '#b05d7a' }}
                     >
                       Thanh Tâm
-                    </div>
-                    <p className="text-[12px] sm:text-[13px] text-gray-500 leading-snug mb-2 italic">
-                      Trường Đại học Nguyễn Tất Thành
-                    </p>
-                    <div className="text-[11px] bg-[#b2878c]/10 text-[#b2878c] border border-[#b2878c]/30 px-3 py-0.5 rounded-full inline-flex items-center gap-1 font-sans font-semibold shadow-sm">
-                      <span>📅</span> 19 · 09 · 2026
                     </div>
                   </div>
 
@@ -240,7 +251,7 @@ const GraduationInvitation = () => {
           <div className="tam-invitation-container">
 
             {/* ====================================================
-                PHẦN 1: TẤM THIỆP GIẤY CHÍNH VINTAGE
+                TẤM THIỆP GIẤY CHÍNH VINTAGE (ĐỒNG NHẤT TOÀN BỘ NỘI DUNG)
                 ==================================================== */}
             <div className="tam-paper-card">
 
@@ -249,26 +260,26 @@ const GraduationInvitation = () => {
 
                 {/* 1. TIÊU ĐỀ THIỆP MỜI */}
                 <div className="text-center pt-2 mb-4">
-                  <p className="text-[11px] md:text-xs tracking-[0.25em] text-[#553b47] uppercase font-serif-elegant font-bold">
+                  <p className="text-[11px] md:text-xs tracking-[0.25em] text-[#854159] uppercase font-serif-elegant font-bold">
                     YOU'RE INVITED TO
                   </p>
 
                   <h1
-                    className="text-3xl md:text-4xl text-[#3a222e] font-extrabold tracking-[0.12em] uppercase font-serif-elegant leading-none mt-2"
+                    className="text-3xl md:text-4xl text-[#6e2f45] font-extrabold tracking-[0.12em] uppercase font-serif-elegant leading-none mt-2 mb-1"
                     style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
                   >
                     GRADUATION
                   </h1>
 
                   <h2
-                    className="text-5xl md:text-6xl text-[#b05d7a] font-normal leading-tight font-script -mt-2 drop-shadow-sm"
+                    className="text-5xl md:text-6xl text-[#b05d7a] font-normal leading-tight font-script mt-2 mb-1 drop-shadow-sm"
                     style={{ fontFamily: "'Alex Brush', 'Brush Script MT', cursive" }}
                   >
                     Thanh Tâm
                   </h2>
 
                   {/* Chỗ dành riêng cho khách mời (Personalized Guest Badge) */}
-                  <div className="mt-2 inline-block bg-[#fdf2f5] border border-pink-200 px-4 py-1.5 rounded-full shadow-sm">
+                  <div className="mt-3 inline-block bg-[#fdf2f5] border border-pink-200 px-4 py-1.5 rounded-full shadow-sm">
                     <p className="text-[12.5px] font-sans text-pink-700 font-semibold tracking-wide">
                       💌 {guestName ? `Kính mời: ${guestName}` : 'Trân trọng kính mời Bạn & Gia đình'}
                     </p>
@@ -298,7 +309,7 @@ const GraduationInvitation = () => {
                 </div>
 
                 {/* 4. THỜI GIAN & ĐỊA ĐIỂM */}
-                <div className="text-center mt-5">
+                <div className="text-center mt-4">
                   {/* Thanh ngăn cách với chữ THỨ BẢY */}
                   <div className="flex items-center justify-center gap-2 my-2">
                     <div className="h-[1px] w-12 bg-[#b05d7a]/40"></div>
@@ -331,43 +342,130 @@ const GraduationInvitation = () => {
                       ✦ Chỉ Đường ✦
                     </a>
                   </div>
+
+                  {/* Liên Hệ (Phong cách Hoàng Yến) */}
+                  <div className="tam-contact-block">
+                    <div className="tam-contact-title">Liên Hệ</div>
+                    <div className="tam-contact-text">
+                      <div>
+                        {EVENT_INFO.contact_1_name}:{' '}
+                        <a href={`tel:${EVENT_INFO.contact_1_phone.replace(/\s+/g, '')}`} className="tam-phone-link">
+                          {EVENT_INFO.contact_1_phone}
+                        </a>
+                      </div>
+                      {EVENT_INFO.contact_2_name && (
+                        <div>
+                          {EVENT_INFO.contact_2_name}:{' '}
+                          <a href={`tel:${EVENT_INFO.contact_2_phone.replace(/\s+/g, '')}`} className="tam-phone-link">
+                            {EVENT_INFO.contact_2_phone}
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 5. THỜI GIAN ĐẾM NGƯỢC */}
+                <div className="tam-countdown-card">
+                  <div className="text-center mb-2">
+                    <span className="text-[10px] sm:text-[11px] font-sans font-bold tracking-[0.22em] text-[#a25e77] uppercase">
+                      ✦ CÙNG ĐẾM NGƯỢC ✦
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-script text-[#5c3547] mt-0.5" style={{ fontFamily: "'Great Vibes', cursive" }}>
+                      Thời Gian Tới Sự Kiện
+                    </h3>
+                  </div>
+
+                  {countdown.over ? (
+                    <div className="text-center py-2 text-xs sm:text-sm text-[#b05d7a] font-sans font-semibold">
+                      ✦ Sự kiện đã diễn ra! Cảm ơn bạn đã luôn yêu thương Thanh Tâm ✦
+                    </div>
+                  ) : (
+                    <div className="tam-cd-grid">
+                      <div className="tam-cd-box">
+                        <span className="tam-cd-num">{pad(countdown.days)}</span>
+                        <span className="tam-cd-label">Ngày</span>
+                      </div>
+                      <span className="tam-cd-colon">:</span>
+                      <div className="tam-cd-box">
+                        <span className="tam-cd-num">{pad(countdown.hours)}</span>
+                        <span className="tam-cd-label">Giờ</span>
+                      </div>
+                      <span className="tam-cd-colon">:</span>
+                      <div className="tam-cd-box">
+                        <span className="tam-cd-num">{pad(countdown.minutes)}</span>
+                        <span className="tam-cd-label">Phút</span>
+                      </div>
+                      <span className="tam-cd-colon">:</span>
+                      <div className="tam-cd-box">
+                        <span className="tam-cd-num">{pad(countdown.seconds)}</span>
+                        <span className="tam-cd-label">Giây</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Đường phân cách họa tiết */}
+                <div className="flex items-center justify-center gap-3 my-6">
+                  <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#eab3c3] to-transparent"></div>
+                  <span className="text-sm text-[#b05d7a]">❦</span>
+                  <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#eab3c3] to-transparent"></div>
+                </div>
+
+                {/* 6. SỔ LƯU BÚT & GỬI LỜI CHÚC (ĐÃ GỘP CHUNG VÀO KHUNG THIỆP) */}
+                <div className="tam-inner-rsvp" id="wishes">
+                  <div className="text-center mb-2">
+                    <div className="tam-section-title-sm">Gửi Lời Yêu Thương</div>
+                    <div className="tam-section-title-script">Sổ Lưu Bút</div>
+                    <p className="text-xs text-[#664b58] font-sans leading-relaxed px-1">
+                      Sự hiện diện và những lời chúc yêu thương của bạn là món quà ý nghĩa nhất dành cho Thanh Tâm trong ngày tốt nghiệp! ❤️
+                    </p>
+                  </div>
+
+                  {/* Form gửi lời chúc */}
+                  <form onSubmit={handleSubmitWish} className="tam-rsvp-form">
+                    <input
+                      type="text"
+                      className="tam-form-control"
+                      placeholder="Tên của bạn *"
+                      value={rsvpName}
+                      onChange={(e) => setRsvpName(e.target.value)}
+                      required
+                    />
+                    <textarea
+                      className="tam-form-control"
+                      placeholder="Gửi lời chúc mừng tốt nghiệp đến Thanh Tâm... *"
+                      value={rsvpMsg}
+                      onChange={(e) => setRsvpMsg(e.target.value)}
+                      rows={3}
+                      wrap="soft"
+                      required
+                    />
+                    <button type="submit" className="tam-btn-submit">
+                      Gửi Lời Nhắn ✦
+                    </button>
+                  </form>
+                </div>
+
+                {/* Đường phân cách họa tiết */}
+                <div className="flex items-center justify-center gap-3 my-6">
+                  <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#eab3c3] to-transparent"></div>
+                  <span className="text-sm text-[#b05d7a]">✦</span>
+                  <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent via-[#eab3c3] to-transparent"></div>
+                </div>
+
+                {/* 7. BỨC ẢNH THANK YOU */}
+                <div className="tam-thank-section text-center mt-2">
+                  <img
+                    src="https://res.cloudinary.com/dlxbhq8pw/image/upload/v1789659252/thanksyou_wa23ru.png"
+                    alt="Thank You"
+                    className="w-full h-auto rounded-xl object-contain shadow-sm"
+                    loading="lazy"
+                  />
                 </div>
 
               </div>
 
-            </div>
-
-            {/* ====================================================
-                PHẦN 2: SỔ LƯU BÚT & GỬI LỜI CHÚC (BẢNG thanh_tam)
-                ==================================================== */}
-            <div className="tam-rsvp-wrap" id="wishes">
-              <div className="tam-section-title-sm">Gửi Lời Yêu Thương</div>
-              <div className="tam-section-title-script">Sổ Lưu Bút</div>
-              <p className="text-xs text-[#664b58] font-sans leading-relaxed px-2">
-                Sự hiện diện và những lời chúc yêu thương của bạn là món quà ý nghĩa nhất dành cho Thanh Tâm trong ngày tốt nghiệp! ❤️
-              </p>
-
-              {/* Form gửi lời chúc */}
-              <form onSubmit={handleSubmitWish} className="tam-rsvp-form">
-                <input
-                  type="text"
-                  className="tam-form-control"
-                  placeholder="Tên của bạn *"
-                  value={rsvpName}
-                  onChange={(e) => setRsvpName(e.target.value)}
-                  required
-                />
-                <textarea
-                  className="tam-form-control"
-                  placeholder="Gửi lời chúc mừng tốt nghiệp đến Thanh Tâm... *"
-                  value={rsvpMsg}
-                  onChange={(e) => setRsvpMsg(e.target.value)}
-                  required
-                />
-                <button type="submit" className="tam-btn-submit">
-                  Gửi Lời Nhắn ✦
-                </button>
-              </form>
             </div>
 
           </div>
