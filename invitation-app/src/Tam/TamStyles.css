@@ -1,0 +1,628 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap');
+
+/* Typography Utilities */
+.font-great-vibes {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-script {
+  font-family: 'Great Vibes', 'Alex Brush', cursive;
+}
+
+.font-serif-elegant {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans-clean {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* =========================================
+   BLURRED BACKGROUND FOR FULL INVITATION
+   ========================================= */
+.tam-blurred-bg-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(16px);
+  transform: scale(1.08);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.tam-invitation-container {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 30px 12px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Main Paper Card (Kẹp bìa thư ngắn gọn) */
+.tam-paper-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(100, 60, 75, 0.28), 0 8px 24px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  padding: 24px 16px 28px;
+  position: relative;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* Vintage Gold Metal Binder Clip ở mép trên */
+.tam-gold-clip {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 32px;
+  background: linear-gradient(135deg, #f6e5a8 0%, #caa03c 45%, #fff6bf 70%, #906313 100%);
+  border-radius: 4px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tam-gold-clip::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2.5px solid #4e320b;
+  background: #f4df96;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Khung viền hoa văn cổ điển bên trong */
+.tam-card-inner-frame {
+  position: relative;
+  border: 1.5px solid #eab3c3;
+  border-radius: 10px;
+  padding: 20px 12px 22px;
+  background: #fffdfd;
+  box-shadow: inset 0 0 0 4px #fffdfd, inset 0 0 0 5px rgba(234, 179, 195, 0.45);
+}
+
+/* Scalloped / Vintage Oval Badge */
+.tam-oval-date-badge {
+  position: relative;
+  width: 145px;
+  height: 185px;
+  margin: 18px auto;
+  background: radial-gradient(circle at 50% 45%, #fff5f7 0%, #faeedc 70%, #f6e2c3 100%);
+  border-radius: 50%;
+  border: 5px solid #8fad72;
+  box-shadow: 0 10px 24px rgba(100, 140, 70, 0.25), inset 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+.tam-oval-date-badge::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(143, 173, 114, 0.7);
+  pointer-events: none;
+}
+
+/* Pearl Accent */
+.tam-pearl {
+  position: absolute;
+  top: 28px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f1f5f9 60%, #cbd5e1 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+/* =========================================
+   INTRO COVER SCREEN & FULLSCREEN / DESKTOP BLUR
+   ========================================= */
+.tam-intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fae2e8;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  transition: opacity 1.4s ease, visibility 1.4s;
+}
+
+.tam-intro-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Nền mờ cho không gian ngoài khi mở trên máy tính */
+.tam-intro-blurred-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(28px);
+  transform: scale(1.12);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Portrait Card Mockup ở giữa */
+.intro-portrait-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 450px;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100%;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: max(28px, env(safe-area-inset-top, 28px)) 16px max(24px, env(safe-area-inset-bottom, 24px));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  transition: transform 2.0s cubic-bezier(0.22, 1, 0.36, 1), filter 2.0s ease, opacity 1.4s 0.3s ease;
+}
+
+.intro-portrait-card.is-zooming {
+  transform: scale(1.18);
+  filter: blur(8px);
+  opacity: 0.3;
+}
+
+.intro-portrait-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 240, 245, 0.05) 50%, rgba(255, 220, 230, 0.2) 100%);
+  pointer-events: none;
+}
+
+/* Sparkles on Card */
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 14px;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+  animation: sparkleTwinkle 3s infinite ease-in-out;
+}
+
+@keyframes sparkleTwinkle {
+
+  0%,
+  100% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.2) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   ENVELOPE 3D & VECTOR STYLING (LAYERED POCKET)
+   ========================================= */
+.envelope-scene {
+  perspective: 1200px;
+  width: 100%;
+  max-width: 350px;
+  height: 235px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.envelope-card {
+  position: relative;
+  width: 340px;
+  max-width: 100%;
+  height: 222px;
+  background-color: #55663b;
+  border-radius: 12px;
+  box-shadow: 0 20px 48px rgba(50, 70, 30, 0.38), 0 6px 18px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.envelope-card:hover {
+  transform: translateY(-2px);
+}
+
+/* 1. TOP FLAP */
+.envelope-top-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 123px;
+  transform-origin: 50% 0%;
+  transform: perspective(600px) rotateX(0deg);
+  transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s 0.6s;
+  z-index: 10;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.18));
+}
+
+.envelope-scene.is-opening .envelope-top-flap {
+  transform: perspective(600px) rotateX(180deg);
+  z-index: 1 !important;
+}
+
+.envelope-flap-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 2. INNER LETTER */
+.envelope-inner-letter {
+  position: absolute;
+  top: 11px;
+  left: 13px;
+  width: calc(100% - 26px);
+  height: 200px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(244, 114, 182, 0.25);
+  padding: 16px 14px;
+  z-index: 5 !important;
+  transform: translateY(0);
+  transition: transform 2.4s 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 1.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: radial-gradient(#fdf2f8 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Bước 1: Lá thư từ từ trồi lên khỏi bao thư (Chậm, êm dịu) */
+.envelope-scene.is-opening .envelope-inner-letter {
+  transform: translateY(-125px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+  z-index: 5 !important;
+}
+
+/* Bước 2: Lá thư phóng to dần lên full màn hình */
+.envelope-scene.is-zooming .envelope-inner-letter {
+  transform: translateY(-125px) scale(3.2);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: transform 2.0s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.4s 0.5s ease;
+  z-index: 100 !important;
+}
+
+/* 3. FRONT POCKET */
+.envelope-pocket {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8 !important;
+  pointer-events: none;
+}
+
+/* 4. WAX SEAL / NÚT OPEN BẰNG ẢNH buttom.png */
+.envelope-wax-seal {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 66px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.envelope-scene.is-opening .envelope-wax-seal {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: none;
+}
+
+/* Floating animation when waiting */
+@keyframes envelopeFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.envelope-scene:not(.is-opening) .envelope-card {
+  animation: envelopeFloat 3.5s ease-in-out infinite;
+}
+
+/* Pulse animation for wax seal */
+@keyframes sealGlow {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+.seal-pulse {
+  animation: sealGlow 2.2s infinite ease-in-out;
+}
+
+/* =========================================
+   LOCATION MAP & RSVP STYLES FOR TAM
+   ========================================= */
+
+/* Section Titles */
+.tam-section-title-sm {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  color: #a25e77;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tam-section-title-script {
+  font-family: 'Alex Brush', cursive;
+  font-size: 2.2rem;
+  color: #5c3547;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+/* Location Card & Map */
+.tam-location-card {
+  background: #ffffff;
+  border: 1px solid rgba(223, 115, 149, 0.2);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: left;
+  box-shadow: 0 4px 14px rgba(140, 70, 95, 0.06);
+  margin-top: 16px;
+}
+
+.tam-loc-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #4a2e3b;
+  margin-bottom: 4px;
+}
+
+.tam-loc-addr {
+  font-size: 0.8rem;
+  color: #6d4e5d;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tam-map-container {
+  border-radius: 10px;
+  overflow: hidden;
+  height: 170px;
+  border: 1px solid rgba(223, 115, 149, 0.2);
+  margin-bottom: 14px;
+}
+
+.tam-map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.tam-btn-direction {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background: linear-gradient(135deg, #df7395, #b05174);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 0.76rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 4px 14px rgba(176, 81, 116, 0.3);
+  transition: all 0.3s ease;
+}
+
+.tam-btn-direction:hover {
+  background: linear-gradient(135deg, #cf6385, #9e4364);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+/* =========================================
+   RSVP / WISHES SECTION
+   ========================================= */
+.tam-rsvp-wrap {
+  width: 100%;
+  max-width: 440px;
+  margin: 24px auto 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 40px rgba(140, 70, 95, 0.15);
+  padding: 24px 18px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.tam-rsvp-form {
+  margin-top: 18px;
+  text-align: left;
+}
+
+.tam-form-control {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(223, 115, 149, 0.3);
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  background: #ffffff;
+  color: #4a343f;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tam-form-control:focus {
+  border-color: #b05174;
+  box-shadow: 0 0 0 3px rgba(223, 115, 149, 0.2);
+}
+
+textarea.tam-form-control {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.tam-btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #df7395, #b05174);
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 4px 14px rgba(176, 81, 116, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tam-btn-submit:hover {
+  background: linear-gradient(135deg, #cf6385, #9e4364);
+  transform: translateY(-2px);
+}
+
+.tam-rsvp-message {
+  margin-top: 12px;
+  text-align: left;
+}
+
+.tam-rsvp-message-inner {
+  background: #fdf6f8;
+  border: 1px solid rgba(223, 115, 149, 0.2);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.tam-rsvp-message-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #b05174;
+  margin-bottom: 4px;
+}
+
+.tam-rsvp-message-text {
+  font-size: 0.85rem;
+  color: #553e4b;
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.tam-rsvp-message-time {
+  font-size: 0.7rem;
+  color: #9c7b8c;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Toast */
+.tam-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #3e2430;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+}
+
+.tam-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}

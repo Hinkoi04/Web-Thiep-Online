@@ -17,6 +17,14 @@ const CARDS = [
     date: '2026',
     accent: '#c9a96e',
   },
+  {
+    href: '/Tam/',
+    emoji: '🌸',
+    name: 'Thanh Tâm',
+    desc: 'Lễ Tốt Nghiệp · 19/09/2026',
+    date: '2026',
+    accent: '#f472b6',
+  },
 ];
 
 export default function App() {

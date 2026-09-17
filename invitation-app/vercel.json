@@ -4,6 +4,8 @@
     { "source": "/Nhi/(.*)", "destination": "/LinkPreview/Nhi/index.html" },
     { "source": "/HoangYen", "destination": "/LinkPreview/HoangYen/index.html" },
     { "source": "/HoangYen/(.*)", "destination": "/LinkPreview/HoangYen/index.html" },
+    { "source": "/Tam", "destination": "/LinkPreview/Tam/index.html" },
+    { "source": "/Tam/(.*)", "destination": "/LinkPreview/Tam/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
