@@ -176,7 +176,7 @@ const GraduationInvitation = () => {
                     >
                       Thân mời
                     </div>
-                    <div className="text-[15px] sm:text-[16px] uppercase tracking-wider text-[#5c3746] font-sans font-bold my-0.5">
+                    <div className="text-[15px] sm:text-[16px] tracking-wider text-[#5c3746] font-sans font-bold my-0.5" style={{ fontFamily: "'Great Vibes', cursive" }}>
                       {guestName ? guestName : 'Bạn & Gia đình'}
                     </div>
                     <p className="text-[12px] sm:text-[13px] text-[#7a4e61] font-sans leading-snug my-0.5 italic">
