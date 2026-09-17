@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './TamStyles.css';
 import bgImage from './images/background.jpg';
 import buttonImg from './images/buttom.png';
+import timeLogoImg from './images/time-logo.png';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
@@ -161,19 +162,19 @@ const GraduationInvitation = () => {
 
                   {/* 2. Lá thư bên trong (Bước 1: Trượt từ từ lên | Bước 2: Phóng to full màn hình) */}
                   <div className="envelope-inner-letter">
-                    <div className="text-[11px] sm:text-[12px] uppercase tracking-wider text-pink-500 font-sans font-semibold mb-0.5">
+                    <div className="text-[11px] sm:text-[12px] uppercase tracking-wider text-[#b2878c] font-sans font-semibold mb-0.5">
                       {guestName ? `Kính gửi: ${guestName}` : 'Thư Mời Tốt Nghiệp'}
                     </div>
                     <div
-                      className="text-2xl sm:text-3xl text-pink-600 font-bold leading-tight font-script mb-0.5"
-                      style={{ fontFamily: "'Great Vibes', cursive" }}
+                      className="text-2xl sm:text-3xl text-[#b2878c] font-bold leading-tight font-script mb-0.5"
+                      style={{ fontFamily: "'Great Vibes', cursive", color: '#b2878c' }}
                     >
                       Thanh Tâm
                     </div>
                     <p className="text-[12px] sm:text-[13px] text-gray-500 leading-snug mb-2 italic">
                       Trường Đại học Nguyễn Tất Thành
                     </p>
-                    <div className="text-[11px] bg-pink-50 text-pink-600 border border-pink-200 px-3 py-0.5 rounded-full inline-flex items-center gap-1 font-sans font-semibold shadow-sm">
+                    <div className="text-[11px] bg-[#b2878c]/10 text-[#b2878c] border border-[#b2878c]/30 px-3 py-0.5 rounded-full inline-flex items-center gap-1 font-sans font-semibold shadow-sm">
                       <span>📅</span> 19 · 09 · 2026
                     </div>
                   </div>
@@ -287,29 +288,13 @@ const GraduationInvitation = () => {
                   </p>
                 </div>
 
-                {/* 3. KHUNG OVAL HOA VINTAGE CHỨA NGÀY 19 / SEPTEMBER / 2026 */}
-                <div className="tam-oval-date-badge">
-                  <span className="text-5xl md:text-6xl font-serif font-bold text-[#3d2430] leading-none">
-                    19
-                  </span>
-                  <span
-                    className="text-2xl md:text-3xl text-[#b05d7a] font-bold font-script -mt-1"
-                    style={{ fontFamily: "'Alex Brush', cursive" }}
-                  >
-                    September
-                  </span>
-                  <span className="text-sm font-serif tracking-[0.25em] text-[#553b47] font-semibold mt-1">
-                    2026
-                  </span>
-
-                  {/* Cụm hoa hồng & ngọc trai trang trí */}
-                  <div className="absolute -top-3 -right-3 text-3xl filter drop-shadow select-none">🌸</div>
-                  <div className="absolute top-1/2 -right-4 text-2xl filter drop-shadow select-none">🌸</div>
-                  <div className="absolute -bottom-2 -left-3 text-2xl filter drop-shadow select-none">🌿</div>
-                  <div className="absolute top-3 -left-3 text-2xl filter drop-shadow select-none">🦋</div>
-
-                  {/* Hạt ngọc trai */}
-                  <div className="tam-pearl"></div>
+                {/* 3. TIME LOGO */}
+                <div className="flex justify-center my-4">
+                  <img
+                    src={timeLogoImg}
+                    alt="Thời gian & Ngày"
+                    className="w-full max-w-[280px] md:max-w-[320px] h-auto object-contain mx-auto drop-shadow-sm"
+                  />
                 </div>
 
                 {/* 4. THỜI GIAN & ĐỊA ĐIỂM */}
