@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './TamStyles.css';
 import bgImage from './images/background.jpg';
 import buttonImg from './images/buttom.png';
-import timeLogoImg from './images/time-logo.png';
+import timeLogoImg from './images/3.png';
 import { useCountdown, pad } from './utils';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
