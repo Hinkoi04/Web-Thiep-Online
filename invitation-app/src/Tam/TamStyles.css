@@ -787,6 +787,64 @@ textarea.tam-form-control {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
+/* =========================================
+   SCROLL PROGRESS BAR & SCROLL TOP BUTTON
+   ========================================= */
+.tam-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(440px, 100vw);
+  height: 4px;
+  background: rgba(234, 179, 195, 0.25);
+  z-index: 99998;
+  pointer-events: none;
+}
+
+.tam-scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #df7395, #b05174, #854159);
+  width: 0%;
+  border-radius: 0 2px 2px 0;
+  transition: width 0.1s ease-out;
+}
+
+.tam-scroll-top-btn {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(calc(min(440px, 100vw) / 2 - 56px)) scale(0);
+  z-index: 9999;
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #df7395, #854159);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 16px rgba(110, 47, 69, 0.35);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  font-size: 1.25rem;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.tam-scroll-top-btn.show {
+  opacity: 1;
+  transform: translateX(calc(min(440px, 100vw) / 2 - 56px)) scale(1);
+  pointer-events: auto;
+}
+
+.tam-scroll-top-btn:hover {
+  transform: translateX(calc(min(440px, 100vw) / 2 - 56px)) scale(1.12);
+  background: linear-gradient(135deg, #cf6385, #6e2f45);
+}
+
 /* Toast */
 .tam-toast {
   position: fixed;

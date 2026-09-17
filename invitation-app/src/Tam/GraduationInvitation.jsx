@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './TamStyles.css';
 import bgImage from './images/background.jpg';
 import buttonImg from './images/buttom.png';
@@ -28,6 +28,72 @@ const GraduationInvitation = () => {
 
   // Đếm ngược thời gian tới sự kiện
   const countdown = useCountdown(EVENT_INFO.event_date, EVENT_INFO.event_time);
+
+  // Tự động cuộn (Auto Scroll) tương tự như Hoàng Yến
+  const autoScrollRef = useRef(null);
+  const [scrollPct, setScrollPct] = useState(0);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const stopAutoScroll = useCallback(() => {
+    if (autoScrollRef.current) {
+      cancelAnimationFrame(autoScrollRef.current);
+      autoScrollRef.current = null;
+    }
+    document.documentElement.style.scrollBehavior = 'smooth';
+  }, []);
+
+  const startAutoScroll = useCallback(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    let currentY = window.scrollY;
+    function step() {
+      currentY += 1.4;
+      window.scrollTo(0, currentY);
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (window.scrollY < maxScroll - 5) {
+        autoScrollRef.current = requestAnimationFrame(step);
+      } else {
+        stopAutoScroll();
+      }
+    }
+    autoScrollRef.current = requestAnimationFrame(step);
+  }, [stopAutoScroll]);
+
+  // Ngừng tự động cuộn khi người dùng chạm vào màn hình hoặc cuộn chuột
+  useEffect(() => {
+    const handler = () => stopAutoScroll();
+    ['wheel', 'touchmove', 'mousedown', 'touchstart', 'keydown'].forEach((e) =>
+      window.addEventListener(e, handler, { passive: true })
+    );
+    return () => {
+      stopAutoScroll();
+      ['wheel', 'touchmove', 'mousedown', 'touchstart', 'keydown'].forEach((e) =>
+        window.removeEventListener(e, handler)
+      );
+    };
+  }, [stopAutoScroll]);
+
+  // Bắt đầu tự động cuộn sau khi mở thư
+  useEffect(() => {
+    if (isOpened) {
+      const timer = setTimeout(() => {
+        startAutoScroll();
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpened, startAutoScroll]);
+
+  // Theo dõi thanh tiến trình cuộn & nút cuộn lên đầu
+  useEffect(() => {
+    if (!isOpened) return;
+    function onScroll() {
+      const scrollTop = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollPct(docH > 0 ? (scrollTop / docH) * 100 : 0);
+      setShowScrollTop(scrollTop > docH * 0.2);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isOpened]);
 
   // Lấy tên khách mời nếu có trên URL (?to=...)
   const [guestName, setGuestName] = useState('');
@@ -240,6 +306,11 @@ const GraduationInvitation = () => {
           ======================================================== */}
       {isOpened && (
         <div className="relative min-h-screen overflow-x-hidden invitation-content-fadein pb-12">
+
+          {/* Thanh tiến trình cuộn trang */}
+          <div className="tam-scroll-progress">
+            <div className="tam-scroll-progress-bar" style={{ width: `${scrollPct}%` }} />
+          </div>
 
           {/* Background ảnh nền làm mờ (Blurred Background) */}
           <div
@@ -467,6 +538,20 @@ const GraduationInvitation = () => {
               </div>
 
             </div>
+
+            {/* Nút Cuộn Lên Đầu Trang */}
+            <button
+              type="button"
+              className={`tam-scroll-top-btn ${showScrollTop ? 'show' : ''}`}
+              onClick={() => {
+                stopAutoScroll();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              title="Cuộn lên đầu trang"
+              aria-label="Cuộn lên đầu trang"
+            >
+              ↑
+            </button>
 
           </div>
 
