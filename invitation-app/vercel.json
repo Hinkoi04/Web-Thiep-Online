@@ -6,6 +6,8 @@
     { "source": "/HoangYen/(.*)", "destination": "/LinkPreview/HoangYen/index.html" },
     { "source": "/Tam", "destination": "/LinkPreview/Tam/index.html" },
     { "source": "/Tam/(.*)", "destination": "/LinkPreview/Tam/index.html" },
+    { "source": "/ThoaWD", "destination": "/LinkPreview/ThoaWD/index.html" },
+    { "source": "/ThoaWD/(.*)", "destination": "/LinkPreview/ThoaWD/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
