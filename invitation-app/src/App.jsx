@@ -25,6 +25,15 @@ const CARDS = [
     date: '2026',
     accent: '#f472b6',
   },
+  {
+    href: '/ThoaWD/',
+    emoji: '💍',
+    name: 'ThoaWD',
+    desc: 'Thiệp Cưới · 15/11/2026',
+    date: '2026',
+    accent: '#c97884',
+    type: 'wedding',
+  },
 ];
 
 export default function App() {
@@ -41,7 +50,7 @@ export default function App() {
           <a key={card.href} href={card.href} style={cardBase} className="hy-landing-card">
             <div style={{ fontSize: '2.5rem', marginBottom: 14 }}>{card.emoji}</div>
             <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.6rem', letterSpacing: 4, textTransform: 'uppercase', color: card.accent, marginBottom: 10, opacity: 0.85 }}>
-              Thiệp Tốt Nghiệp
+              {card.type === 'wedding' ? 'Thiệp Cưới' : 'Thiệp Tốt Nghiệp'}
             </div>
             <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1.4rem, 4vw, 2rem)', color: '#f0e6d3', lineHeight: 1.2, marginBottom: 10 }}>
               {card.name}

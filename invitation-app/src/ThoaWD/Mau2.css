@@ -1,0 +1,203 @@
+/* Vietnamese Calligraphy & Serif Typography */
+.font-script,
+.font-calligraphy {
+  font-family: 'Dancing Script', 'Playfair Display', cursive, sans-serif !important;
+  letter-spacing: 0.5px;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-playfair,
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom shadows & utilities */
+.arch-shadow {
+  box-shadow: 0 10px 30px -5px rgba(27, 46, 75, 0.12), 0 0 0 1px rgba(208, 219, 231, 0.6);
+}
+
+.card-soft-shadow {
+  box-shadow: 0 -8px 30px -4px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(226, 232, 240, 0.8);
+}
+
+.shadow-2xs,
+.shadow-xs {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.backdrop-blur-xs {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.aspect-3\/4,
+.aspect-3-4 {
+  aspect-ratio: 3 / 4;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Floating animation */
+@keyframes softFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-soft-float {
+  animation: softFloat 3s ease-in-out infinite;
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 12s linear infinite;
+}
+
+/* ── SCROLL REVEAL UTILITY STYLES (MƯỢT MÀ, CHẬM RÃI 3.8S) ── */
+.reveal-init {
+  opacity: 0;
+  transition: opacity 3.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 3.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 3.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-up {
+  transform: translateY(50px);
+}
+
+.reveal-left {
+  transform: translateX(-60px);
+}
+
+.reveal-right {
+  transform: translateX(60px);
+}
+
+.reveal-scale {
+  transform: scale(0.92);
+}
+
+.reveal-active {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+  filter: blur(0px) !important;
+}
+
+/* ── TRANSPARENT FLOATING PILL BUBBLE ANIMATIONS (HIỆN LÊN ẨN XUỐNG LIÊN TỤC) ── */
+@keyframes pillBubbleFadeFloat1 {
+  0% {
+    transform: translateY(12px) scale(0.92);
+    opacity: 0.15;
+  }
+  30%, 70% {
+    transform: translateY(-6px) scale(1);
+    opacity: 0.98;
+  }
+  100% {
+    transform: translateY(-16px) scale(0.94);
+    opacity: 0.15;
+  }
+}
+
+@keyframes pillBubbleFadeFloat2 {
+  0% {
+    transform: translateY(8px) scale(0.94);
+    opacity: 0.2;
+  }
+  35%, 65% {
+    transform: translateY(-10px) scale(1);
+    opacity: 0.98;
+  }
+  100% {
+    transform: translateY(-18px) scale(0.92);
+    opacity: 0.2;
+  }
+}
+
+@keyframes pillBubbleFadeFloat3 {
+  0% {
+    transform: translateY(14px) scale(0.9);
+    opacity: 0.1;
+  }
+  40%, 70% {
+    transform: translateY(-8px) scale(1);
+    opacity: 0.98;
+  }
+  100% {
+    transform: translateY(-20px) scale(0.92);
+    opacity: 0.1;
+  }
+}
+
+.animate-pill-bubble-0 {
+  animation: pillBubbleFadeFloat1 5.5s ease-in-out infinite;
+}
+
+.animate-pill-bubble-1 {
+  animation: pillBubbleFadeFloat2 6.5s ease-in-out infinite 1.4s;
+}
+
+.animate-pill-bubble-2 {
+  animation: pillBubbleFadeFloat3 6.0s ease-in-out infinite 2.8s;
+}
+
+.animate-pill-bubble-3 {
+  animation: pillBubbleFadeFloat1 7.0s ease-in-out infinite 0.7s;
+}
+
+.animate-pill-bubble-4 {
+  animation: pillBubbleFadeFloat2 6.2s ease-in-out infinite 2.1s;
+}
+
+.animate-pill-bubble-5 {
+  animation: pillBubbleFadeFloat3 6.8s ease-in-out infinite 3.5s;
+}
+
+/* ── INFINITE CONTINUOUS VERTICAL MARQUEE FOR WISHES BUBBLES ── */
+@keyframes marqueeVertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-marquee-vertical {
+  display: flex;
+  flex-direction: column;
+  animation: marqueeVertical 22s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-vertical:hover,
+.animate-marquee-vertical:active {
+  animation-play-state: paused;
+}
+
+
+
