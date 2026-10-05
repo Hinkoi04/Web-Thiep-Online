@@ -19,9 +19,55 @@ export interface Mau2Props {
   defaultOpened?: boolean;
 }
 
+// Helper to extract guest name from URL (supports ?to=..., /to=..., /to/..., ?guest=..., ?name=..., ?n=... and hash routes)
+const getGuestNameFromUrl = (): string | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    // 1. Kiểm tra URL query string chuẩn: ?to=..., ?guest=..., ?name=..., ?n=...
+    const params = new URLSearchParams(window.location.search);
+    const paramName = params.get('to') || params.get('guest') || params.get('name') || params.get('n');
+    if (paramName && paramName.trim()) {
+      return paramName.trim();
+    }
+
+    // 2. Kiểm tra nếu query nằm sau hash (ví dụ: /#/route?to=...)
+    if (window.location.hash && window.location.hash.includes('?')) {
+      const hashQuery = window.location.hash.split('?')[1];
+      const hashParams = new URLSearchParams(hashQuery);
+      const hashName = hashParams.get('to') || hashParams.get('guest') || hashParams.get('name') || hashParams.get('n');
+      if (hashName && hashName.trim()) {
+        return hashName.trim();
+      }
+    }
+
+    // 3. Hỗ trợ trường hợp gõ nhầm dấu gạch chéo thay vì dấu chấm hỏi:
+    // Ví dụ: /ThoaWD/to=Bạn+ABC hoặc /ThoaWD/to/Bạn+ABC hoặc /ThoaWD/guest=...
+    const fullUrl = window.location.href;
+    const pathMatch = fullUrl.match(/(?:[/?&#])(?:to|guest|name|n)[=/]([^/?&#]+)/i);
+    if (pathMatch && pathMatch[1]) {
+      const rawVal = decodeURIComponent(pathMatch[1].replace(/\+/g, ' ')).trim();
+      if (rawVal) {
+        return rawVal;
+      }
+    }
+  } catch (e) {
+    console.error('Error parsing guest name from URL', e);
+  }
+  return null;
+};
+
 export default function Mau2({ defaultOpened = false }: Mau2Props) {
   const [opened, setOpened] = useState(defaultOpened);
-  const [weddingInfo, setWeddingInfo] = useState<WeddingInfo>(initialWeddingInfo);
+  const [weddingInfo, setWeddingInfo] = useState<WeddingInfo>(() => {
+    const fromUrl = getGuestNameFromUrl();
+    if (fromUrl) {
+      return {
+        ...initialWeddingInfo,
+        guestName: fromUrl,
+      };
+    }
+    return initialWeddingInfo;
+  });
   const [activeSection, setActiveSection] = useState<ScreenId>('cover');
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [petalsEnabled, setPetalsEnabled] = useState(true);
@@ -38,14 +84,13 @@ export default function Mau2({ defaultOpened = false }: Mau2Props) {
     };
   }, []);
 
-  // Parse custom guest from URL search params (e.g. ?guest=Anh+Hoang)
+  // Parse custom guest from URL search params on mount / navigation
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const guestParam = params.get('guest');
-    if (guestParam) {
+    const fromUrl = getGuestNameFromUrl();
+    if (fromUrl) {
       setWeddingInfo((prev) => ({
         ...prev,
-        guestName: decodeURIComponent(guestParam),
+        guestName: fromUrl,
       }));
     }
   }, []);
@@ -121,7 +166,7 @@ export default function Mau2({ defaultOpened = false }: Mau2Props) {
       isAutoScrollingRef.current = true;
       let lastTime: number | null = null;
       // Scroll speed: ~55 pixels per second (smooth and readable)
-      const scrollSpeed = 0.07;
+      const scrollSpeed = 0.075;
 
       const scrollLoop = (time: number) => {
         if (!isAutoScrollingRef.current) return;
@@ -181,9 +226,8 @@ export default function Mau2({ defaultOpened = false }: Mau2Props) {
     <div className="w-full min-h-screen bg-[#181122] flex justify-center selection:bg-purple-200">
       <div
         ref={containerRef}
-        className={`relative w-full max-w-[450px] font-sans text-[#300f47] bg-[#faf6fe] shadow-[0_0_80px_rgba(0,0,0,0.6)] border-x border-[#3b1554]/15 ${
-          !opened ? 'h-[100dvh] overflow-hidden' : 'min-h-screen pb-24 overflow-x-hidden'
-        }`}
+        className={`relative w-full max-w-[450px] font-sans text-[#300f47] bg-[#faf6fe] shadow-[0_0_80px_rgba(0,0,0,0.6)] border-x border-[#3b1554]/15 ${!opened ? 'h-[100dvh] overflow-hidden' : 'min-h-screen pb-24 overflow-x-hidden'
+          }`}
       >
         {/* ── INTERACTIVE OPENING ENVELOPE COVER ── */}
         {!opened && (
@@ -202,11 +246,10 @@ export default function Mau2({ defaultOpened = false }: Mau2Props) {
             {/* Petals Toggle Pill */}
             <button
               onClick={() => setPetalsEnabled(!petalsEnabled)}
-              className={`p-2 rounded-full backdrop-blur-md shadow-md border transition-all cursor-pointer ${
-                petalsEnabled
+              className={`p-2 rounded-full backdrop-blur-md shadow-md border transition-all cursor-pointer ${petalsEnabled
                   ? 'bg-white/90 text-purple-600 border-purple-200'
                   : 'bg-white/70 text-slate-400 border-slate-200 hover:text-slate-600'
-              }`}
+                }`}
               title={petalsEnabled ? 'Tắt hiệu ứng cánh hoa' : 'Bật hiệu ứng cánh hoa'}
               aria-label="Bật/Tắt cánh hoa"
             >
@@ -216,11 +259,10 @@ export default function Mau2({ defaultOpened = false }: Mau2Props) {
             {/* Music Toggle Pill */}
             <button
               onClick={toggleMusic}
-              className={`p-2 rounded-full backdrop-blur-md shadow-md border transition-all cursor-pointer ${
-                isPlayingMusic
+              className={`p-2 rounded-full backdrop-blur-md shadow-md border transition-all cursor-pointer ${isPlayingMusic
                   ? 'bg-[#4a1d6d] text-amber-200 border-[#6b2a9e] animate-spin-slow'
                   : 'bg-white/90 text-slate-600 border-slate-200 hover:bg-white'
-              }`}
+                }`}
               title={isPlayingMusic ? 'Tắt nhạc nền' : 'Bật nhạc đám cưới'}
               aria-label="Bật/Tắt nhạc cưới"
             >
@@ -269,7 +311,7 @@ export default function Mau2({ defaultOpened = false }: Mau2Props) {
 
         {/* ── SECTION 6: GUESTBOOK ── */}
         <section id="section-guestbook" className="relative w-full border-t border-[#e2d3f2]">
-          <GuestbookScreen />
+          <GuestbookScreen guestName={weddingInfo.guestName} />
         </section>
 
         {/* Romantic Footer */}

@@ -6,13 +6,24 @@ import { useInView } from '../../hooks/useInView';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
-export const GuestbookScreen: React.FC = () => {
+export interface GuestbookScreenProps {
+  guestName?: string;
+}
+
+export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) => {
+  const isGenericGuest = !guestName || guestName === 'Anh/ Chị & Người thương';
   const [wishes, setWishes] = useState<GuestWish[]>([]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState(() => (!isGenericGuest ? guestName : ''));
   const [message, setMessage] = useState('');
   const [likedIds, setLikedIds] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [successToast, setSuccessToast] = useState(false);
+
+  useEffect(() => {
+    if (guestName && guestName !== 'Anh/ Chị & Người thương' && !name) {
+      setName(guestName);
+    }
+  }, [guestName]);
 
   const { ref: headerRef, isInView: headerInView } = useInView({ threshold: 0.15 });
   const { ref: formRef, isInView: formInView } = useInView<HTMLFormElement>({ threshold: 0.15 });
