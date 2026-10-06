@@ -36,9 +36,9 @@ export const weddingEvents: WeddingEvent[] = [
     locationName: 'ĐỊA ĐIỂM TỔ CHỨC',
     address: 'Xã An Phú, Tỉnh Quảng Ngãi',
     // Link mở Google Maps khi bấm nút "Maps ↗" hoặc "Chỉ đường":
-    mapUrl: 'https://maps.google.com/?q=Xã+An+Phú+Quảng+Ngãi',
+    mapUrl: 'https://maps.google.com/?q=15.13671811751521,108.89633230162609',
     // Link iframe nhúng bản đồ Google Maps:
-    mapEmbedUrl: 'https://maps.google.com/maps?q=An%20Ph%C3%BA,%20Qu%E1%BA%A3ng%20Ng%C3%A3i&t=&z=14&ie=UTF8&iwloc=&output=embed',
+    mapEmbedUrl: 'https://maps.google.com/maps?q=15.13671811751521,108.89633230162609&t=&z=16&ie=UTF8&iwloc=&output=embed',
     calendarTitle: 'Tiệc Cưới: Tên Chú Rể & Tên Cô Dâu',
     type: 'reception',
   },
