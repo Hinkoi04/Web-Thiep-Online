@@ -112,6 +112,16 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
     }
   }, []);
 
+  // Tắt phục hồi vị trí cuộn cũ của trình duyệt để luôn bắt đầu từ đầu trang
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   // Khóa cuộn trang khi đang ở bìa thư
   useEffect(() => {
     if (!opened) {
@@ -119,6 +129,7 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
       window.scrollTo(0, 0);
     } else {
       document.body.style.overflow = '';
+      window.scrollTo(0, 0);
     }
     return () => {
       document.body.style.overflow = '';

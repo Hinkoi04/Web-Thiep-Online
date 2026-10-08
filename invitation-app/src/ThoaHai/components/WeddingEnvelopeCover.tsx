@@ -17,6 +17,9 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
   const handleOpen = useCallback(() => {
     if (opening) return;
     setOpening(true);
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
     try {
       if (onStartOpen) onStartOpen();
     } catch (err) {
