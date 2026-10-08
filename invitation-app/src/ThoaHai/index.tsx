@@ -200,12 +200,12 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
     setOpened(true);
   }, []);
 
-  // Tự động cuộn và bật nhạc sau khi nội dung đã hiện rõ (delay 2000ms sau khi mở bìa)
+  // Tự động cuộn và bật nhạc sau khi nội dung đã hiện rõ (delay 4000ms sau khi mở bìa)
   useEffect(() => {
     if (opened) {
       const timer = setTimeout(() => {
         startAutoScroll();
-      }, 2000);
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [opened, startAutoScroll]);
