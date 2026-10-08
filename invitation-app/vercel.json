@@ -8,6 +8,8 @@
     { "source": "/Tam/(.*)", "destination": "/LinkPreview/Tam/index.html" },
     { "source": "/ThoaWD", "destination": "/LinkPreview/ThoaWD/index.html" },
     { "source": "/ThoaWD/(.*)", "destination": "/LinkPreview/ThoaWD/index.html" },
+    { "source": "/ThoaHai", "destination": "/LinkPreview/ThoaHai/index.html" },
+    { "source": "/ThoaHai/(.*)", "destination": "/LinkPreview/ThoaHai/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

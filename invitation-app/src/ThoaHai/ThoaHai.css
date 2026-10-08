@@ -1,0 +1,335 @@
+/* === THOAHAI - WEDDING INVITATION STYLES === */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+/* Tone màu: Be (#e1cbb4) + Trắng + Đỏ Rượu Vang (#6e1820) */
+
+:root {
+  --th-font-script: 'Pinyon Script', cursive;
+  --th-font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --th-font-sans: 'Outfit', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* HoangYen Typography applied to ThoaHai */
+.th-font-calligraphy {
+  font-family: 'Pinyon Script', cursive !important;
+  letter-spacing: 0.5px;
+}
+
+.th-font-serif {
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+}
+
+.th-font-sans {
+  font-family: 'Outfit', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Floating animation */
+@keyframes th-softFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.th-animate-soft-float {
+  animation: th-softFloat 3s ease-in-out infinite;
+}
+
+@keyframes th-spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.th-animate-spin-slow {
+  animation: th-spinSlow 12s linear infinite;
+}
+
+/* ── SCROLL REVEAL UTILITY STYLES (CHẬM RÃI 3.6S THEO YÊU CẦU) ── */
+.th-reveal-init {
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 3.6s cubic-bezier(0.16, 1, 0.3, 1), transform 3.6s cubic-bezier(0.16, 1, 0.3, 1), filter 3.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.th-reveal-up { transform: translateY(35px); }
+.th-reveal-left { transform: translateX(-40px); }
+.th-reveal-right { transform: translateX(40px); }
+.th-reveal-scale { transform: scale(0.95); }
+
+.th-reveal-active {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+  filter: blur(0px) !important;
+}
+
+/* Hide scrollbar */
+.th-no-scrollbar::-webkit-scrollbar { display: none; }
+.th-no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Falling petals for ThoaHai - beige tone */
+@keyframes th-petalFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.th-petal {
+  position: fixed;
+  pointer-events: none;
+  animation: th-petalFall linear infinite;
+  z-index: 5;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+/* ================= THOAHAI ENVELOPE COVER (TRẮNG DẦN TRONG 1S) ================= */
+.th-envelope-scene {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #faf6f0 50%, #e1cbb4 100%);
+  z-index: 9999;
+  cursor: pointer;
+  touch-action: none;
+  overscroll-behavior: none;
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Lớp phủ trắng dần */
+.th-white-washout {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s cubic-bezier(0.3, 0, 0.2, 1);
+  z-index: 20;
+}
+
+.th-envelope-scene.opening .th-white-washout {
+  opacity: 1;
+}
+
+.th-envelope-scene.opening {
+  pointer-events: none;
+}
+
+.th-envelope-scene.opening .th-env-body {
+  transform: scale(1.03) translateY(-6px);
+  filter: blur(3px) brightness(1.25);
+  opacity: 0.15;
+  transition: transform 1s cubic-bezier(0.2, 1, 0.3, 1), filter 1s ease, opacity 1s ease;
+}
+
+.th-envelope-scene.opening .th-tap-hint {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ── HIỆU ỨNG NỘI DUNG BÊN TRONG HIỆN RÕ DẦN TRONG 1.5S ── */
+@keyframes th-contentFadeInSlow {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.99);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.th-content-reveal {
+  animation: th-contentFadeInSlow 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform, filter;
+}
+
+.th-env-body {
+  position: relative;
+  background: linear-gradient(175deg, #fdfbf7 0%, #faf6f0 60%, #f5eee6 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(225, 203, 180, 0.65);
+}
+
+.th-env-cover-photo-wrap {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 19px 19px 0 0;
+}
+
+.th-env-cover-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.th-envelope-scene:hover .th-env-cover-photo {
+  transform: scale(1.04);
+}
+
+.th-env-cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(250, 245, 238, 0.02) 0%, rgba(250, 245, 238, 0.35) 75%, #faf5ee 100%);
+}
+
+.th-env-cover-title {
+  font-family: 'Dancing Script', 'Playfair Display', cursive, sans-serif;
+  font-size: 3.4rem;
+  color: #1a1a1a;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.th-env-cover-year {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 6px;
+  color: #4a4039;
+  margin-bottom: 14px;
+}
+
+.th-env-ornament {
+  color: #b2946e;
+  font-size: 14px;
+  letter-spacing: 4px;
+}
+
+.th-env-cover-type {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #4a4039;
+  margin-top: 12px;
+}
+
+.th-env-cover-couple {
+  font-family: 'Pinyon Script', cursive !important;
+  font-size: clamp(1.6rem, 5.2vw, 1.85rem);
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.3;
+  letter-spacing: 0.2px;
+  margin-top: 4px;
+}
+
+.th-env-cover-date {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.82rem;
+  letter-spacing: 3px;
+  color: #4a4039;
+  margin-top: 14px;
+  font-weight: 600;
+}
+
+.th-env-guest-box {
+  margin-top: 16px;
+  padding: 8px 18px;
+  background: rgba(225, 203, 180, 0.22);
+  border: 1px solid rgba(178, 148, 110, 0.35);
+  border-radius: 12px;
+  display: inline-block;
+  max-width: 92%;
+}
+
+.th-env-guest-label {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #4a4039;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.th-env-guest-name {
+  display: block;
+  font-family: 'Dancing Script', 'Playfair Display', cursive, sans-serif;
+  font-size: 1.85rem;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.th-tap-hint {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  font-weight: 600;
+  animation: thTapPulse 2s infinite ease-in-out;
+}
+
+@keyframes thTapPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+/* ================= SCROLL TOP BUTTON ================= */
+.th-scroll-top-btn {
+  position: fixed;
+  bottom: 68px;
+  right: calc(50% - min(225px, 50vw) + 16px);
+  z-index: 45;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  color: #2b241e;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;
+  cursor: pointer;
+  border: 1.5px solid #bda893;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.th-scroll-top-btn.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.th-scroll-top-btn:hover {
+  background: rgba(189, 168, 147, 0.18);
+  border-color: #8c7355;
+  transform: scale(1.08);
+}
+
+.th-scroll-top-btn:active {
+  transform: scale(0.95);
+}
+
+

@@ -34,6 +34,15 @@ const CARDS = [
     accent: '#c97884',
     type: 'wedding',
   },
+  {
+    href: '/ThoaHai/',
+    emoji: '💍',
+    name: 'Thoa & Hải',
+    desc: 'Thiệp Cưới · 29/10/2026',
+    date: '2026',
+    accent: '#6e1820',
+    type: 'wedding',
+  },
 ];
 
 export default function App() {

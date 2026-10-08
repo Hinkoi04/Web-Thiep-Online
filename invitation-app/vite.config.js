@@ -5,7 +5,7 @@ import { resolve } from 'path'
 import fs from 'fs'
 
 // Danh sách các thư mục thiệp (MPA entry points)
-const MPA_FOLDERS = ['Nhi', 'HoangYen', 'Tam', 'ThoaWD'];
+const MPA_FOLDERS = ['Nhi', 'HoangYen', 'Tam', 'ThoaWD', 'ThoaHai'];
 
 // Plugin MPA: serve đúng index.html cho từng thiệp
 const mpaFallbackPlugin = () => ({
@@ -57,7 +57,8 @@ export default defineConfig({
         nhi: resolve(__dirname, 'LinkPreview/Nhi/index.html'),
         hoangyen: resolve(__dirname, 'LinkPreview/HoangYen/index.html'),
         tam: resolve(__dirname, 'LinkPreview/Tam/index.html'),
-        thoawd: resolve(__dirname, 'LinkPreview/ThoaWD/index.html')
+        thoawd: resolve(__dirname, 'LinkPreview/ThoaWD/index.html'),
+        thoahai: resolve(__dirname, 'LinkPreview/ThoaHai/index.html')
       }
     }
   }
