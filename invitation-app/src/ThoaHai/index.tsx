@@ -20,25 +20,48 @@ export interface ThoaHaiProps {
 }
 
 // Trích xuất tên khách mời từ URL (?to=..., ?guest=..., ?name=..., ?n=...)
+// Hỗ trợ đầy đủ dấu "+" kèm người thương (ví dụ: "Nhi+", "Nhi +", "Nhi %2B", "Bạn Nhi +")
 const getGuestNameFromUrl = (): string | null => {
   if (typeof window === 'undefined') return null;
   try {
-    const params = new URLSearchParams(window.location.search);
-    const paramName = params.get('to') || params.get('guest') || params.get('name') || params.get('n');
-    if (paramName && paramName.trim()) return paramName.trim();
-
-    if (window.location.hash && window.location.hash.includes('?')) {
-      const hashQuery = window.location.hash.split('?')[1];
-      const hashParams = new URLSearchParams(hashQuery);
-      const hashName = hashParams.get('to') || hashParams.get('guest') || hashParams.get('name') || hashParams.get('n');
-      if (hashName && hashName.trim()) return hashName.trim();
-    }
-
     const fullUrl = window.location.href;
-    const pathMatch = fullUrl.match(/(?:[/?&#])(?:to|guest|name|n)[=/]([^/?&#]+)/i);
-    if (pathMatch && pathMatch[1]) {
-      const rawVal = decodeURIComponent(pathMatch[1].replace(/\+/g, ' ')).trim();
-      if (rawVal) return rawVal;
+
+    // Tìm tham số to / guest / name / n từ Search (?) hoặc Hash (#)
+    const match = fullUrl.match(/(?:[?&#])(?:to|guest|name|n)=([^&#]+)/i);
+    if (match && match[1]) {
+      let raw = match[1];
+
+      // Đánh dấu %2B (mã hóa URL của dấu +) để bảo toàn dấu +
+      raw = raw.replace(/%2B/gi, '__PLUS_SIGN__');
+
+      // Kiểm tra nếu URL kết thúc bằng dấu + (như ?to=Nhi+ hoặc ?to=Bạn+Nhi+)
+      const hasTrailingPlus = raw.endsWith('+') || raw.endsWith(' +') || raw.endsWith('%20+');
+      if (hasTrailingPlus) {
+        raw = raw.replace(/\+$/, '').replace(/%20\+$/, '');
+      }
+
+      // Giải mã URL
+      let decoded = '';
+      try {
+        decoded = decodeURIComponent(raw);
+      } catch {
+        decoded = raw;
+      }
+
+      // Đổi dấu + phân cách giữa các chữ thành khoảng trắng
+      decoded = decoded.replace(/\+/g, ' ');
+
+      // Khôi phục dấu + kèm người thương
+      decoded = decoded.replace(/__PLUS_SIGN__/g, ' +');
+
+      if (hasTrailingPlus && !decoded.includes('+')) {
+        decoded = decoded.trim() + ' +';
+      }
+
+      // Chuẩn hóa khoảng cách
+      decoded = decoded.replace(/\s+/g, ' ').trim();
+
+      if (decoded) return decoded;
     }
   } catch (e) {
     console.error('Error parsing guest name from URL', e);
