@@ -14,6 +14,7 @@ import { NavigationTabBar } from './components/NavigationTabBar';
 import type { ScreenId } from './components/NavigationTabBar';
 import { FallingPetals } from './components/FallingPetals';
 import { Volume2, VolumeX, Sparkles, ChevronUp, ChevronsDown, Pause } from 'lucide-react';
+import ThoaHaiAdmin from './admin/ThoaHaiAdmin';
 
 export interface ThoaHaiProps {
   defaultOpened?: boolean;
@@ -70,6 +71,21 @@ const getGuestNameFromUrl = (): string | null => {
 };
 
 export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
+  // Kiểm tra nếu đang truy cập trang Quản trị (qua /admin, ?admin hoặc #admin)
+  const [isAdminView] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const p = new URLSearchParams(window.location.search);
+      if (p.has('admin')) return true;
+      if (window.location.hash.includes('admin')) return true;
+      if (window.location.pathname.endsWith('/admin') || window.location.pathname.endsWith('/admin/')) return true;
+    }
+    return false;
+  });
+
+  if (isAdminView) {
+    return <ThoaHaiAdmin />;
+  }
+
   const [opened, setOpened] = useState(() => {
     if (defaultOpened) return true;
     if (typeof window !== 'undefined') {
