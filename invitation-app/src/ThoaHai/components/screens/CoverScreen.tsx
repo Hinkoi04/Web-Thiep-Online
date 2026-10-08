@@ -4,17 +4,19 @@ import { useInView } from '../../hooks/useInView';
 
 interface CoverScreenProps {
   weddingInfo: WeddingInfo;
+  isOpened?: boolean;
   onExploreClick?: () => void;
 }
 
 export const CoverScreen: React.FC<CoverScreenProps> = ({
   weddingInfo,
+  isOpened = false,
 }) => {
-  const { ref: heroRef, isInView: heroInView } = useInView({ threshold: 0.1 });
-  const { ref: quoteRef, isInView: quoteInView } = useInView({ threshold: 0.1 });
-  const { ref: stripRef, isInView: stripInView } = useInView({ threshold: 0.1 });
-  const { ref: calRef, isInView: calInView } = useInView({ threshold: 0.1 });
-  const { ref: parentsRef, isInView: parentsInView } = useInView({ threshold: 0.1 });
+  const { ref: heroRef, isInView: heroInView } = useInView({ threshold: 0.05, enabled: isOpened });
+  const { ref: quoteRef, isInView: quoteInView } = useInView({ threshold: 0.08, enabled: isOpened });
+  const { ref: stripRef, isInView: stripInView } = useInView({ threshold: 0.08, enabled: isOpened });
+  const { ref: calRef, isInView: calInView } = useInView({ threshold: 0.08, enabled: isOpened });
+  const { ref: parentsRef, isInView: parentsInView } = useInView({ threshold: 0.08, enabled: isOpened });
 
   // October 2026: 1/10/2026 is Thursday (THU)
   // Calendar row array (Monday = col 0)

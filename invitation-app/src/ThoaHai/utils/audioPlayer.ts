@@ -3,6 +3,7 @@ const bgMusicUrl = '/thoahai/NhacNen.mp3';
 class WeddingAudioPlayer {
   private audio: HTMLAudioElement | null = null;
   private isPlaying = false;
+  private wasPlayingBeforeHidden = false;
   private onStateChange?: (playing: boolean) => void;
 
   constructor() {
@@ -23,6 +24,27 @@ class WeddingAudioPlayer {
         this.audio.addEventListener('ended', () => {
           this.isPlaying = false;
           this.onStateChange?.(false);
+        });
+
+        // Tự động tạm dừng khi rời khỏi tab thiệp và tự động phát tiếp khi quay trở lại
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            if (this.isPlaying) {
+              this.wasPlayingBeforeHidden = true;
+              if (this.audio) {
+                try {
+                  this.audio.pause();
+                } catch (e) {
+                  console.warn('Pause on tab hide error:', e);
+                }
+              }
+            }
+          } else {
+            if (this.wasPlayingBeforeHidden) {
+              this.wasPlayingBeforeHidden = false;
+              this.play();
+            }
+          }
         });
       } catch (e) {
         console.warn('Init audio error:', e);
@@ -67,6 +89,7 @@ class WeddingAudioPlayer {
   }
 
   public pause() {
+    this.wasPlayingBeforeHidden = false;
     if (this.audio) {
       try {
         this.audio.pause();
@@ -83,6 +106,7 @@ class WeddingAudioPlayer {
       this.pause();
       return false;
     } else {
+      this.wasPlayingBeforeHidden = false;
       this.play();
       return true;
     }

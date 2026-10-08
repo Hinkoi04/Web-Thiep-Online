@@ -274,19 +274,9 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
         />
       )}
 
-      <div
-        ref={containerRef}
-        className={`relative w-full max-w-[450px] th-font-sans bg-[#faf5ee] shadow-[0_10px_40px_rgba(0,0,0,0.06)] border-x min-h-screen pb-24 overflow-x-hidden ${
-          opened ? 'th-content-reveal' : 'opacity-0'
-        }`}
-        style={{ borderColor: 'rgba(178,148,110,0.2)', color: '#3d2c1e' }}
-      >
-
-        {/* Falling Petals */}
-        <FallingPetals enabled={petalsEnabled} />
-
-        {/* ── FLOATING CONTROLS (top right - vertical stack) ── */}
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 w-full max-w-[450px] z-40 pointer-events-none px-3 sm:px-4 flex justify-end">
+      {/* ── FLOATING CONTROLS (Cố định toàn màn hình, đi theo khi cuộn) ── */}
+      {opened && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 w-full max-w-[450px] z-50 pointer-events-none px-3 sm:px-4 flex justify-end">
           <div className="flex flex-col items-center gap-2.5 pointer-events-auto">
             {/* Auto-scroll Toggle */}
             <button
@@ -331,11 +321,47 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
             </button>
           </div>
         </div>
+      )}
+
+      {/* ── NÚT CUỘN LÊN ĐẦU TRANG (Cố định theo màn hình) ── */}
+      {opened && (
+        <button
+          onClick={() => {
+            stopAutoScroll();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className={`th-scroll-top-btn ${showScrollTop ? 'show' : ''}`}
+          title="Lên đầu trang"
+          aria-label="Cuộn lên đầu trang"
+        >
+          <ChevronUp className="w-5 h-5 text-[#2b241e]" />
+        </button>
+      )}
+
+      {/* ── NAVIGATION TAB BAR (Cố định chân màn hình) ── */}
+      {opened && (
+        <NavigationTabBar
+          activeScreen={activeSection}
+          onSelectScreen={(screenId) => scrollToSection(screenId)}
+        />
+      )}
+
+      {/* ── NỘI DUNG CUỘN CHÍNH CỦA THIỆP ── */}
+      <div
+        ref={containerRef}
+        className={`relative w-full max-w-[450px] th-font-sans bg-[#faf5ee] shadow-[0_10px_40px_rgba(0,0,0,0.06)] border-x min-h-screen pb-24 overflow-x-hidden ${
+          opened ? 'th-content-reveal' : 'opacity-0'
+        }`}
+        style={{ borderColor: 'rgba(178,148,110,0.2)', color: '#3d2c1e' }}
+      >
+        {/* Falling Petals */}
+        <FallingPetals enabled={petalsEnabled} />
 
         {/* ── SECTION 1: BÌA THIỆP ── */}
         <section id="section-cover" className="relative w-full min-h-[100dvh] flex flex-col">
           <CoverScreen
             weddingInfo={weddingInfo}
+            isOpened={opened}
             onExploreClick={() => scrollToSection('invitation')}
           />
         </section>
@@ -384,25 +410,6 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
             29 · 10 · 2026 — Trân trọng cảm ơn quý khách
           </p>
         </footer>
-
-        {/* ── NÚT CUỘN LÊN ĐẦU TRANG (MŨI TÊN TRỞ VỀ ĐẦU) ── */}
-        <button
-          onClick={() => {
-            stopAutoScroll();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-          className={`th-scroll-top-btn ${showScrollTop ? 'show' : ''}`}
-          title="Lên đầu trang"
-          aria-label="Cuộn lên đầu trang"
-        >
-          <ChevronUp className="w-5 h-5 text-[#2b241e]" />
-        </button>
-
-        {/* ── NAVIGATION TAB BAR ── */}
-        <NavigationTabBar
-          activeScreen={activeSection}
-          onSelectScreen={(screenId) => scrollToSection(screenId)}
-        />
       </div>
 
     </div>
