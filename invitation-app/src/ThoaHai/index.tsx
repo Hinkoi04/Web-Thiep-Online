@@ -192,7 +192,7 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
     }
 
     let lastTime: number | null = null;
-    const scrollSpeed = 0.040; // Chậm rãi, thư thái để người xem kịp ngắm nhìn các hiệu ứng chữ xuất hiện ở giữa màn hình
+    const scrollSpeed = 0.050; // Chậm rãi, thư thái để người xem kịp ngắm nhìn các hiệu ứng chữ xuất hiện ở giữa màn hình
 
     const scrollLoop = (time: number) => {
       if (!isAutoScrollingRef.current) return;
@@ -399,9 +399,8 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
       {/* ── NỘI DUNG CUỘN CHÍNH CỦA THIỆP ── */}
       <div
         ref={containerRef}
-        className={`relative w-full max-w-[450px] th-font-sans bg-[#faf5ee] shadow-[0_10px_40px_rgba(0,0,0,0.06)] border-x min-h-screen pb-24 overflow-x-hidden ${
-          opened ? 'th-content-reveal' : 'opacity-0'
-        }`}
+        className={`relative w-full max-w-[450px] th-font-sans bg-[#faf5ee] shadow-[0_10px_40px_rgba(0,0,0,0.06)] border-x min-h-screen pb-24 overflow-x-hidden ${opened ? 'th-content-reveal' : 'opacity-0'
+          }`}
         style={{ borderColor: 'rgba(178,148,110,0.2)', color: '#3d2c1e' }}
       >
         {/* Falling Petals */}
