@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import './ThoaHai.css';
-import { initialWeddingInfo } from './data/weddingData';
+import { initialWeddingInfo, weddingImages } from './data/weddingData';
+import { useInView } from './hooks/useInView';
 import type { WeddingInfo } from './types';
 import { weddingAudio } from './utils/audioPlayer';
 import { WeddingEnvelopeCover } from './components/WeddingEnvelopeCover';
@@ -108,6 +109,7 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isAutoScrollingRef = useRef<boolean>(false);
   const autoScrollRafRef = useRef<number | null>(null);
+  const { ref: footerPhotoRef, isInView: footerPhotoInView } = useInView({ threshold: 0.1 });
 
   // Sync music state
   useEffect(() => {
@@ -134,10 +136,11 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
   useEffect(() => {
     const guestN = weddingInfo.guestName;
     const isGeneric = !guestN || guestN === 'Anh/ Chị & Người thương';
+    const couple = `${weddingInfo.groomName} & ${weddingInfo.brideName}`;
     document.title = isGeneric
-      ? 'Thiệp Cưới — Thanh Hải & Yến Thoa · 29.10.2026'
-      : `Thiệp Cưới Thanh Hải & Yến Thoa · Kính gửi ${guestN}`;
-  }, [weddingInfo.guestName]);
+      ? `Thiệp Cưới — ${couple} · 29.10.2026`
+      : `Thiệp Cưới ${couple} · Kính gửi ${guestN}`;
+  }, [weddingInfo.guestName, weddingInfo.groomName, weddingInfo.brideName]);
 
   // Stop auto-scroll cleanly - instantly releases control to user's hand
   const stopAutoScroll = useCallback(() => {
@@ -445,19 +448,67 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
         </section>
 
         {/* ── FOOTER ── */}
-        <footer className="w-full py-10 text-center border-t text-xs space-y-2 bg-[#f5ede3]/40"
+        <footer className="w-full text-center border-t text-xs bg-[#f5ede3]/40"
           style={{ borderColor: 'rgba(215,195,175,0.45)', color: '#6d5a49' }}>
-          <img
-            src="/thoahai/Hoa7.png"
-            alt="hoa điểm"
-            className="w-9 h-auto mx-auto mb-1.5 opacity-80 pointer-events-none select-none drop-shadow-xs"
-          />
-          <div className="th-font-calligraphy text-3xl" style={{ color: '#1a1a1a' }}>
-            {weddingInfo.groomName} &amp; {weddingInfo.brideName}
+          <div className="py-10 space-y-2">
+            <img
+              src="/thoahai/Hoa7.png"
+              alt="hoa điểm"
+              className="w-9 h-auto mx-auto mb-1.5 opacity-80 pointer-events-none select-none drop-shadow-xs"
+            />
+            <div className="th-font-calligraphy text-3xl" style={{ color: '#1a1a1a' }}>
+              {weddingInfo.groomName} &amp; {weddingInfo.brideName}
+            </div>
+            <p className="text-xs th-font-serif tracking-wider" style={{ color: '#4a4039' }}>
+              29 · 10 · 2026
+            </p>
           </div>
-          <p className="text-xs th-font-serif tracking-wider" style={{ color: '#4a4039' }}>
-            29 · 10 · 2026 — Trân trọng cảm ơn quý khách
-          </p>
+
+          {/* ── ẢNH KẾT Ở CUỐI CÙNG TRANG THIỆP (FULL KHUNG & GÓC VUÔNG) ── */}
+          <div
+            ref={footerPhotoRef}
+            className={`relative w-full overflow-hidden th-reveal-init th-reveal-up ${
+              footerPhotoInView ? 'th-reveal-active' : ''
+            }`}
+          >
+            <img
+              src={weddingImages.closingPhoto}
+              alt="Hẹn gặp bạn trong ngày cưới Hoàng Hải & Yến Thoa"
+              className="w-full h-auto block object-cover object-center rounded-none select-none"
+              loading="lazy"
+            />
+
+            {/* Lớp gradient tối mềm mại ở nửa dưới để chữ trắng nổi bật */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent pointer-events-none" />
+
+            {/* Khối chữ đặt đè lên phần dưới của ảnh cưới */}
+            <div className="absolute inset-x-0 bottom-5 sm:bottom-7 px-4 sm:px-7 text-center text-white pointer-events-none select-none">
+              {/* Đoạn văn bản hiệu ứng rõ dần từ trái qua trong 3s */}
+              <p
+                className="text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-xs sm:max-w-md mx-auto text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+                style={{
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  clipPath: footerPhotoInView ? 'inset(0% 0% 0% 0%)' : 'inset(0% 100% 0% 0%)',
+                  transition: 'clip-path 3000ms cubic-bezier(0.25, 1, 0.5, 1)',
+                }}
+              >
+                Hẹn gặp bạn vào ngày đặc biệt nhất của chúng mình. Sẽ thật hạnh phúc khi bạn ở đó, cùng tham dự và chứng kiến khoảnh khắc ý nghĩa này của chúng mình!
+              </p>
+
+              {/* Chữ "Thank you!" font Pinyon Script giống Timeline */}
+              <div
+                className={`mt-2 sm:mt-3 text-3xl sm:text-4xl text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] transition-all duration-[1600ms] cubic-bezier(0.16, 1, 0.3, 1) ${
+                  footerPhotoInView ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-3'
+                }`}
+                style={{
+                  fontFamily: "'Pinyon Script', cursive",
+                  transitionDelay: footerPhotoInView ? '1200ms' : '0ms',
+                }}
+              >
+                Thank you!
+              </div>
+            </div>
+          </div>
         </footer>
       </div>
 

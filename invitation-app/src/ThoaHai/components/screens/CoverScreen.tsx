@@ -33,68 +33,40 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
       {/* ── 1. HERO PHOTO OVERLAY (SAVE THE DATE) ── */}
       <div
         ref={heroRef}
-        className={`relative w-full overflow-hidden th-reveal-init th-reveal-scale ${
-          heroInView ? 'th-reveal-active' : ''
-        }`}
+        className={`relative w-full overflow-hidden th-reveal-init th-reveal-scale ${heroInView ? 'th-reveal-active' : ''
+          }`}
       >
-        <div className="relative w-full" style={{ height: '56vh', minHeight: '430px', maxHeight: '560px' }}>
+        <div className="relative w-full" style={{ height: '66vh', minHeight: '500px', maxHeight: '660px' }}>
           <img
             src={weddingImages.coverPhoto}
-            alt="Ảnh cưới Thanh Hải & Yến Thoa"
+            alt="Ảnh cưới Hoàng Hải & Yến Thoa"
             className="w-full h-full object-cover object-[center_20%]"
             loading="eager"
           />
           {/* Soft dark overlay for contrast */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-black/25 pointer-events-none" />
 
-          {/* Typography "SAVE the DATE" với hiệu ứng chữ xuất hiện (có cái hiện lên, có cái chạy vào) */}
-          <div className="absolute bottom-10 left-5 right-5 z-20 text-white text-left overflow-hidden">
-            {/* SAVE: chạy vào từ bên trái */}
+          {/* Typography "SAVE the DATE" dạng hình ảnh HoangHaiYenThoa.png */}
+          <div className="absolute bottom-8 left-5 right-5 z-20 text-white text-left overflow-hidden">
+            {/* Hình SAVE the DATE xuất hiện mượt mà */}
             <div
-              className={`th-font-serif text-5xl sm:text-6xl font-light tracking-[0.08em] leading-none drop-shadow-lg transition-all duration-[2800ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                heroInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-14'
-              }`}
+              className={`transition-all duration-[2800ms] cubic-bezier(0.16, 1, 0.3, 1) ${heroInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'
+                }`}
               style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                transitionDelay: heroInView ? '300ms' : '0ms',
+                transitionDelay: heroInView ? '400ms' : '0ms',
               }}
             >
-              SAVE
-            </div>
-
-            <div className="flex items-baseline gap-2.5 -mt-1 overflow-hidden">
-              {/* the: hiện lên phóng to mềm mại */}
-              <span
-                className={`th-font-calligraphy text-3xl sm:text-4xl italic font-normal text-white drop-shadow-lg inline-block transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                  heroInView ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-                }`}
-                style={{
-                  fontFamily: "'Alex Brush', 'Dancing Script', cursive",
-                  transitionDelay: heroInView ? '700ms' : '0ms',
-                }}
-              >
-                the
-              </span>
-
-              {/* DATE: chạy vào từ bên phải */}
-              <span
-                className={`th-font-serif text-4xl sm:text-5xl font-light tracking-[0.16em] uppercase text-white drop-shadow-lg inline-block transition-all duration-[2800ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                  heroInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-14'
-                }`}
-                style={{
-                  fontFamily: "'Playfair Display', Georgia, serif",
-                  transitionDelay: heroInView ? '1000ms' : '0ms',
-                }}
-              >
-                DATE
-              </span>
+              <img
+                src="/thoahai/name/HoangHaiYenThoa.png"
+                alt="Save the Date"
+                className="w-48 sm:w-56 max-w-[75vw] h-auto object-contain select-none pointer-events-none drop-shadow-[0_4px_14px_rgba(0,0,0,0.85)]"
+              />
             </div>
 
             {/* Tên Chú Rể & Cô Dâu: chạy từ dưới lên chậm rãi */}
             <div
-              className={`th-font-calligraphy text-3xl sm:text-4xl mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-white font-normal transition-all duration-[3200ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
+              className={`th-font-calligraphy text-3xl sm:text-4xl mt-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] text-white font-normal transition-all duration-[3200ms] cubic-bezier(0.16, 1, 0.3, 1) ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
               style={{
                 fontFamily: "'Pinyon Script', cursive",
                 transitionDelay: heroInView ? '1400ms' : '0ms',
@@ -120,58 +92,25 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
         ref={quoteRef}
         className="pt-6 pb-4 px-6 text-center space-y-3 bg-[#faf5ee] overflow-hidden"
       >
-        {/* Monogram emblem hiện lên từ từ */}
+        {/* Logo H&T hiện lên từ từ */}
         <div
-          className={`flex justify-center items-center transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-            quoteInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-          }`}
+          className={`flex justify-center items-center transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${quoteInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+            }`}
           style={{ transitionDelay: quoteInView ? '200ms' : '0ms' }}
         >
-          <div className="relative flex items-center justify-center w-16 h-16">
-            <svg viewBox="0 0 100 100" className="w-full h-full text-[#1a1a1a]" fill="currentColor">
-              {/* Artistic interwoven H & T monogram */}
-              <text
-                x="34"
-                y="54"
-                fontFamily="'Playfair Display', serif"
-                fontSize="46"
-                fontWeight="400"
-                fill="#1a1a1a"
-                textAnchor="middle"
-              >
-                H
-              </text>
-              <text
-                x="50"
-                y="52"
-                fontFamily="'Alex Brush', cursive"
-                fontSize="32"
-                fontStyle="italic"
-                fill="#b2946e"
-                textAnchor="middle"
-              >
-                &amp;
-              </text>
-              <text
-                x="68"
-                y="74"
-                fontFamily="'Playfair Display', serif"
-                fontSize="46"
-                fontWeight="400"
-                fill="#1a1a1a"
-                textAnchor="middle"
-              >
-                T
-              </text>
-            </svg>
+          <div className="relative flex items-center justify-center">
+            <img
+              src="https://res.cloudinary.com/dlxbhq8pw/image/upload/v1791993243/copy_of_logoht_wx0cth.png"
+              alt="Logo H&T"
+              className="w-20 sm:w-24 h-auto object-contain select-none pointer-events-none drop-shadow-xs"
+            />
           </div>
         </div>
 
         {/* Điểm hoa Hoa1 giữa Monogram và Trích dẫn */}
         <div
-          className={`flex justify-center items-center my-0.5 transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-            quoteInView ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
-          }`}
+          className={`flex justify-center items-center my-0.5 transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${quoteInView ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+            }`}
           style={{ transitionDelay: quoteInView ? '500ms' : '0ms' }}
         >
           <img
@@ -183,16 +122,15 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
         {/* English quote: chạy từ dưới lên */}
         <p
-          className={`text-xs sm:text-[13px] leading-relaxed max-w-xs mx-auto italic transition-all duration-[2800ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-            quoteInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
+          className={`text-xs sm:text-[13px] leading-relaxed max-w-xs mx-auto italic transition-all duration-[2800ms] cubic-bezier(0.16, 1, 0.3, 1) ${quoteInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
           style={{
             color: '#4a4039',
             fontFamily: "'Playfair Display', Georgia, serif",
             transitionDelay: quoteInView ? '800ms' : '0ms',
           }}
         >
-          We step into a new chapter together, hand in hand, ready to build our home and embrace a lifetime of love.
+          Một lời hẹn ước, một hành trình mới <br /> và một ngày thật đặc biệt.
         </p>
       </div>
 
@@ -202,11 +140,10 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
         className="px-3 py-3 bg-[#faf5ee] overflow-hidden"
       >
         <div className="grid grid-cols-3 gap-1.5 overflow-hidden">
-          {/* Photo 1: 29 (chạy vào từ bên trái) */}
+          {/* Photo 1 (chạy vào từ bên trái) */}
           <div
-            className={`relative overflow-hidden rounded-md shadow-xs transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              stripInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-            }`}
+            className={`relative overflow-hidden rounded-md shadow-xs transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${stripInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}
             style={{
               aspectRatio: '3/4',
               background: '#f0e8dc',
@@ -215,26 +152,16 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
           >
             <img
               src={weddingImages.stripPhotos[0]}
-              alt="Ngày 29"
+              alt="Ảnh cưới 1"
               className="w-full h-full object-cover object-center"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-1 left-0 right-0 flex justify-center items-center pointer-events-none">
-              <span
-                className="text-white font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] leading-none select-none"
-                style={{ fontSize: '2.5rem', fontFamily: "'Playfair Display', serif" }}
-              >
-                29
-              </span>
-            </div>
           </div>
 
-          {/* Photo 2: 10 (hiện lên từ dưới lên) */}
+          {/* Photo 2 (hiện lên từ dưới lên) */}
           <div
-            className={`relative overflow-hidden rounded-md shadow-xs transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              stripInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
-            }`}
+            className={`relative overflow-hidden rounded-md shadow-xs transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${stripInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
             style={{
               aspectRatio: '3/4',
               background: '#f0e8dc',
@@ -243,26 +170,16 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
           >
             <img
               src={weddingImages.stripPhotos[1]}
-              alt="Tháng 10"
+              alt="Ảnh cưới 2"
               className="w-full h-full object-cover object-center"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-1 left-0 right-0 flex justify-center items-center pointer-events-none">
-              <span
-                className="text-white font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] leading-none select-none"
-                style={{ fontSize: '2.5rem', fontFamily: "'Playfair Display', serif" }}
-              >
-                10
-              </span>
-            </div>
           </div>
 
-          {/* Photo 3: 26 (chạy vào từ bên phải) */}
+          {/* Photo 3 (chạy vào từ bên phải) */}
           <div
-            className={`relative overflow-hidden rounded-md shadow-xs transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              stripInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-            }`}
+            className={`relative overflow-hidden rounded-md shadow-xs transition-all duration-[2600ms] cubic-bezier(0.16, 1, 0.3, 1) ${stripInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}
             style={{
               aspectRatio: '3/4',
               background: '#f0e8dc',
@@ -271,19 +188,10 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
           >
             <img
               src={weddingImages.stripPhotos[2]}
-              alt="Năm 26"
+              alt="Ảnh cưới 3"
               className="w-full h-full object-cover object-center"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-1 left-0 right-0 flex justify-center items-center pointer-events-none">
-              <span
-                className="text-white font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] leading-none select-none"
-                style={{ fontSize: '2.5rem', fontFamily: "'Playfair Display', serif" }}
-              >
-                26
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -303,15 +211,13 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
           {/* Khung lịch viền thanh lịch xuất hiện trước */}
           <div
-            className={`w-full p-4 sm:p-5 rounded-2xl border border-[#d8c7b3] bg-[#f5ede3]/60 shadow-xs transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              calInView ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
-            }`}
+            className={`w-full p-4 sm:p-5 rounded-2xl border border-[#d8c7b3] bg-[#f5ede3]/60 shadow-xs transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${calInView ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
+              }`}
           >
             {/* Title: October in Pinyon Script */}
             <h3
-              className={`text-4xl sm:text-5xl font-normal mb-2.5 transition-all duration-[2200ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                calInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
-              }`}
+              className={`text-4xl sm:text-5xl font-normal mb-2.5 transition-all duration-[2200ms] cubic-bezier(0.16, 1, 0.3, 1) ${calInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
+                }`}
               style={{ color: '#1a1a1a', fontFamily: "'Pinyon Script', cursive" }}
             >
               October
@@ -319,9 +225,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
             {/* Weekday headers: MON - SUN */}
             <div
-              className={`grid grid-cols-7 gap-1 text-[11px] font-medium tracking-wider mb-3 text-[#6d5a49] border-b border-[#d8c7b3]/70 pb-2 transition-all duration-[1800ms] delay-200 cubic-bezier(0.16, 1, 0.3, 1) ${
-                calInView ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`grid grid-cols-7 gap-1 text-[11px] font-medium tracking-wider mb-3 text-[#6d5a49] border-b border-[#d8c7b3]/70 pb-2 transition-all duration-[1800ms] delay-200 cubic-bezier(0.16, 1, 0.3, 1) ${calInView ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               <span>MON</span>
               <span>TUE</span>
@@ -344,11 +249,10 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
                 return (
                   <div
                     key={idx}
-                    className={`h-7 w-7 mx-auto flex items-center justify-center transition-all duration-[1200ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                      calInView
-                        ? 'opacity-100 scale-100 translate-y-0'
-                        : 'opacity-0 scale-50 translate-y-2'
-                    }`}
+                    className={`h-7 w-7 mx-auto flex items-center justify-center transition-all duration-[1200ms] cubic-bezier(0.16, 1, 0.3, 1) ${calInView
+                      ? 'opacity-100 scale-100 translate-y-0'
+                      : 'opacity-0 scale-50 translate-y-2'
+                      }`}
                     style={{ transitionDelay: staggerDelay }}
                   >
                     {isEventDay ? (
@@ -382,9 +286,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
       >
         {/* Điểm hoa Hoa6 (nhánh hoa trái tim) */}
         <div
-          className={`transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-            parentsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
-          }`}
+          className={`transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${parentsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+            }`}
         >
           <img
             src="/thoahai/Hoa6.png"
@@ -399,9 +302,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
           <div className="space-y-1.5 overflow-hidden">
             {/* Dòng 1: Tiêu đề NHÀ GÁI (chạy từ trái vào) */}
             <h4
-              className={`text-xs font-bold uppercase tracking-widest transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-              }`}
+              className={`text-xs font-bold uppercase tracking-widest transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+                }`}
               style={{
                 color: '#1a1a1a',
                 fontFamily: "'Playfair Display', serif",
@@ -413,9 +315,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
             {/* Dòng 2: Ba (chạy từ trái vào, chừa dòng nếu rỗng) */}
             <p
-              className={`text-xs leading-snug transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) min-h-[1.15rem] ${
-                parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-              }`}
+              className={`text-xs leading-snug transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) min-h-[1.15rem] ${parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+                }`}
               style={{
                 color: '#4a4039',
                 transitionDelay: parentsInView ? '800ms' : '0ms',
@@ -426,9 +327,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
             {/* Dòng 3: Mẹ (chạy từ trái vào, chừa dòng nếu rỗng) */}
             <p
-              className={`text-xs leading-snug transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) min-h-[1.15rem] ${
-                parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-              }`}
+              className={`text-xs leading-snug transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) min-h-[1.15rem] ${parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+                }`}
               style={{
                 color: '#4a4039',
                 transitionDelay: parentsInView ? '1400ms' : '0ms',
@@ -439,9 +339,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
             {/* Dòng 4: Địa chỉ Nhà Gái */}
             <p
-              className={`text-[11px] text-[#6d5a49] italic transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-              }`}
+              className={`text-[11px] text-[#6d5a49] italic transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+                }`}
               style={{
                 transitionDelay: parentsInView ? '1800ms' : '0ms',
               }}
@@ -454,9 +353,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
           <div className="space-y-1.5 overflow-hidden">
             {/* Dòng 1: Tiêu đề NHÀ TRAI (chạy từ phải vào) */}
             <h4
-              className={`text-xs font-bold uppercase tracking-widest transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-              }`}
+              className={`text-xs font-bold uppercase tracking-widest transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+                }`}
               style={{
                 color: '#1a1a1a',
                 fontFamily: "'Playfair Display', serif",
@@ -468,9 +366,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
             {/* Dòng 2: Ba (nếu rỗng thì vẫn chừa dòng trống để cân đối) */}
             <p
-              className={`text-xs leading-snug transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) min-h-[1.15rem] ${
-                parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-              }`}
+              className={`text-xs leading-snug transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) min-h-[1.15rem] ${parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+                }`}
               style={{
                 color: '#4a4039',
                 transitionDelay: parentsInView ? '1100ms' : '0ms',
@@ -481,9 +378,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
             {/* Dòng 3: Mẹ (chạy từ phải vào, chừa dòng nếu rỗng) */}
             <p
-              className={`text-xs leading-snug transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) min-h-[1.15rem] ${
-                parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-              }`}
+              className={`text-xs leading-snug transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) min-h-[1.15rem] ${parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+                }`}
               style={{
                 color: '#4a4039',
                 transitionDelay: parentsInView ? '1700ms' : '0ms',
@@ -494,9 +390,8 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
 
             {/* Dòng 4: Địa chỉ Nhà Trai */}
             <p
-              className={`text-[11px] text-[#6d5a49] italic transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-              }`}
+              className={`text-[11px] text-[#6d5a49] italic transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${parentsInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+                }`}
               style={{
                 transitionDelay: parentsInView ? '2100ms' : '0ms',
               }}

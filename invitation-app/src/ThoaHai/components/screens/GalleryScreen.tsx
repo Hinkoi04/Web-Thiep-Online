@@ -1,19 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { galleryPhotos } from '../../data/weddingData';
-import { X, ChevronLeft, ChevronRight, Maximize2, Heart } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
 
 export const GalleryScreen: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
-  const [photoLikes, setPhotoLikes] = useState<{ [id: string]: number }>({
-    g1: 42,
-    g2: 38,
-    g3: 29,
-    g4: 51,
-    g5: 45,
-    g6: 33,
-  });
 
   const { ref: headerRef, isInView: headerInView } = useInView({ threshold: 0.15 });
   const { ref: sliderRef, isInView: sliderInView } = useInView({ threshold: 0.15 });
@@ -45,14 +37,6 @@ export const GalleryScreen: React.FC = () => {
       handlePrev();
     }
     touchStartX.current = null;
-  };
-
-  const handleLike = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setPhotoLikes((prev) => ({
-      ...prev,
-      [id]: (prev[id] || 0) + 1,
-    }));
   };
 
   return (
@@ -133,26 +117,6 @@ export const GalleryScreen: React.FC = () => {
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 translate-x-0.5" />
           </button>
-
-          {/* Scrim thông tin ảnh & nút thả tim */}
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4 flex items-end justify-between text-white">
-            <div className="space-y-0.5 max-w-[80%]">
-              <span className="text-xs font-semibold drop-shadow-sm line-clamp-1" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {currentPhoto.title}
-              </span>
-              <p className="text-[11px] text-white/90 drop-shadow-xs line-clamp-1">
-                {currentPhoto.caption}
-              </p>
-            </div>
-
-            <button
-              onClick={(e) => handleLike(currentPhoto.id, e)}
-              className="p-1.5 px-2.5 rounded-full bg-black/40 hover:bg-black/60 text-white backdrop-blur-xs flex items-center gap-1.5 text-xs transition-transform active:scale-90 cursor-pointer"
-            >
-              <Heart className="w-3.5 h-3.5 fill-[#e8a4a5] text-[#e8a4a5]" />
-              <span className="font-semibold text-[11px]">{photoLikes[currentPhoto.id] || 0}</span>
-            </button>
-          </div>
         </div>
 
         {/* ── DẢI THUMBNAIL ẢNH NHỎ BÊN DƯỚI ── */}
@@ -176,7 +140,7 @@ export const GalleryScreen: React.FC = () => {
               >
                 <img
                   src={photo.url}
-                  alt={photo.title}
+                  alt={photo.title || `Ảnh cưới ${idx + 1}`}
                   className="w-full h-full object-cover"
                   loading="lazy"
                   referrerPolicy="no-referrer"
@@ -223,16 +187,12 @@ export const GalleryScreen: React.FC = () => {
           >
             <img
               src={currentPhoto.url}
-              alt={currentPhoto.title}
-              className="max-h-[70vh] w-auto object-contain rounded-2xl shadow-2xl"
+              alt={currentPhoto.title || `Ảnh cưới ${activeIndex + 1}`}
+              className="max-h-[75vh] w-auto object-contain rounded-2xl shadow-2xl"
               referrerPolicy="no-referrer"
             />
-            <div className="text-center mt-3 text-white space-y-1">
-              <h3 className="font-serif text-lg font-medium" style={{ fontFamily: "'Playfair Display', serif" }}>
-                {currentPhoto.title}
-              </h3>
-              <p className="text-xs text-slate-300">{currentPhoto.caption}</p>
-              <span className="text-[11px] text-[#e1cbb4] font-sans block">
+            <div className="text-center mt-3 text-white">
+              <span className="text-xs text-white/70 font-sans block">
                 {activeIndex + 1} / {galleryPhotos.length}
               </span>
             </div>

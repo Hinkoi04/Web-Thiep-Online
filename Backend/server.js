@@ -25,12 +25,14 @@ const rsvpRoutes = require("./routes/rsvp");
 const hoangYenRoutes = require("./routes/hoangYen");
 const thanhTamRoutes = require("./routes/thanhTam");
 const thoaWDRoutes = require("./routes/thoaWD");
+const thoaHaiRoutes = require("./routes/thoaHai");
 const adminRoutes = require("./routes/admin");
 
 app.use("/api/rsvp", rsvpRoutes);
 app.use("/api/hoang-yen", hoangYenRoutes);
 app.use("/api/thanh-tam", thanhTamRoutes);
 app.use("/api/thoa-wd", thoaWDRoutes);
+app.use("/api/thoa-hai", thoaHaiRoutes);
 app.use("/api/admin", adminRoutes);
 
 // Health check
@@ -97,6 +99,19 @@ async function initDB() {
       ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
     console.log("✅ Bảng thoa_wd đã sẵn sàng");
+    // Bảng lời chúc ThoaHai
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS thoa_hai (
+        id int(11) NOT NULL AUTO_INCREMENT,
+        guest_name varchar(100) DEFAULT NULL,
+        message mediumtext DEFAULT NULL,
+        attendance_status varchar(50) DEFAULT NULL,
+        is_deleted tinyint(1) DEFAULT 0,
+        created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+      ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `);
+    console.log("✅ Bảng thoa_hai đã sẵn sàng");
   } catch (err) {
     console.error("❌ Lỗi tạo bảng:", err.message);
   }
@@ -113,6 +128,8 @@ app.listen(PORT, async () => {
   console.log(`   POST /api/rsvp       — Gửi lời chúc mới (Nhi)`);
   console.log(`   GET  /api/hoang-yen  — Lấy danh sách lời chúc (Hoàng Yến)`);
   console.log(`   POST /api/hoang-yen  — Gửi lời chúc mới (Hoàng Yến)`);
+  console.log(`   GET  /api/thoa-hai   — Lấy danh sách lời chúc (ThoaHai)`);
+  console.log(`   POST /api/thoa-hai   — Gửi lời chúc mới (ThoaHai)`);
   console.log(`   GET  /api/health     — Health check\n`);
   await initDB();
 });

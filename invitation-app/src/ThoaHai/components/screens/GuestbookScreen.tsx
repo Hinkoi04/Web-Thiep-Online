@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { initialWishes, weddingImages } from '../../data/weddingData';
+import { initialWishes } from '../../data/weddingData';
 import type { GuestWish } from '../../types';
 import { Heart, CheckCircle2 } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
@@ -27,7 +27,6 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
 
   const { ref: headerRef, isInView: headerInView } = useInView({ threshold: 0.1 });
   const { ref: formRef, isInView: formInView } = useInView<HTMLFormElement>({ threshold: 0.1 });
-  const { ref: footerRef, isInView: footerInView } = useInView({ threshold: 0.1 });
   const { ref: wishesRef, isInView: wishesInView } = useInView({ threshold: 0.1 });
 
   useEffect(() => {
@@ -129,8 +128,8 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
   };
 
   return (
-    <div className="relative w-full px-5 py-8 bg-[#faf5ee] text-[#3d2c1e] select-none overflow-hidden">
-      <div className="max-w-md mx-auto space-y-6 pt-1">
+    <div className="relative w-full bg-[#faf5ee] text-[#3d2c1e] select-none overflow-hidden">
+      <div className="max-w-md mx-auto px-5 pt-8 pb-6 space-y-6">
         {/* ── 1. RSVP HEADER NOTE ── */}
         <div
           ref={headerRef}
@@ -162,15 +161,31 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
         {/* Success Toast */}
         {successToast && (
           <div
-            className="flex items-center gap-2 p-3.5 rounded-2xl text-xs shadow-sm animate-fade-in"
+            className="flex items-start gap-3 p-4 rounded-2xl shadow-md"
             style={{
-              background: 'rgba(225,203,180,0.3)',
-              border: '1px solid #1a1a1a',
+              background: 'linear-gradient(135deg, rgba(225,203,180,0.55) 0%, rgba(250,245,238,0.9) 100%)',
+              border: '1.5px solid #c4a882',
               color: '#1a1a1a',
+              animation: 'th-toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both',
             }}
           >
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-[#1a1a1a]" />
-            <span>Cảm ơn bạn! Lời chúc đã được gửi thành công.</span>
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+              style={{ background: '#1a1a1a' }}
+            >
+              <CheckCircle2 className="w-4 h-4 text-[#e1cbb4]" />
+            </div>
+            <div className="space-y-0.5">
+              <p
+                className="text-sm font-bold"
+                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+              >
+                Cảm ơn bạn thật nhiều! 🌸
+              </p>
+              <p className="text-xs text-[#4a4039] leading-relaxed">
+                Lời chúc của bạn đã được gửi thành công đến Hoàng Hải & Yến Thoa.
+              </p>
+            </div>
           </div>
         )}
 
@@ -265,43 +280,6 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* ── 4. CLOSING PHOTO & MESSAGE (IMAGE 3 VERY BOTTOM) ── */}
-        <div
-          ref={footerRef}
-          className={`pt-6 pb-4 text-center space-y-3 th-reveal-init th-reveal-up ${
-            footerInView ? 'th-reveal-active' : ''
-          }`}
-        >
-          {/* Couple Photo */}
-          <div
-            className="w-full max-w-[340px] mx-auto rounded-2xl overflow-hidden shadow-md"
-            style={{ aspectRatio: '16/10', background: '#f0e8dc' }}
-          >
-            <img
-              src={weddingImages.closingPhoto}
-              alt="Hẹn gặp bạn trong ngày cưới Thanh Hải & Yến Thoa"
-              className="w-full h-full object-cover object-center"
-              loading="lazy"
-            />
-          </div>
-
-          {/* Warm closing lines */}
-          <div className="space-y-1 pt-2">
-            <p
-              className="text-xs sm:text-[13px] font-medium leading-relaxed"
-              style={{ color: '#1a1a1a', fontFamily: "'Playfair Display', Georgia, serif" }}
-            >
-              Hẹn gặp bạn trong ngày đặc biệt nhất của chúng mình.
-            </p>
-            <p
-              className="text-xs sm:text-[13px] italic leading-relaxed"
-              style={{ color: '#4a4039', fontFamily: "'Playfair Display', Georgia, serif" }}
-            >
-              Sự hiện diện của bạn là niềm vinh hạnh của chúng mình!
-            </p>
           </div>
         </div>
       </div>

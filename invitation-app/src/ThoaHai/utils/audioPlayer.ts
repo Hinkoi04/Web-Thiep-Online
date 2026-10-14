@@ -1,4 +1,4 @@
-const bgMusicUrl = '/thoahai/NhacNen.mp3';
+const bgMusicUrl = '/thoahai/NhacNenHT.mp3';
 
 class WeddingAudioPlayer {
   private audio: HTMLAudioElement | null = null;

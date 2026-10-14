@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import type { WeddingInfo } from '../../types';
 import { weddingEvents } from '../../data/weddingData';
 import { MapPin, Heart } from 'lucide-react';
@@ -21,26 +21,9 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
   const { ref: venueRef, isInView: venueInView } = useInView({ threshold: 0.1 });
   const { ref: guestRef, isInView: guestInView } = useInView({ threshold: 0.1 });
 
-  // ── TYPEWRITER EFFECT GIỐNG THOAWD ──
+  // ── ĐOẠN TRÍCH DẪN MỞ ĐẦU ──
   const fullQuote =
-    '"Hôn nhân là bến đỗ bình yên, nơi tình yêu được đơm hoa kết trái. Trong ngày vui trọng đại của cuộc đời, sự hiện diện và lời chúc phúc của quý khách là niềm vinh hạnh to lớn đối với chúng tôi."';
-  const [typedQuote, setTypedQuote] = useState('');
-  const [isQuoteTyping, setIsQuoteTyping] = useState(false);
-
-  useEffect(() => {
-    if (!quoteCardInView) return;
-    setIsQuoteTyping(true);
-    let i = 0;
-    const interval = setInterval(() => {
-      i++;
-      setTypedQuote(fullQuote.slice(0, i));
-      if (i >= fullQuote.length) {
-        clearInterval(interval);
-        setIsQuoteTyping(false);
-      }
-    }, 48);
-    return () => clearInterval(interval);
-  }, [quoteCardInView, fullQuote]);
+    '"Sau những ngày tháng yêu thương, chúng mình quyết định cùng nhau viết tiếp câu chuyện của hai đứa bằng một đám cưới nhỏ nhưng đầy ý nghĩa."';
 
   return (
     <div className="relative w-full px-5 py-9 bg-[#faf5ee] text-[#3d2c1e] text-center select-none overflow-hidden">
@@ -58,9 +41,8 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
         {/* Lời mời trang trọng hiện lên trước */}
         <span
-          className={`text-[11px] font-semibold tracking-[0.25em] text-[#4a4039] uppercase block mb-1 transition-all duration-[1600ms] cubic-bezier(0.16,1,0.3,1) ${
-            headerInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 -translate-y-3 scale-95'
-          }`}
+          className={`text-[11px] font-semibold tracking-[0.25em] text-[#4a4039] uppercase block mb-1 transition-all duration-[1600ms] cubic-bezier(0.16,1,0.3,1) ${headerInView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 -translate-y-3 scale-95'
+            }`}
         >
           LỜI MỜI TRANG TRỌNG
         </span>
@@ -69,9 +51,8 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
         <div className="flex items-center justify-center gap-2 sm:gap-3 py-2 overflow-hidden">
           {/* Tên Chú Rể di chuyển chậm từ bên trái vào */}
           <span
-            className={`text-3xl sm:text-4xl font-normal transition-all duration-[3200ms] cubic-bezier(0.16,1,0.3,1) inline-block ${
-              headerInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-32'
-            }`}
+            className={`text-3xl sm:text-4xl font-normal transition-all duration-[3200ms] cubic-bezier(0.16,1,0.3,1) inline-block ${headerInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-32'
+              }`}
             style={{
               color: '#1a1a1a',
               fontFamily: "'Pinyon Script', cursive",
@@ -83,9 +64,8 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
           {/* Dấu & ở giữa */}
           <span
-            className={`text-3xl sm:text-4xl italic transition-all duration-[2400ms] cubic-bezier(0.16,1,0.3,1) inline-block px-1 ${
-              headerInView ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-            }`}
+            className={`text-3xl sm:text-4xl italic transition-all duration-[2400ms] cubic-bezier(0.16,1,0.3,1) inline-block px-1 ${headerInView ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+              }`}
             style={{
               color: '#8c7355',
               fontFamily: "'Pinyon Script', cursive",
@@ -97,9 +77,8 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
           {/* Tên Cô Dâu di chuyển chậm từ bên phải vào */}
           <span
-            className={`text-3xl sm:text-4xl font-normal transition-all duration-[3200ms] cubic-bezier(0.16,1,0.3,1) inline-block ${
-              headerInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-32'
-            }`}
+            className={`text-3xl sm:text-4xl font-normal transition-all duration-[3200ms] cubic-bezier(0.16,1,0.3,1) inline-block ${headerInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-32'
+              }`}
             style={{
               color: '#1a1a1a',
               fontFamily: "'Pinyon Script', cursive",
@@ -112,20 +91,22 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
         {/* Thin vertical separator line */}
         <div
-          className={`flex justify-center my-3 transition-all duration-[1600ms] ${
-            headerInView ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
-          }`}
+          className={`flex justify-center my-3 transition-all duration-[1600ms] ${headerInView ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
+            }`}
           style={{ transitionDelay: headerInView ? '700ms' : '0ms' }}
         >
           <div className="w-[1px] h-8 bg-[#1a1a1a]/20" />
         </div>
       </div>
 
-      {/* ── 2. ĐOẠN TRIẾT LÝ MỞ ĐẦU (HIỆU ỨNG ĐÁNH MÁY TYPEWRITER THOAWD) ── */}
+      {/* ── 2. ĐOẠN TRIẾT LÝ MỞ ĐẦU (HIỂN THỊ TỪ TRÊN XUỐNG TRONG 2S) ── */}
       <div
         ref={quoteCardRef}
-        className={`max-w-xs sm:max-w-sm mx-auto p-4 rounded-2xl border text-center transition-all duration-[1800ms] ${quoteCardInView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-          }`}
+        className={`max-w-xs sm:max-w-sm mx-auto p-4 rounded-2xl border text-center transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${
+          quoteCardInView
+            ? 'opacity-100 translate-y-0 scale-100'
+            : 'opacity-0 -translate-y-8 scale-95'
+        }`}
         style={{
           background: 'rgba(225, 203, 180, 0.18)',
           borderColor: 'rgba(225, 203, 180, 0.65)',
@@ -135,25 +116,20 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
           className="text-xs sm:text-[13px] leading-relaxed italic"
           style={{ color: '#4a4039', fontFamily: "'Playfair Display', Georgia, serif" }}
         >
-          {typedQuote}
-          {isQuoteTyping && (
-            <span className="inline-block w-[1.5px] h-[1em] bg-[#1a1a1a] animate-pulse ml-0.5 align-middle" />
-          )}
+          {fullQuote}
         </p>
       </div>
 
       {/* ── 3. CEREMONY TIME & DATE BLOCK (NGÀY 29 · 10 · 2026 - KHUNG HIỆN RA TRƯỚC RỒI NGÀY THÁNG NĂM MỚI HIỆN LÊN) ── */}
       <div
         ref={dateCardRef}
-        className={`max-w-xs mx-auto mt-6 p-4 sm:p-5 rounded-2xl border border-[#d8c7b3] bg-[#f5ede3]/50 shadow-2xs space-y-3 transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-          dateCardInView ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
-        }`}
+        className={`max-w-xs mx-auto mt-6 p-4 sm:p-5 rounded-2xl border border-[#d8c7b3] bg-[#f5ede3]/50 shadow-2xs space-y-3 transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${dateCardInView ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
+          }`}
       >
         {/* Điểm hoa Hoa3 trên khối ngày giờ (hiện lên sau khung) */}
         <div
-          className={`flex justify-center items-center transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-            dateCardInView ? 'opacity-90 scale-100' : 'opacity-0 scale-75'
-          }`}
+          className={`flex justify-center items-center transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${dateCardInView ? 'opacity-90 scale-100' : 'opacity-0 scale-75'
+            }`}
           style={{ transitionDelay: dateCardInView ? '300ms' : '0ms' }}
         >
           <img
@@ -165,9 +141,8 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
         {/* Time (hiện lên) */}
         <p
-          className={`text-xs sm:text-sm font-semibold tracking-[0.22em] uppercase transition-all duration-[2200ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-            dateCardInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
-          }`}
+          className={`text-xs sm:text-sm font-semibold tracking-[0.22em] uppercase transition-all duration-[2200ms] cubic-bezier(0.16, 1, 0.3, 1) ${dateCardInView ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
+            }`}
           style={{
             color: '#1a1a1a',
             fontFamily: "'Playfair Display', serif",
@@ -179,16 +154,14 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
         {/* Date Row with lines above & below: THÁNG 10 · 29 · NĂM 2026 */}
         <div
-          className={`border-y border-[#1a1a1a]/20 py-2.5 flex items-center justify-center gap-3 transition-all duration-[2000ms] ${
-            dateCardInView ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`border-y border-[#1a1a1a]/20 py-2.5 flex items-center justify-center gap-3 transition-all duration-[2000ms] ${dateCardInView ? 'opacity-100' : 'opacity-0'
+            }`}
           style={{ transitionDelay: dateCardInView ? '850ms' : '0ms' }}
         >
           {/* THÁNG 10 (chạy từ trái vào) */}
           <span
-            className={`text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase flex-1 text-right transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              dateCardInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
-            }`}
+            className={`text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase flex-1 text-right transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${dateCardInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
+              }`}
             style={{
               color: '#1a1a1a',
               fontFamily: "'Playfair Display', serif",
@@ -200,9 +173,8 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
           {/* Ngày 29 (phóng to ở giữa) */}
           <span
-            className={`text-4xl sm:text-5xl font-light tracking-tight leading-none px-2 select-none transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              dateCardInView ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-            }`}
+            className={`text-4xl sm:text-5xl font-light tracking-tight leading-none px-2 select-none transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${dateCardInView ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+              }`}
             style={{
               color: '#1a1a1a',
               fontFamily: "'Playfair Display', serif",
@@ -214,9 +186,8 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
           {/* NĂM 2026 (chạy từ phải vào) */}
           <span
-            className={`text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase flex-1 text-left transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              dateCardInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-            }`}
+            className={`text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase flex-1 text-left transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${dateCardInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
+              }`}
             style={{
               color: '#1a1a1a',
               fontFamily: "'Playfair Display', serif",
@@ -229,9 +200,8 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
 
         {/* Lunar Date (hiện lên sau cùng) */}
         <p
-          className={`text-xs italic text-[#6d5a49] transition-all duration-[2200ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-            dateCardInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-          }`}
+          className={`text-xs italic text-[#6d5a49] transition-all duration-[2200ms] cubic-bezier(0.16, 1, 0.3, 1) ${dateCardInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+            }`}
           style={{ transitionDelay: dateCardInView ? '1700ms' : '0ms' }}
         >
           {event?.lunarText || '(Tức ngày 20 tháng 09 năm Bính Ngọ)'}

@@ -52,7 +52,7 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
           <div className="th-env-cover-photo-wrap">
             <img
               src={coverImage}
-              alt="Ảnh bìa cưới Thanh Hải & Yến Thoa"
+              alt="Ảnh bìa cưới Hoàng Hải & Yến Thoa"
               className="th-env-cover-photo"
             />
             <div className="th-env-cover-overlay" />
@@ -60,7 +60,6 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
 
           <div style={{ position: 'relative', zIndex: 1, padding: '0 24px 28px' }}>
             <div className="th-env-cover-title">Save the Date</div>
-            <div className="th-env-cover-year">2026</div>
             <img
               src="/thoahai/Hoa3.png"
               alt="hoa điểm"
@@ -68,7 +67,7 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
             />
             <div className="th-env-cover-type">Lễ Thành Hôn</div>
             <div className="th-env-cover-couple">
-              Thanh Hải &amp; Yến Thoa
+              Hoàng Hải &amp; Yến Thoa
             </div>
             <div className="th-env-cover-date">29 · 10 · 2026</div>
 
