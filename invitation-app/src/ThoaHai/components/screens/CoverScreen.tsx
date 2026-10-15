@@ -114,7 +114,7 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
           style={{ transitionDelay: quoteInView ? '500ms' : '0ms' }}
         >
           <img
-            src="/thoahai/Hoa1.png"
+            src="/thoahai/Hoa11.png"
             alt="hoa điểm"
             className="w-11 h-auto object-contain opacity-90 drop-shadow-xs pointer-events-none select-none"
           />

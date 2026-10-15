@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { galleryPhotos } from '../../data/weddingData';
 import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
@@ -13,6 +14,29 @@ export const GalleryScreen: React.FC = () => {
 
   const touchStartX = useRef<number | null>(null);
   const currentPhoto = galleryPhotos[activeIndex] || galleryPhotos[0];
+
+  // Khóa cuộn trang khi mở lightbox để không bị dính thanh cuộn
+  useEffect(() => {
+    if (isLightboxOpen) {
+      const originalOverflow = document.body.style.overflow;
+      const originalOverscroll = document.body.style.overscrollBehavior;
+      document.body.style.overflow = 'hidden';
+      document.body.style.overscrollBehavior = 'none';
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setIsLightboxOpen(false);
+        else if (e.key === 'ArrowRight') handleNext();
+        else if (e.key === 'ArrowLeft') handlePrev();
+      };
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.body.style.overscrollBehavior = originalOverscroll;
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isLightboxOpen]);
 
   const handleNext = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -69,12 +93,13 @@ export const GalleryScreen: React.FC = () => {
           <div className="w-12 h-0.5 bg-[#1a1a1a]/20 mx-auto mt-2" />
         </div>
 
-        {/* ── KHUNG ẢNH CHÍNH LỚN THEO MẪU THOAWD (FEATURED PHOTO SLIDER) ── */}
+        {/* ── KHUNG ẢNH CHÍNH LỚN VỚI CHIỀU CAO FULL ẢNH DỌC (TỶ LỆ 3:4) ── */}
         <div
           ref={sliderRef}
-          className={`relative w-full aspect-4/3 sm:aspect-1/1 rounded-3xl overflow-hidden bg-[#f0e8dc] shadow-md border border-[#d8c7b3] group select-none cursor-pointer th-reveal-init th-reveal-scale ${
+          className={`relative w-full aspect-3/4 sm:aspect-3/4 max-h-[580px] rounded-3xl overflow-hidden bg-[#f0e8dc] shadow-md border border-[#d8c7b3] group select-none cursor-pointer th-reveal-init th-reveal-scale ${
             sliderInView ? 'th-reveal-active' : ''
           }`}
+          style={{ aspectRatio: '3/4' }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onClick={() => setIsLightboxOpen(true)}
@@ -83,7 +108,7 @@ export const GalleryScreen: React.FC = () => {
             key={currentPhoto.id}
             src={currentPhoto.url}
             alt={currentPhoto.title}
-            className="w-full h-full object-cover transition-all duration-300 animate-in fade-in"
+            className="w-full h-full object-cover object-center transition-all duration-300 animate-in fade-in"
             loading="eager"
             referrerPolicy="no-referrer"
           />
@@ -151,16 +176,20 @@ export const GalleryScreen: React.FC = () => {
         </div>
       </div>
 
-      {/* ── LIGHTBOX MODAL PHÓNG TO ẢNH FULLSCREEN ── */}
-      {isLightboxOpen && (
+      {/* ── LIGHTBOX MODAL PHÓNG TO ẢNH FULLSCREEN (RENDER BẰNG PORTAL TRÁNH BỊ DÍNH THANH CUỘN) ── */}
+      {isLightboxOpen && typeof document !== 'undefined' && createPortal(
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-3 sm:p-6 select-none overflow-hidden touch-none"
+          style={{ zIndex: 99999 }}
           onClick={() => setIsLightboxOpen(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           {/* Nút đóng */}
           <button
             onClick={() => setIsLightboxOpen(false)}
             className="absolute top-4 right-4 p-2.5 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-colors cursor-pointer z-20"
+            title="Đóng (Esc)"
           >
             <X className="w-6 h-6" />
           </button>
@@ -169,6 +198,7 @@ export const GalleryScreen: React.FC = () => {
           <button
             onClick={handlePrev}
             className="absolute left-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/20 text-white hover:bg-white/35 transition-colors cursor-pointer z-20"
+            title="Ảnh trước (←)"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -176,28 +206,33 @@ export const GalleryScreen: React.FC = () => {
           <button
             onClick={handleNext}
             className="absolute right-3 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/20 text-white hover:bg-white/35 transition-colors cursor-pointer z-20"
+            title="Ảnh tiếp theo (→)"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Large Photo Display */}
+          {/* Large Photo Display - Hiển thị full 100% không dính thanh cuộn */}
           <div
-            className="max-w-xl w-full max-h-[82vh] flex flex-col items-center select-none"
+            className="relative flex flex-col items-center justify-center max-w-full max-h-[92vh] select-none"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={currentPhoto.url}
               alt={currentPhoto.title || `Ảnh cưới ${activeIndex + 1}`}
-              className="max-h-[75vh] w-auto object-contain rounded-2xl shadow-2xl"
+              className="max-h-[82vh] max-w-[92vw] sm:max-h-[86vh] sm:max-w-[85vw] w-auto h-auto object-contain rounded-2xl shadow-2xl"
               referrerPolicy="no-referrer"
             />
             <div className="text-center mt-3 text-white">
-              <span className="text-xs text-white/70 font-sans block">
+              {currentPhoto.title && (
+                <p className="text-sm font-medium text-white/95">{currentPhoto.title}</p>
+              )}
+              <span className="text-xs text-white/70 font-sans block mt-0.5">
                 {activeIndex + 1} / {galleryPhotos.length}
               </span>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
