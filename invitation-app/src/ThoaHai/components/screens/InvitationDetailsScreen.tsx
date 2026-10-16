@@ -132,7 +132,7 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
           style={{ transitionDelay: dateCardInView ? '300ms' : '0ms' }}
         >
           <img
-            src="/thoahai/Hoa3.png"
+            src="/thoahai/Hoa9.png"
             alt="hoa điểm"
             className="w-10 h-auto object-contain pointer-events-none select-none drop-shadow-xs"
           />

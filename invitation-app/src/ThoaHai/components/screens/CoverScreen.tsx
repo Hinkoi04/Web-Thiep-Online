@@ -404,9 +404,9 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
         {/* Điểm hoa Hoa2 (dải hoa thân cao) ở chân trang bìa */}
         <div className="flex justify-center pt-5 pb-1">
           <img
-            src="/thoahai/Hoa18.png"
+            src="/thoahai/Hoa17.png"
             alt="hoa điểm chân trang bìa"
-            className="w-60 h-auto object-contain opacity-80 pointer-events-none select-none"
+            className="w-20 h-auto object-contain opacity-80 pointer-events-none select-none"
           />
         </div>
       </div>

@@ -68,7 +68,7 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
           <div style={{ position: 'relative', zIndex: 1, padding: '0 24px 28px' }}>
             <div className="th-env-cover-title">Save the Date</div>
             <img
-              src="/thoahai/Hoa3.png"
+              src="/thoahai/Hoa8.png"
               alt="hoa điểm"
               className="w-7 h-auto mx-auto my-1 opacity-85 select-none pointer-events-none drop-shadow-xs"
             />

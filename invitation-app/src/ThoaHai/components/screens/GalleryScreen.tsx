@@ -73,7 +73,7 @@ export const GalleryScreen: React.FC = () => {
         >
           {/* Điểm hoa Hoa7 */}
           <img
-            src="/thoahai/Hoa21.png"
+            src="/thoahai/Hoa8.png"
             alt="hoa điểm"
             className="w-20 h-auto mx-auto mb-1 opacity-85 drop-shadow-xs pointer-events-none select-none"
           />

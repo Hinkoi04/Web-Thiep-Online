@@ -163,9 +163,9 @@ export const ScheduleScreen: React.FC = () => {
         {/* Điểm hoa Hoa2 ở chân lịch trình (nằm sát vạch dưới) */}
         <div className="flex justify-center items-end pt-4 pb-0 leading-none">
           <img
-            src="/thoahai/Hoa20.png"
+            src="/thoahai/Hoa12.png"
             alt="hoa điểm chân lịch trình"
-            className="w-50 h-auto block object-contain opacity-80 pointer-events-none select-none -mb-px"
+            className="w-30 h-auto block object-contain opacity-80 pointer-events-none select-none -mb-px"
           />
         </div>
       </div>
