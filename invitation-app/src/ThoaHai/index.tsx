@@ -114,6 +114,7 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
   // Sync music state
   useEffect(() => {
     weddingAudio.setCallback((playing) => setIsPlayingMusic(playing));
+    setIsPlayingMusic(weddingAudio.getIsPlaying());
     return () => { weddingAudio.pause(); };
   }, []);
 
@@ -249,8 +250,25 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
     };
   }, [stopAutoScroll]);
 
+  const handleEnvelopeStartOpen = useCallback(() => {
+    try {
+      weddingAudio.play();
+      setIsPlayingMusic(true);
+    } catch (e) {
+      console.warn('Play audio on envelope start error:', e);
+    }
+  }, []);
+
   const handleEnvelopeDone = useCallback(() => {
     setOpened(true);
+    if (!weddingAudio.getIsPlaying()) {
+      try {
+        weddingAudio.play();
+        setIsPlayingMusic(true);
+      } catch (e) {
+        console.warn('Play audio on envelope done error:', e);
+      }
+    }
   }, []);
 
   // Tự động cuộn và bật nhạc sau khi nội dung đã hiện rõ (delay 4000ms sau khi mở bìa)
@@ -323,6 +341,7 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
       {!opened && (
         <WeddingEnvelopeCover
           guestName={weddingInfo.guestName}
+          onStartOpen={handleEnvelopeStartOpen}
           onDone={handleEnvelopeDone}
         />
       )}
@@ -467,9 +486,8 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
           {/* ── ẢNH KẾT Ở CUỐI CÙNG TRANG THIỆP (FULL KHUNG & GÓC VUÔNG) ── */}
           <div
             ref={footerPhotoRef}
-            className={`relative w-full overflow-hidden th-reveal-init th-reveal-up ${
-              footerPhotoInView ? 'th-reveal-active' : ''
-            }`}
+            className={`relative w-full overflow-hidden th-reveal-init th-reveal-up ${footerPhotoInView ? 'th-reveal-active' : ''
+              }`}
           >
             <img
               src={weddingImages.closingPhoto}
@@ -497,9 +515,8 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
 
               {/* Chữ "Thank you!" font Pinyon Script giống Timeline */}
               <div
-                className={`mt-2 sm:mt-3 text-3xl sm:text-4xl text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] transition-all duration-[1600ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-                  footerPhotoInView ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-3'
-                }`}
+                className={`mt-2 sm:mt-3 text-3xl sm:text-4xl text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] transition-all duration-[1600ms] cubic-bezier(0.16, 1, 0.3, 1) ${footerPhotoInView ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-3'
+                  }`}
                 style={{
                   fontFamily: "'Pinyon Script', cursive",
                   transitionDelay: footerPhotoInView ? '1200ms' : '0ms',

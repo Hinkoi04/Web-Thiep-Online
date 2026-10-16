@@ -6,50 +6,53 @@ class WeddingAudioPlayer {
   private wasPlayingBeforeHidden = false;
   private onStateChange?: (playing: boolean) => void;
 
-  constructor() {
-    if (typeof window !== 'undefined') {
-      try {
-        this.audio = new Audio(bgMusicUrl);
-        this.audio.loop = true;
-        this.audio.preload = 'auto';
+  private initAudio() {
+    if (this.audio || typeof window === 'undefined') return;
+    try {
+      this.audio = new Audio(bgMusicUrl);
+      this.audio.loop = true;
+      this.audio.preload = 'auto';
 
-        this.audio.addEventListener('play', () => {
-          this.isPlaying = true;
-          this.onStateChange?.(true);
-        });
-        this.audio.addEventListener('pause', () => {
-          this.isPlaying = false;
-          this.onStateChange?.(false);
-        });
-        this.audio.addEventListener('ended', () => {
-          this.isPlaying = false;
-          this.onStateChange?.(false);
-        });
+      this.audio.addEventListener('play', () => {
+        this.isPlaying = true;
+        this.onStateChange?.(true);
+      });
+      this.audio.addEventListener('pause', () => {
+        this.isPlaying = false;
+        this.onStateChange?.(false);
+      });
+      this.audio.addEventListener('ended', () => {
+        this.isPlaying = false;
+        this.onStateChange?.(false);
+      });
 
-        // Tự động tạm dừng khi rời khỏi tab thiệp và tự động phát tiếp khi quay trở lại
-        document.addEventListener('visibilitychange', () => {
-          if (document.hidden) {
-            if (this.isPlaying) {
-              this.wasPlayingBeforeHidden = true;
-              if (this.audio) {
-                try {
-                  this.audio.pause();
-                } catch (e) {
-                  console.warn('Pause on tab hide error:', e);
-                }
+      // Tự động tạm dừng khi rời khỏi tab thiệp và tự động phát tiếp khi quay trở lại
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (this.isPlaying) {
+            this.wasPlayingBeforeHidden = true;
+            if (this.audio) {
+              try {
+                this.audio.pause();
+              } catch (e) {
+                console.warn('Pause on tab hide error:', e);
               }
             }
-          } else {
-            if (this.wasPlayingBeforeHidden) {
-              this.wasPlayingBeforeHidden = false;
-              this.play();
-            }
           }
-        });
-      } catch (e) {
-        console.warn('Init audio error:', e);
-      }
+        } else {
+          if (this.wasPlayingBeforeHidden) {
+            this.wasPlayingBeforeHidden = false;
+            this.play();
+          }
+        }
+      });
+    } catch (e) {
+      console.warn('Init audio error:', e);
     }
+  }
+
+  constructor() {
+    this.initAudio();
   }
 
   public setCallback(cb: (playing: boolean) => void) {
@@ -57,12 +60,11 @@ class WeddingAudioPlayer {
   }
 
   public play() {
-    if (!this.audio && typeof window !== 'undefined') {
-      this.audio = new Audio(bgMusicUrl);
-      this.audio.loop = true;
-      this.audio.preload = 'auto';
+    if (!this.audio) {
+      this.initAudio();
     }
     if (!this.audio) return;
+    if (this.isPlaying && !this.audio.paused) return;
 
     try {
       const promise = this.audio.play();

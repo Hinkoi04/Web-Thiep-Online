@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { weddingImages } from '../data/weddingData';
+import { weddingAudio } from '../utils/audioPlayer';
 
 export interface WeddingEnvelopeCoverProps {
   guestName?: string;
@@ -19,6 +20,12 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
     setOpening(true);
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+    // Phát nhạc ngay lập tức trong sự kiện chạm tay của người dùng
+    try {
+      weddingAudio.play();
+    } catch (err) {
+      console.warn('weddingAudio play error:', err);
     }
     try {
       if (onStartOpen) onStartOpen();
@@ -45,7 +52,7 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
       {/* Lớp phủ trắng dần khi chạm vào mở thiệp */}
       <div className="th-white-washout" />
 
-      <div style={{ width: 'min(340px, 90vw)', position: 'relative', userSelect: 'none', zIndex: 1 }}>
+      <div style={{ width: 'min(380px, 92vw)', position: 'relative', userSelect: 'none', zIndex: 1 }}>
         {/* Cover Card */}
         <div className="th-env-body">
           {/* Cover Photo */}
