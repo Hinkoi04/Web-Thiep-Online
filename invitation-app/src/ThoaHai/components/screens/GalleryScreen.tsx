@@ -75,7 +75,7 @@ export const GalleryScreen: React.FC = () => {
           <img
             src="/thoahai/Hoa8.png"
             alt="hoa điểm"
-            className="w-20 h-auto mx-auto mb-1 opacity-85 drop-shadow-xs pointer-events-none select-none"
+            className="w-15 h-auto mx-auto mb-1 opacity-85 drop-shadow-xs pointer-events-none select-none"
           />
 
           <span className="text-[11px] font-semibold tracking-[0.25em] text-[#4a4039] uppercase block">

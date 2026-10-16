@@ -165,7 +165,7 @@ export const ScheduleScreen: React.FC = () => {
           <img
             src="/thoahai/Hoa12.png"
             alt="hoa điểm chân lịch trình"
-            className="w-30 h-auto block object-contain opacity-80 pointer-events-none select-none -mb-px"
+            className="w-15 h-auto block object-contain opacity-80 pointer-events-none select-none -mb-px"
           />
         </div>
       </div>
