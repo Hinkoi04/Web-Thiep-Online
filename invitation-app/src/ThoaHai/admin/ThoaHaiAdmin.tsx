@@ -29,8 +29,9 @@ const STORAGE_KEY = 'thoahai_admin_auth';
 type Tab = 'wishes' | 'trash';
 
 export default function ThoaHaiAdmin() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return localStorage.getItem(STORAGE_KEY) === 'true';
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState<boolean>(() => {
+    return Boolean(localStorage.getItem(STORAGE_KEY));
   });
   const [passwordInput, setPasswordInput] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -59,15 +60,64 @@ export default function ThoaHaiAdmin() {
     ? `${baseUrl}?to=${encodeURIComponent(guestInput.trim())}`
     : baseUrl;
 
+  // Header kèm Token xác thực cho các thao tác quản trị
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem(STORAGE_KEY);
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    return headers;
+  };
+
+  // Kiểm tra token hợp lệ khi tải trang (tránh 401 do token hết hạn hoặc giả)
+  useEffect(() => {
+    const token = localStorage.getItem(STORAGE_KEY);
+    if (!token) {
+      setIsCheckingAuth(false);
+      return;
+    }
+    (async () => {
+      try {
+        const res = await fetch(`${API_BASE}/admin/check`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) {
+          setIsAuthenticated(true);
+        } else {
+          // Token hết hạn hoặc không hợp lệ — xóa và yêu cầu đăng nhập lại
+          localStorage.removeItem(STORAGE_KEY);
+          setIsAuthenticated(false);
+        }
+      } catch {
+        // Server chưa phản hồi — giữ nguyên trạng thái chờ đăng nhập
+        localStorage.removeItem(STORAGE_KEY);
+        setIsAuthenticated(false);
+      } finally {
+        setIsCheckingAuth(false);
+      }
+    })();
+  }, []);
+
   // Handle login
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (passwordInput === ADMIN_PASSWORD) {
-      localStorage.setItem(STORAGE_KEY, 'true');
-      setIsAuthenticated(true);
-      setLoginError('');
-    } else {
-      setLoginError('Mật khẩu không chính xác! Vui lòng thử lại.');
+    setLoginError('');
+    try {
+      const res = await fetch(`${API_BASE}/admin/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: passwordInput }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success && data.token) {
+        localStorage.setItem(STORAGE_KEY, data.token);
+        setIsAuthenticated(true);
+        setLoginError('');
+        return;
+      } else {
+        setLoginError(data.error || 'Mật khẩu không chính xác! Vui lòng thử lại.');
+      }
+    } catch {
+      setLoginError('Không kết nối được máy chủ! Vui lòng kiểm tra backend đang chạy.');
     }
   };
 
@@ -112,7 +162,10 @@ export default function ThoaHaiAdmin() {
   const fetchTrash = async () => {
     setLoadingWishes(true);
     try {
-      const res = await fetch(`${API_BASE}/thoa-hai/trash`);
+      const res = await fetch(`${API_BASE}/thoa-hai/trash`, {
+        headers: getAuthHeaders(),
+      });
+      if (res.status === 401) { handleLogout(); return; }
       if (res.ok) {
         const json = await res.json();
         if (json.success && Array.isArray(json.data)) {
@@ -127,6 +180,7 @@ export default function ThoaHaiAdmin() {
               : '',
           }));
           setTrashWishes(trashed);
+          return;
         }
       }
     } catch (e) {
@@ -190,21 +244,28 @@ export default function ThoaHaiAdmin() {
   // Soft delete (move to trash)
   const handleSoftDelete = async (id: string) => {
     try {
-      await fetch(`${API_BASE}/thoa-hai/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/thoa-hai/${id}`, {
+        method: 'DELETE',
+        headers: getAuthHeaders(),
+      });
+      if (res.status === 401) { handleLogout(); return; }
     } catch (err) {
       console.warn('API soft-delete error:', err);
     }
     setWishes((prev) => prev.filter((w) => w.id !== id));
     setDeleteConfirmId(null);
     if (selectedWish?.id === id) setSelectedWish(null);
-    // Refresh trash
     fetchTrash();
   };
 
   // Restore from trash
   const handleRestore = async (id: string) => {
     try {
-      await fetch(`${API_BASE}/thoa-hai/restore/${id}`, { method: 'PUT' });
+      const res = await fetch(`${API_BASE}/thoa-hai/restore/${id}`, {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+      });
+      if (res.status === 401) { handleLogout(); return; }
     } catch (err) {
       console.warn('API restore error:', err);
     }
@@ -215,13 +276,29 @@ export default function ThoaHaiAdmin() {
   // Force delete from trash
   const handleForceDelete = async (id: string) => {
     try {
-      await fetch(`${API_BASE}/thoa-hai/force/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE}/thoa-hai/force/${id}`, {
+        method: 'DELETE',
+        headers: getAuthHeaders(),
+      });
+      if (res.status === 401) { handleLogout(); return; }
     } catch (err) {
       console.warn('API force-delete error:', err);
     }
     setTrashWishes((prev) => prev.filter((w) => w.id !== id));
     setForceDeleteId(null);
   };
+
+  // ── 0. ĐANG KIỂM TRA TOKEN ──
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen bg-[#f5eee6] flex items-center justify-center p-4 selection:bg-amber-100">
+        <div className="w-full max-w-[420px] bg-[#faf5ee] border border-[#bda893]/40 rounded-3xl p-8 shadow-xl text-center">
+          <div className="animate-spin w-8 h-8 border-2 border-[#bda893] border-t-transparent rounded-full mx-auto mb-4" />
+          <p className="text-sm text-[#6d5a49]">Đang xác thực...</p>
+        </div>
+      </div>
+    );
+  }
 
   // ── 1. LOGIN SCREEN ──
   if (!isAuthenticated) {

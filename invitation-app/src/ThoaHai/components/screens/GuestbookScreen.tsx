@@ -35,7 +35,7 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
         const res = await fetch(`${API_BASE}/thoa-hai`);
         if (res.ok) {
           const json = await res.json();
-          if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+          if (json.success && Array.isArray(json.data)) {
             const apiWishes: GuestWish[] = json.data.map((item: any) => ({
               id: item.id.toString(),
               senderName: item.guest_name || 'Khách quý',
@@ -232,52 +232,86 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
           </div>
         </form>
 
-        {/* ── 3. LIST OF WISHES (SỔ LƯU BÚT) ── */}
+        {/* ── 3. LIST OF WISHES (BONG BÓNG LỜI CHÚC DẠNG VIÊN THUỐC CUỘN VÒNG LẶP LIÊN TỤC GIỐNG THOAWD) ── */}
         <div
           ref={wishesRef}
-          className={`space-y-3 pt-6 border-t border-[#d8c7b3]/70 th-reveal-init th-reveal-up ${wishesInView ? 'th-reveal-active' : ''
-            }`}
+          className={`space-y-2.5 pt-4 border-t border-[#d8c7b3]/70 th-reveal-init th-reveal-up ${
+            wishesInView ? 'th-reveal-active' : ''
+          }`}
         >
-          <div className="flex items-center justify-between">
-            <h4
-              className="text-xs font-bold uppercase tracking-wider text-[#1a1a1a]"
+          <div className="flex items-center justify-between text-xs px-1">
+            <span
+              className="font-bold text-xs uppercase tracking-wider text-[#1a1a1a]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Lời Chúc Từ Bạn Bè ({wishes.length})
-            </h4>
+            </span>
+            <span className="text-[11px] text-[#8d7560] font-serif italic">
+              ✦ Cuộn lặp lại liên tục
+            </span>
           </div>
 
-          <div className="space-y-2.5 max-h-60 overflow-y-auto pr-1 th-no-scrollbar">
-            {wishes.map((w) => (
-              <div
-                key={w.id}
-                className="p-3 rounded-2xl border text-xs space-y-1"
-                style={{
-                  background: 'rgba(245, 238, 228, 0.65)',
-                  borderColor: 'rgba(215, 195, 175, 0.6)',
-                }}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold text-[#1a1a1a]">{w.senderName}</span>
-                  <span className="text-[10px] text-[#8d7560]">{w.timestamp}</span>
-                </div>
-                <p className="text-[#4a4039] leading-relaxed italic">{w.message}</p>
-                <div className="flex items-center justify-between pt-1 text-[11px]">
-                  {w.relation ? (
-                    <span className="text-[10px] text-[#6d5a49]">{w.relation}</span>
-                  ) : <span />}
-                  <button
-                    onClick={() => handleLike(w.id)}
-                    className="flex items-center gap-1 text-[#1a1a1a] hover:scale-110 transition-transform cursor-pointer"
+          {/* KHUNG CỐ ĐỊNH CHỨA BONG BÓNG LỜI CHÚC CUỘN VÒNG LẶP */}
+          <div className="relative h-[310px] sm:h-[330px] overflow-hidden rounded-2xl bg-[#f8f3ec]/70 border border-[#d8c7b3]/70 p-2.5 shadow-2xs">
+            {/* Lớp gradient mờ ở đỉnh & đáy khung tạo hiệu ứng xuất hiện / biến mất êm dịu */}
+            <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-[#faf5ee] to-transparent pointer-events-none z-10" />
+            <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-[#faf5ee] to-transparent pointer-events-none z-10" />
+
+            {/* Dải bong bóng cuộn dọc liên tục (Infinite Loop) */}
+            <div className="animate-marquee-vertical space-y-2.5 py-1">
+              {(wishes.length < 4
+                ? [...wishes, ...wishes, ...wishes, ...wishes]
+                : [...wishes, ...wishes]
+              ).map((wish, index) => {
+                const isLiked = likedIds.includes(wish.id);
+
+                return (
+                  <div
+                    key={`${wish.id}-${index}`}
+                    className="w-full rounded-full bg-white/90 backdrop-blur-md border border-[#e1cbb4]/60 shadow-[0_4px_16px_rgba(61,44,30,0.05)] p-2.5 sm:p-3 flex items-center justify-between gap-2.5 text-xs transition-transform hover:scale-[1.01]"
                   >
-                    <Heart
-                      className={`w-3.5 h-3.5 ${likedIds.includes(w.id) ? 'fill-[#1a1a1a] text-[#1a1a1a]' : 'text-[#1a1a1a]'}`}
-                    />
-                    <span className="text-[10px] font-semibold">{w.likes}</span>
-                  </button>
-                </div>
-              </div>
-            ))}
+                    {/* Avatar Tròn & Nội Dung Lời Chúc Dạng Viên Thuốc */}
+                    <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                      <div className="shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#f3e8db] to-[#e4ceb6] text-[#3d2c1e] font-bold flex items-center justify-center text-xs border border-white shadow-2xs">
+                        {wish.senderName.charAt(0).toUpperCase()}
+                      </div>
+
+                      <div className="min-w-0 flex-1 pr-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-[#1a1a1a] truncate text-xs">
+                            {wish.senderName}
+                          </span>
+                          <span className="text-[9.5px] text-[#8d7560] shrink-0">
+                            {wish.timestamp}
+                          </span>
+                        </div>
+                        <p className="text-[#4a4039] font-sans truncate text-[11px] sm:text-xs leading-tight mt-0.5 italic">
+                          "{wish.message}"
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Nút Thả Tim */}
+                    <button
+                      type="button"
+                      onClick={() => handleLike(wish.id)}
+                      className={`shrink-0 flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer border ${
+                        isLiked
+                          ? 'bg-rose-50/90 text-rose-600 border-rose-200'
+                          : 'bg-white/80 text-[#6d5a49] border-[#d8c7b3]/70 hover:bg-[#faf5ee]'
+                      }`}
+                    >
+                      <Heart
+                        className={`w-3.5 h-3.5 ${
+                          isLiked ? 'fill-rose-500 text-rose-500' : 'text-[#8d7560]'
+                        }`}
+                      />
+                      <span>{wish.likes}</span>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

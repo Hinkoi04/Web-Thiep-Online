@@ -389,3 +389,25 @@ html {
 .th-scroll-top-btn:active {
   transform: scale(0.95);
 }
+
+/* ── INFINITE CONTINUOUS VERTICAL MARQUEE FOR WISHES BUBBLES (GIỐNG THOAWD) ── */
+@keyframes th-marqueeVertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-marquee-vertical {
+  display: flex;
+  flex-direction: column;
+  animation: th-marqueeVertical 22s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-vertical:hover,
+.animate-marquee-vertical:active {
+  animation-play-state: paused;
+}
