@@ -44,7 +44,6 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
             loading="eager"
           />
           {/* Soft dark overlay for contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-black/25 pointer-events-none" />
 
           {/* Typography "SAVE the DATE" dạng hình ảnh HoangHaiYenThoa.png */}
           <div className="absolute bottom-8 left-5 right-5 z-20 text-white text-left overflow-hidden">

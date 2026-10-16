@@ -60,7 +60,7 @@ export const timelineMilestones: TimelineItem[] = [
  */
 export const weddingImages = {
   // Ảnh bìa chính
-  coverPhoto: 'https://res.cloudinary.com/dlxbhq8pw/image/upload/v1791994582/copy_of_img_20261010151301799-3_llzctz.png?auto=format&fit=crop&w=1200&q=85',
+  coverPhoto: 'https://res.cloudinary.com/dlxbhq8pw/image/upload/v1792145070/M%E1%BA%ABu_thi%E1%BB%87p_c%C6%B0%E1%BB%9Bi_%E1%BA%A3nh_thay_th%E1%BA%BF_%C4%91%C6%B0%E1%BB%A3c_rprcvy.png?auto=format&fit=crop&w=1200&q=85',
   // 3 ảnh dải số 29 · 10 · 26
   stripPhotos: [
     'https://res.cloudinary.com/dlxbhq8pw/image/upload/v1791993596/11_kwzotz.png?auto=format&fit=crop&w=600&q=80',
