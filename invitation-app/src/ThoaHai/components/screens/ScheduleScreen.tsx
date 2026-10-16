@@ -5,11 +5,11 @@ export const ScheduleScreen: React.FC = () => {
   const { ref: timelineRef, isInView: timelineInView } = useInView({ threshold: 0.1 });
 
   return (
-    <div className="relative w-full px-5 py-10 bg-[#faf5ee] text-[#3d2c1e] select-none overflow-hidden">
+    <div className="relative w-full px-5 pt-10 pb-0 bg-[#faf5ee] text-[#3d2c1e] select-none overflow-hidden">
       {/* ── TOP RIGHT FLORAL ACCENT (HOA5) ── */}
       <div className="absolute top-2 right-1 w-16 sm:w-20 pointer-events-none z-10 opacity-90 drop-shadow-xs">
         <img
-          src="/thoahai/Hoa5.png"
+          src="/thoahai/Hoa16.png"
           alt="hoa điểm lịch trình"
           className="w-full h-auto object-contain"
         />
@@ -18,7 +18,7 @@ export const ScheduleScreen: React.FC = () => {
       {/* ── TIMELINE SECTION (IMAGE 2 WAVY PATH) ── */}
       <div
         ref={timelineRef}
-        className={`relative pt-4 pb-6 th-reveal-init th-reveal-up ${timelineInView ? 'th-reveal-active' : ''}`}
+        className={`relative pt-4 pb-0 th-reveal-init th-reveal-up ${timelineInView ? 'th-reveal-active' : ''}`}
       >
         {/* Timeline Title in Pinyon Script font */}
         <div className="text-center mb-8 relative z-20">
@@ -40,7 +40,7 @@ export const ScheduleScreen: React.FC = () => {
             className="absolute inset-0 flex justify-center items-center pointer-events-none"
             style={{
               clipPath: timelineInView ? 'inset(0% 0% 0% 0%)' : 'inset(0% 0% 100% 0%)',
-              transition: 'clip-path 4000ms cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: 'clip-path 6000ms cubic-bezier(0.4, 0, 0.2, 1)',
             }}
           >
             <img
@@ -50,17 +50,16 @@ export const ScheduleScreen: React.FC = () => {
             />
           </div>
 
-          {/* ── MỐC 1: 09:00 RƯỚC DÂU (Đi vào từ bên phải sau khi đường vẽ hiện xong sau 4s) ── */}
+          {/* ── MỐC 1: 09:00 RƯỚC DÂU (Hiển thị sau khi đường vẽ hiện xong 1s: 4000ms + 1000ms = 5000ms) ── */}
           <div
-            className={`absolute flex flex-col items-start text-left transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              timelineInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-            }`}
+            className={`absolute flex flex-col items-start text-left transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${timelineInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+              }`}
             style={{
               top: '16%',
               transform: 'translateY(-50%)',
               left: 'calc(50% + 72px)',
               right: '4px',
-              transitionDelay: timelineInView ? '4050ms' : '0ms',
+              transitionDelay: timelineInView ? '3000ms' : '0ms',
             }}
           >
             <div className="flex items-center gap-1.5">
@@ -87,17 +86,16 @@ export const ScheduleScreen: React.FC = () => {
             </span>
           </div>
 
-          {/* ── MỐC 2: 10:30 LÀM LỄ (Đi vào từ bên trái sau khi đường vẽ hiện xong sau 4s) ── */}
+          {/* ── MỐC 2: 10:30 LÀM LỄ (Hiển thị sau khi đường vẽ hiện xong 1s: 5000ms) ── */}
           <div
-            className={`absolute flex flex-col items-end text-right transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              timelineInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-            }`}
+            className={`absolute flex flex-col items-end text-right transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${timelineInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+              }`}
             style={{
               top: '56%',
               transform: 'translateY(-50%)',
               right: 'calc(50% + 72px)',
               left: '4px',
-              transitionDelay: timelineInView ? '4350ms' : '0ms',
+              transitionDelay: timelineInView ? '3500ms' : '0ms',
             }}
           >
             <div className="flex items-center justify-end gap-1.5">
@@ -123,17 +121,16 @@ export const ScheduleScreen: React.FC = () => {
             </span>
           </div>
 
-          {/* ── MỐC 3: 11:00 KHAI TIỆC & GIAO LƯU (Đi vào từ bên phải sau khi đường vẽ hiện xong sau 4s) ── */}
+          {/* ── MỐC 3: 11:00 KHAI TIỆC & GIAO LƯU (Hiển thị sau khi đường vẽ hiện xong 1s: 5000ms) ── */}
           <div
-            className={`absolute flex flex-col items-start text-left transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-              timelineInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-            }`}
+            className={`absolute flex flex-col items-start text-left transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) ${timelineInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+              }`}
             style={{
               top: '81.5%',
               transform: 'translateY(-50%)',
               left: 'calc(50% + 64px)',
               right: '4px',
-              transitionDelay: timelineInView ? '4650ms' : '0ms',
+              transitionDelay: timelineInView ? '4000ms' : '0ms',
             }}
           >
             <div className="flex items-center gap-1.5">
@@ -163,12 +160,12 @@ export const ScheduleScreen: React.FC = () => {
           </div>
         </div>
 
-        {/* Điểm hoa Hoa2 ở chân lịch trình */}
-        <div className="flex justify-center pt-6 pb-2">
+        {/* Điểm hoa Hoa2 ở chân lịch trình (nằm sát vạch dưới) */}
+        <div className="flex justify-center items-end pt-4 pb-0 leading-none">
           <img
-            src="/thoahai/Hoa2.png"
+            src="/thoahai/Hoa20.png"
             alt="hoa điểm chân lịch trình"
-            className="w-24 h-auto object-contain opacity-80 pointer-events-none select-none"
+            className="w-50 h-auto block object-contain opacity-80 pointer-events-none select-none -mb-px"
           />
         </div>
       </div>

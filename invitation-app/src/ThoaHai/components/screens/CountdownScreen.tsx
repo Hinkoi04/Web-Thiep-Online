@@ -63,13 +63,6 @@ export const CountdownScreen: React.FC<CountdownScreenProps> = ({ targetDate }) 
           ref={headerRef}
           className={`space-y-1 transition-all duration-[2000ms] ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
         >
-          {/* Điểm hoa Hoa6 (nhánh hoa trái tim) */}
-          <img
-            src="/thoahai/Hoa6.png"
-            alt="hoa điểm đếm ngược"
-            className="w-9 h-auto mx-auto mb-1 opacity-90 drop-shadow-xs pointer-events-none select-none"
-          />
-
           <span
             className="text-[11px] font-semibold tracking-[0.25em] uppercase"
             style={{ color: '#4a4039', fontFamily: "'Playfair Display', serif" }}
@@ -92,9 +85,8 @@ export const CountdownScreen: React.FC<CountdownScreenProps> = ({ targetDate }) 
 
         {/* Live Countdown Card (hiện ra sau khi đánh máy xong tiêu đề) */}
         <div
-          className={`rounded-3xl p-6 sm:p-7 border text-center space-y-4 transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-            isTitleDone ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8 pointer-events-none'
-          }`}
+          className={`rounded-3xl p-6 sm:p-7 border text-center space-y-4 transition-all duration-[2400ms] cubic-bezier(0.16, 1, 0.3, 1) ${isTitleDone ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8 pointer-events-none'
+            }`}
           style={{
             background: 'rgba(245, 238, 228, 0.65)',
             borderColor: 'rgba(215, 195, 175, 0.75)',

@@ -430,11 +430,10 @@ export default function ThoaHaiAdmin() {
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => handleTabChange('wishes')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    activeTab === 'wishes'
-                      ? 'bg-[#1a1a1a] text-white'
-                      : 'text-[#6d5a49] hover:bg-[#faf5ee]'
-                  }`}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${activeTab === 'wishes'
+                    ? 'bg-[#1a1a1a] text-white'
+                    : 'text-[#6d5a49] hover:bg-[#faf5ee]'
+                    }`}
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                   <MessageSquareHeart className="w-3.5 h-3.5" />
@@ -442,11 +441,10 @@ export default function ThoaHaiAdmin() {
                 </button>
                 <button
                   onClick={() => handleTabChange('trash')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                    activeTab === 'trash'
-                      ? 'bg-red-600 text-white'
-                      : 'text-[#8d7560] hover:bg-[#faf5ee]'
-                  }`}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${activeTab === 'trash'
+                    ? 'bg-red-600 text-white'
+                    : 'text-[#8d7560] hover:bg-[#faf5ee]'
+                    }`}
                   style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                   <Trash2 className="w-3.5 h-3.5" />

@@ -471,7 +471,7 @@ export default function ThoaHai({ defaultOpened = false }: ThoaHaiProps) {
           style={{ borderColor: 'rgba(215,195,175,0.45)', color: '#6d5a49' }}>
           <div className="py-10 space-y-2">
             <img
-              src="/thoahai/Hoa7.png"
+              src="/thoahai/Hoa17.png"
               alt="hoa điểm"
               className="w-9 h-auto mx-auto mb-1.5 opacity-80 pointer-events-none select-none drop-shadow-xs"
             />

@@ -34,7 +34,7 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
       >
         {/* Điểm hoa Hoa4 ở góc trên bên phải */}
         <img
-          src="/thoahai/Hoa4.png"
+          src="/thoahai/Hoa19.png"
           alt="hoa điểm"
           className="absolute -top-2 -right-2 w-14 h-auto pointer-events-none select-none opacity-85 z-10 drop-shadow-xs"
         />
@@ -102,11 +102,10 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
       {/* ── 2. ĐOẠN TRIẾT LÝ MỞ ĐẦU (HIỂN THỊ TỪ TRÊN XUỐNG TRONG 2S) ── */}
       <div
         ref={quoteCardRef}
-        className={`max-w-xs sm:max-w-sm mx-auto p-4 rounded-2xl border text-center transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${
-          quoteCardInView
-            ? 'opacity-100 translate-y-0 scale-100'
-            : 'opacity-0 -translate-y-8 scale-95'
-        }`}
+        className={`max-w-xs sm:max-w-sm mx-auto p-4 rounded-2xl border text-center transition-all duration-[2000ms] cubic-bezier(0.16, 1, 0.3, 1) ${quoteCardInView
+          ? 'opacity-100 translate-y-0 scale-100'
+          : 'opacity-0 -translate-y-8 scale-95'
+          }`}
         style={{
           background: 'rgba(225, 203, 180, 0.18)',
           borderColor: 'rgba(225, 203, 180, 0.65)',

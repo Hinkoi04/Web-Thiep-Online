@@ -31,6 +31,7 @@
     opacity: 0;
     transform: translateY(-12px) scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -245,7 +246,7 @@ html {
 
 .th-env-cover-title {
   font-family: 'Dancing Script', 'Playfair Display', cursive, sans-serif;
-  font-size: 3.4rem;
+  font-size: 3rem;
   color: #1a1a1a;
   line-height: 1.1;
   margin-bottom: 2px;

@@ -52,7 +52,7 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
       {/* Lớp phủ trắng dần khi chạm vào mở thiệp */}
       <div className="th-white-washout" />
 
-      <div style={{ width: 'min(380px, 92vw)', position: 'relative', userSelect: 'none', zIndex: 1 }}>
+      <div style={{ width: 'min(340px, 92vw)', position: 'relative', userSelect: 'none', zIndex: 1 }}>
         {/* Cover Card */}
         <div className="th-env-body">
           {/* Cover Photo */}

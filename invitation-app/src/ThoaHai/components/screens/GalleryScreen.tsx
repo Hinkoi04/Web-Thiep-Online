@@ -67,15 +67,15 @@ export const GalleryScreen: React.FC = () => {
     <div className="relative w-full min-h-full px-4 sm:px-5 py-9 bg-[#faf5ee] text-[#3d2c1e] select-none overflow-hidden">
       <div className="max-w-md mx-auto space-y-5 pt-1">
         {/* Header */}
-        <div 
+        <div
           ref={headerRef}
           className={`text-center space-y-1 th-reveal-init th-reveal-up ${headerInView ? 'th-reveal-active' : ''}`}
         >
           {/* Điểm hoa Hoa7 */}
           <img
-            src="/thoahai/Hoa7.png"
+            src="/thoahai/Hoa21.png"
             alt="hoa điểm"
-            className="w-10 h-auto mx-auto mb-1 opacity-85 drop-shadow-xs pointer-events-none select-none"
+            className="w-20 h-auto mx-auto mb-1 opacity-85 drop-shadow-xs pointer-events-none select-none"
           />
 
           <span className="text-[11px] font-semibold tracking-[0.25em] text-[#4a4039] uppercase block">
@@ -96,9 +96,8 @@ export const GalleryScreen: React.FC = () => {
         {/* ── KHUNG ẢNH CHÍNH LỚN VỚI CHIỀU CAO FULL ẢNH DỌC (TỶ LỆ 3:4) ── */}
         <div
           ref={sliderRef}
-          className={`relative w-full aspect-3/4 sm:aspect-3/4 max-h-[580px] rounded-3xl overflow-hidden bg-[#f0e8dc] shadow-md border border-[#d8c7b3] group select-none cursor-pointer th-reveal-init th-reveal-scale ${
-            sliderInView ? 'th-reveal-active' : ''
-          }`}
+          className={`relative w-full aspect-3/4 sm:aspect-3/4 max-h-[580px] rounded-3xl overflow-hidden bg-[#f0e8dc] shadow-md border border-[#d8c7b3] group select-none cursor-pointer th-reveal-init th-reveal-scale ${sliderInView ? 'th-reveal-active' : ''
+            }`}
           style={{ aspectRatio: '3/4' }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -145,11 +144,10 @@ export const GalleryScreen: React.FC = () => {
         </div>
 
         {/* ── DẢI THUMBNAIL ẢNH NHỎ BÊN DƯỚI ── */}
-        <div 
+        <div
           ref={thumbRef}
-          className={`flex items-center gap-2 sm:gap-2.5 overflow-x-auto py-1 px-0.5 th-no-scrollbar scroll-smooth th-reveal-init th-reveal-up ${
-            thumbInView ? 'th-reveal-active' : ''
-          }`}
+          className={`flex items-center gap-2 sm:gap-2.5 overflow-x-auto py-1 px-0.5 th-no-scrollbar scroll-smooth th-reveal-init th-reveal-up ${thumbInView ? 'th-reveal-active' : ''
+            }`}
         >
           {galleryPhotos.map((photo, idx) => {
             const isActive = idx === activeIndex;
@@ -157,11 +155,10 @@ export const GalleryScreen: React.FC = () => {
               <button
                 key={photo.id}
                 onClick={() => setActiveIndex(idx)}
-                className={`relative shrink-0 w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden border-2 transition-all cursor-pointer ${
-                  isActive
-                    ? 'border-[#1a1a1a] ring-2 ring-[#1a1a1a]/30 scale-105 shadow-md'
-                    : 'border-[#d8c7b3]/70 opacity-70 hover:opacity-100 hover:border-[#1a1a1a]/60'
-                }`}
+                className={`relative shrink-0 w-16 h-16 sm:w-18 sm:h-18 rounded-2xl overflow-hidden border-2 transition-all cursor-pointer ${isActive
+                  ? 'border-[#1a1a1a] ring-2 ring-[#1a1a1a]/30 scale-105 shadow-md'
+                  : 'border-[#d8c7b3]/70 opacity-70 hover:opacity-100 hover:border-[#1a1a1a]/60'
+                  }`}
               >
                 <img
                   src={photo.url}

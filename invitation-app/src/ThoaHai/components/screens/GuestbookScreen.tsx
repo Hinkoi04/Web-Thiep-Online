@@ -105,7 +105,7 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
     setWishes(updated);
     try {
       localStorage.setItem('wedding_wishes_thoahai', JSON.stringify(updated));
-    } catch {}
+    } catch { }
 
     setMessage('');
     setSubmitting(false);
@@ -124,7 +124,7 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
     setWishes(updatedWishes);
     try {
       localStorage.setItem('wedding_wishes_thoahai', JSON.stringify(updatedWishes));
-    } catch {}
+    } catch { }
   };
 
   return (
@@ -133,15 +133,14 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
         {/* ── 1. RSVP HEADER NOTE ── */}
         <div
           ref={headerRef}
-          className={`text-center space-y-2 th-reveal-init th-reveal-up ${
-            headerInView ? 'th-reveal-active' : ''
-          }`}
+          className={`text-center space-y-2 th-reveal-init th-reveal-up ${headerInView ? 'th-reveal-active' : ''
+            }`}
         >
           {/* Điểm hoa Hoa1 */}
           <img
-            src="/thoahai/Hoa1.png"
+            src="/thoahai/Hoa15.png"
             alt="hoa điểm xác nhận"
-            className="w-11 h-auto mx-auto mb-1.5 opacity-90 drop-shadow-xs pointer-events-none select-none"
+            className="w-15 h-auto mx-auto mb-1.5 opacity-90 drop-shadow-xs pointer-events-none select-none"
           />
 
           <p
@@ -236,9 +235,8 @@ export const GuestbookScreen: React.FC<GuestbookScreenProps> = ({ guestName }) =
         {/* ── 3. LIST OF WISHES (SỔ LƯU BÚT) ── */}
         <div
           ref={wishesRef}
-          className={`space-y-3 pt-6 border-t border-[#d8c7b3]/70 th-reveal-init th-reveal-up ${
-            wishesInView ? 'th-reveal-active' : ''
-          }`}
+          className={`space-y-3 pt-6 border-t border-[#d8c7b3]/70 th-reveal-init th-reveal-up ${wishesInView ? 'th-reveal-active' : ''
+            }`}
         >
           <div className="flex items-center justify-between">
             <h4

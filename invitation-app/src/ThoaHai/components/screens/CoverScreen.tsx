@@ -204,7 +204,7 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
         <div className="relative max-w-[325px] mx-auto">
           {/* Điểm hoa Hoa5 ở góc trên khung lịch */}
           <img
-            src="/thoahai/Hoa5.png"
+            src="/thoahai/Hoa13.png"
             alt="hoa điểm lịch"
             className="absolute -top-5 -right-3 w-12 h-auto pointer-events-none select-none opacity-85 z-10 drop-shadow-xs"
           />
@@ -290,9 +290,9 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
             }`}
         >
           <img
-            src="/thoahai/Hoa6.png"
+            src="/thoahai/Hoa16.png"
             alt="hoa điểm"
-            className="w-10 h-auto mx-auto object-contain my-2 opacity-90 drop-shadow-xs pointer-events-none select-none"
+            className="w-20 h-auto mx-auto object-contain my-2 opacity-90 drop-shadow-xs pointer-events-none select-none"
           />
         </div>
 
@@ -404,9 +404,9 @@ export const CoverScreen: React.FC<CoverScreenProps> = ({
         {/* Điểm hoa Hoa2 (dải hoa thân cao) ở chân trang bìa */}
         <div className="flex justify-center pt-5 pb-1">
           <img
-            src="/thoahai/Hoa2.png"
+            src="/thoahai/Hoa18.png"
             alt="hoa điểm chân trang bìa"
-            className="w-28 h-auto object-contain opacity-80 pointer-events-none select-none"
+            className="w-60 h-auto object-contain opacity-80 pointer-events-none select-none"
           />
         </div>
       </div>
