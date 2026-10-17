@@ -80,7 +80,7 @@ export const WeddingEnvelopeCover: React.FC<WeddingEnvelopeCoverProps> = ({
 
             {guestName && (
               <div className="th-env-guest-box">
-                <span className="th-env-guest-label">Kính mời</span>
+                <span className="th-env-guest-label">Thân mời</span>
                 <span className="th-env-guest-name">{guestName}</span>
               </div>
             )}

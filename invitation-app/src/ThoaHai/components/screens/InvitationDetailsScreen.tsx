@@ -254,7 +254,7 @@ export const InvitationDetailsScreen: React.FC<InvitationDetailsScreenProps> = (
             className={`text-[10px] uppercase tracking-[0.25em] font-semibold block text-[#4a4039] transition-all duration-[2400ms] cubic-bezier(0.16,1,0.3,1) ${guestInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
               }`}
           >
-            Trân trọng kính mời
+            Trân trọng Thân mời
           </span>
 
           {/* Tên khách mời bay từ bên phải vào chậm rãi */}
