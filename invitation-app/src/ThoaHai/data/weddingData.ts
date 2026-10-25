@@ -50,9 +50,9 @@ export interface TimelineItem {
 }
 
 export const timelineMilestones: TimelineItem[] = [
-  { time: '09:00', title: 'RƯỚC DÂU', icon: 'bouquet' },
-  { time: '10:30', title: 'LÀM LỄ', icon: 'rings' },
-  { time: '11:00', title: 'KHAI TIỆC & GIAO LƯU', icon: 'feast' },
+  { time: '10:30', title: 'RƯỚC DÂU', icon: 'bouquet' },
+  { time: '11:30', title: 'LÀM LỄ', icon: 'rings' },
+  { time: '11:45', title: 'KHAI TIỆC & GIAO LƯU', icon: 'feast' },
 ];
 
 /**
