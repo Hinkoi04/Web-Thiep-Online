@@ -67,7 +67,7 @@ export const ScheduleScreen: React.FC = () => {
                 className="text-base font-bold tracking-wider"
                 style={{ color: '#7b2c2d', fontFamily: "'Playfair Display', serif" }}
               >
-                09:00
+                10:30
               </span>
               <div className="w-5 h-5 flex items-center justify-center text-[#7b2c2d]">
                 <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-current" fill="none" strokeWidth="1.6">
@@ -110,7 +110,7 @@ export const ScheduleScreen: React.FC = () => {
                 className="text-base font-bold tracking-wider"
                 style={{ color: '#7b2c2d', fontFamily: "'Playfair Display', serif" }}
               >
-                10:30
+                11:30
               </span>
             </div>
             <span
@@ -138,7 +138,7 @@ export const ScheduleScreen: React.FC = () => {
                 className="text-base font-bold tracking-wider"
                 style={{ color: '#7b2c2d', fontFamily: "'Playfair Display', serif" }}
               >
-                11:00
+                11:45
               </span>
               <div className="w-5 h-5 flex items-center justify-center text-[#7b2c2d]">
                 <svg viewBox="0 0 28 24" className="w-4.5 h-4.5 stroke-current" fill="none" strokeWidth="1.5">
